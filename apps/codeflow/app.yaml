@@ -1,0 +1,10 @@
+name: "CodeFlow"
+description: "Smart code review and refactoring tool. Analyze pull requests, suggest improvements, and auto-fix common issues across your codebase."
+url: "https://example.com/codeflow"
+docs: "https://docs.example.com/codeflow/ofox"
+tags:
+  - coding
+models:
+  - "Claude 3.5"
+  - "DeepSeek V3"
+date_added: "2026-03-18"

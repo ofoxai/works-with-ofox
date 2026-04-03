@@ -1,0 +1,15 @@
+{
+  "name": "works-with-ofox",
+  "version": "1.0.0",
+  "description": "Ofox 应用展示墙 — 基于 Ofox 构建的应用精选列表",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "generate": "node scripts/generate-readme.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "js-yaml": "^4.1.0"
+  }
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "codeflow",
+    "name": "CodeFlow",
+    "description": "Smart code review and refactoring tool. Analyze pull requests, suggest improvements, and auto-fix common issues across your codebase.",
+    "url": "https://example.com/codeflow",
+    "docs": "https://docs.example.com/codeflow/ofox",
+    "tags": [
+      "coding"
+    ],
+    "models": [
+      "Claude 3.5",
+      "DeepSeek V3"
+    ],
+    "openSource": null,
+    "dateAdded": "2026-03-18"
+  },
+  {
+    "slug": "deepchat",
+    "name": "DeepChat",
+    "description": "Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox.",
+    "url": "https://example.com/deepchat",
+    "docs": "https://docs.example.com/deepchat/ofox",
+    "tags": [
+      "chat",
+      "productivity"
+    ],
+    "models": [
+      "Claude 3.5",
+      "GPT-4o",
+      "DeepSeek V3"
+    ],
+    "openSource": "https://github.com/example/deepchat",
+    "dateAdded": "2026-03-20"
+  },
+  {
+    "slug": "studymate",
+    "name": "StudyMate AI",
+    "description": "Adaptive learning companion that creates personalized study plans, generates practice questions, and explains concepts at your level.",
+    "url": "https://example.com/studymate",
+    "docs": null,
+    "tags": [
+      "education"
+    ],
+    "models": [
+      "Gemini Pro",
+      "Claude 3.5"
+    ],
+    "openSource": "https://github.com/example/studymate",
+    "dateAdded": "2026-03-22"
+  }
+]

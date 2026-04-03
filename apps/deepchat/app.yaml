@@ -1,0 +1,13 @@
+name: "DeepChat"
+description: "Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox."
+url: "https://example.com/deepchat"
+docs: "https://docs.example.com/deepchat/ofox"
+tags:
+  - chat
+  - productivity
+models:
+  - "Claude 3.5"
+  - "GPT-4o"
+  - "DeepSeek V3"
+open_source: "https://github.com/example/deepchat"
+date_added: "2026-03-20"

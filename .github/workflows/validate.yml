@@ -1,0 +1,40 @@
+name: Validate App Submission
+
+on:
+  pull_request:
+    paths:
+      - 'apps/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Find changed app directories
+        id: changed
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          CHANGED_DIRS=$(git diff --name-only "origin/${BASE_REF}...HEAD" | grep '^apps/' | cut -d'/' -f2 | sort -u | tr '\n' ' ')
+          echo "dirs=${CHANGED_DIRS}" >> "$GITHUB_OUTPUT"
+
+      - name: Validate app submissions
+        env:
+          CHANGED_DIRS: ${{ steps.changed.outputs.dirs }}
+        run: |
+          if [ -n "$CHANGED_DIRS" ]; then
+            node scripts/validate.js $CHANGED_DIRS
+          else
+            echo "No app changes detected"
+          fi
