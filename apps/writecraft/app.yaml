@@ -1,0 +1,11 @@
+name: "WriteCraft"
+description: "AI writing assistant for blogs, emails, and marketing copy. Supports tone adjustment, multi-language translation, and SEO optimization."
+url: "https://example.com/writecraft"
+docs: "https://docs.example.com/writecraft/ofox"
+tags:
+  - creative
+  - productivity
+models:
+  - "Claude 3.5"
+  - "GPT-4o"
+date_added: "2026-03-25"

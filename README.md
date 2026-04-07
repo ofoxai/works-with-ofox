@@ -22,11 +22,30 @@
 
 ## 目录
 
+- [AIFlow](#aiflow)
 - [CodeFlow](#codeflow)
+- [DataWise](#datawise)
 - [DeepChat](#deepchat)
+- [DocuBot](#docubot)
+- [PixelLab](#pixellab)
 - [StudyMate AI](#studymate-ai)
+- [WriteCraft](#writecraft)
 
 ## 应用列表
+
+### [AIFlow](https://example.com/aiflow)
+
+<img src="./apps/aiflow/logo.png" alt="AIFlow logo" width="64" height="64">
+
+Visual workflow builder for AI automation. Drag-and-drop nodes to chain models, APIs, and data sources into production pipelines.
+
+`productivity` `coding`
+
+**Models:** Claude 3.5, GPT-4o, DeepSeek V3
+
+[Documentation](https://docs.example.com/aiflow/ofox)
+
+---
 
 ### [CodeFlow](https://example.com/codeflow)
 
@@ -39,6 +58,18 @@ Smart code review and refactoring tool. Analyze pull requests, suggest improveme
 **Models:** Claude 3.5, DeepSeek V3
 
 [Documentation](https://docs.example.com/codeflow/ofox)
+
+---
+
+### [DataWise](https://example.com/datawise)
+
+<img src="./apps/datawise/logo.png" alt="DataWise logo" width="64" height="64">
+
+Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly.
+
+`research` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/datawise)
+
+**Models:** Claude 3.5, GPT-4o, DeepSeek V3
 
 ---
 
@@ -56,6 +87,32 @@ Multi-model chat interface with conversation branching, prompt templates, and te
 
 ---
 
+### [DocuBot](https://example.com/docubot)
+
+<img src="./apps/docubot/logo.png" alt="DocuBot logo" width="64" height="64">
+
+Chat with your documents. Upload PDFs, Word files, or Notion pages and get accurate answers with source citations.
+
+`chat` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/docubot)
+
+**Models:** Claude 3.5, Gemini Pro
+
+---
+
+### [PixelLab](https://example.com/pixellab)
+
+<img src="./apps/pixellab/logo.png" alt="PixelLab logo" width="64" height="64">
+
+AI-powered design tool for social media graphics, thumbnails, and banners. Generate and edit visuals with text prompts.
+
+`creative`
+
+**Models:** GPT-4o, Gemini Pro
+
+[Documentation](https://docs.example.com/pixellab/ofox)
+
+---
+
 ### [StudyMate AI](https://example.com/studymate)
 
 <img src="./apps/studymate/logo.png" alt="StudyMate AI logo" width="64" height="64">
@@ -65,6 +122,20 @@ Adaptive learning companion that creates personalized study plans, generates pra
 `education` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/studymate)
 
 **Models:** Gemini Pro, Claude 3.5
+
+---
+
+### [WriteCraft](https://example.com/writecraft)
+
+<img src="./apps/writecraft/logo.png" alt="WriteCraft logo" width="64" height="64">
+
+AI writing assistant for blogs, emails, and marketing copy. Supports tone adjustment, multi-language translation, and SEO optimization.
+
+`creative` `productivity`
+
+**Models:** Claude 3.5, GPT-4o
+
+[Documentation](https://docs.example.com/writecraft/ofox)
 
 ---
 

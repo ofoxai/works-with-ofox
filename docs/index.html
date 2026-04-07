@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works with Ofox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --copper:#C65D3B;
+  --copper-light:#E8805E;
+  --copper-dark:#A44D31;
+  --bg:#FDF8F3;
+  --bg-card:#FFFFFF;
+  --text:#1A1A1A;
+  --text-secondary:#666;
+  --text-tertiary:#999;
+  --border:#E8E0D8;
+  --radius:12px;
+}
+body{
+  font-family:'Inter',-apple-system,'PingFang SC','Noto Sans SC',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--copper);text-decoration:none}
+a:hover{color:var(--copper-dark)}
+
+/* Header */
+.header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
+.logo-dot{width:10px;height:10px;background:var(--copper);border-radius:50%;display:inline-block}
+.header-actions{display:flex;align-items:center;gap:12px}
+.lang-toggle{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .2s}
+.lang-toggle:hover{border-color:var(--copper);color:var(--copper)}
+.btn-submit{padding:8px 16px;background:var(--copper);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s}
+.btn-submit:hover{background:var(--copper-dark)}
+
+/* Hero */
+.hero{text-align:center;padding:64px 24px 48px;background:linear-gradient(180deg,#fff 0%,var(--bg) 100%)}
+.hero h1{font-size:40px;font-weight:700;line-height:1.2;margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:4px}
+.hero h1 .accent{color:var(--copper)}
+.hero .sub{font-size:18px;color:var(--text-secondary);max-width:560px;margin:0 auto 12px}
+.hero .actions{font-size:14px;color:var(--text-tertiary)}
+.hero .actions a{font-weight:500}
+
+/* Stats */
+.stats{display:flex;justify-content:center;gap:48px;margin-top:32px}
+.stat-item{text-align:center}
+.stat-num{font-size:28px;font-weight:700;color:var(--copper);display:flex;align-items:center;justify-content:center;gap:4px}
+.stat-icon{font-size:16px;opacity:0.7}
+.stat-label{font-size:13px;color:var(--text-tertiary);margin-top:4px;text-align:center}
+
+/* Controls */
+.search-wrap{max-width:1200px;margin:0 auto;padding:0 24px 24px}
+.search-wrap input{
+  width:100%;padding:10px 16px;border:1px solid var(--border);
+  border-radius:8px;font-size:14px;background:#fff;outline:none;transition:border-color .2s;
+}
+.search-wrap input:focus{border-color:var(--copper)}
+
+/* Grid */
+.grid{
+  max-width:1200px;margin:0 auto;padding:0 24px 64px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;
+}
+.card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px;cursor:pointer;transition:all .25s;position:relative;
+  border-left:3px solid transparent;
+}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(198,93,59,0.12);border-color:var(--copper-light);border-left-color:var(--copper)}
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.card-logo{width:44px;height:44px;border-radius:10px;object-fit:cover;border:1px solid var(--border)}
+.card-logo-ph{
+  width:44px;height:44px;border-radius:10px;background:var(--copper);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:18px;font-weight:700;flex-shrink:0;
+}
+.card-name{font-size:15px;font-weight:600;display:flex;align-items:center;gap:6px}
+.oss-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:1px 6px;background:#E8F5E9;color:#2E7D32;border-radius:4px;font-size:11px;font-weight:600;
+}
+.new-badge{
+  position:absolute;top:12px;right:12px;
+  padding:2px 8px;background:var(--copper);color:#fff;border-radius:6px;
+  font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;
+}
+.card-date{font-size:11px;color:var(--text-tertiary);margin-top:8px}
+.verified{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px;flex-shrink:0}
+.card-desc{
+  font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:12px;
+  display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  padding:3px 10px;background:#FEF3EF;color:var(--copper);
+  border-radius:12px;font-size:12px;font-weight:500;
+}
+.empty{text-align:center;padding:60px 24px;color:var(--text-tertiary);grid-column:1/-1}
+
+/* ===== Detail View ===== */
+.detail{max-width:800px;margin:0 auto;padding:0 24px 80px;display:none}
+.detail.active{display:block}
+.back{font-size:14px;color:var(--text-tertiary);display:inline-flex;align-items:center;gap:4px;margin:24px 0}
+.back:hover{color:var(--text);text-decoration:none}
+
+/* Hero banner */
+.d-banner{
+  background:linear-gradient(135deg,#C65D3B 0%,#E8805E 50%,#F5A882 100%);
+  border-radius:16px;padding:40px 32px;margin-bottom:32px;position:relative;overflow:hidden;
+}
+.d-banner::before{
+  content:'';position:absolute;top:-30%;right:-10%;width:200px;height:200px;
+  background:rgba(255,255,255,0.08);border-radius:50%;
+}
+.d-banner::after{
+  content:'';position:absolute;bottom:-20%;left:10%;width:150px;height:150px;
+  background:rgba(255,255,255,0.05);border-radius:50%;
+}
+.d-header{display:flex;align-items:center;gap:20px;position:relative;z-index:1}
+.d-logo{width:72px;height:72px;border-radius:16px;object-fit:cover;border:2px solid rgba(255,255,255,0.3);background:#fff}
+.d-logo-ph{
+  width:72px;height:72px;border-radius:16px;background:rgba(255,255,255,0.2);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:28px;font-weight:700;flex-shrink:0;
+  border:2px solid rgba(255,255,255,0.3);
+}
+.d-name{font-size:24px;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.d-verified{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:rgba(255,255,255,0.25);border-radius:50%;color:#fff;font-size:12px}
+.d-tags{display:flex;flex-wrap:wrap;gap:6px}
+.d-tags .tag{background:rgba(255,255,255,0.2);color:#fff;border:none}
+
+/* Content cards */
+.d-card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;
+  padding:28px;margin-bottom:20px;
+}
+.d-card h2{font-size:17px;font-weight:700;margin-bottom:14px;color:var(--text)}
+.d-card p{font-size:15px;color:var(--text-secondary);line-height:1.7}
+.d-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.d-btn{
+  padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;
+  display:inline-flex;align-items:center;gap:6px;text-decoration:none;
+}
+.d-btn:hover{text-decoration:none}
+.d-btn-primary{background:var(--copper);color:#fff}
+.d-btn-primary:hover{background:var(--copper-dark)}
+.d-btn-secondary{border:1px solid var(--border);color:var(--text)}
+.d-btn-secondary:hover{border-color:var(--copper);color:var(--copper)}
+
+.d-card ol{padding-left:20px;font-size:15px;color:var(--text-secondary);line-height:2.2}
+.d-card ol a{font-weight:500}
+.d-models{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.model-badge{
+  padding:6px 14px;background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;font-size:13px;color:var(--text-secondary);font-weight:500;
+}
+
+/* ===== Shared ===== */
+.footer{text-align:center;padding:32px 24px;border-top:1px solid var(--border);color:var(--text-tertiary);font-size:13px}
+.footer a{color:var(--copper);font-weight:500}
+.list-view.hidden{display:none}
+
+@media(max-width:640px){
+  .hero h1{font-size:28px}
+  .hero .sub{font-size:15px}
+  .stats{gap:24px}
+  .stat-num{font-size:22px}
+  .grid{grid-template-columns:1fr}
+  .d-header{flex-direction:column;align-items:center;text-align:center}
+  .d-tags{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><span class="logo-dot"></span><span>Works with Ofox</span></div>
+    <div class="header-actions">
+      <button class="lang-toggle" id="langToggle">EN</button>
+      <button class="btn-submit" id="btnSubmit">提交你的应用</button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== List View ===== -->
+<div class="list-view" id="listView">
+  <div class="hero">
+    <h1 id="heroTitle"></h1>
+    <div class="sub" id="heroSub"></div>
+    <div class="actions" id="heroActions"></div>
+    <div class="stats" id="statsBar"></div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput">
+  </div>
+  <div class="grid" id="appGrid"></div>
+</div>
+
+<!-- ===== Detail View ===== -->
+<div class="detail" id="detailView"></div>
+
+<footer class="footer" id="footerEl"></footer>
+
+<script>
+/* ========== i18n ========== */
+var lang = localStorage.getItem('ofox_lang') || 'zh';
+var i18n = {
+  zh: {
+    title: 'Works with Ofox',
+    sub: '用 Ofox 的开发者做了哪些值得关注的应用？',
+    submit_q: '想添加你的应用？',
+    submit_link: '提交 PR',
+    search: '搜索应用...',
+    about: '关于',
+    visit: '访问',
+    docs: '文档',
+    source: '源代码',
+    back: '\u2190 返回列表',
+    guide_title: 'Ofox for {app}入门指南',
+    guide_s1_pre: '在',
+    guide_s1_link: 'ofox.ai',
+    guide_s1_suf: '创建账户',
+    guide_s2_pre: '前往',
+    guide_s2_link: 'ofox.ai 控制台',
+    guide_s2_suf: '充值并生成 API Key',
+    guide_s3: '在{app}中配置你的 API Key',
+    guide_s3_docs_pre: '——设置详情请参阅',
+    guide_s3_docs_link: '{app} Ofox 集成指南',
+    use_title: '使用 Ofox 和{app}',
+    use_body: '{app}支持 Ofox 作为模型供应商，让你只需一个 API Key 即可访问 Claude、GPT、Gemini、DeepSeek 等多家模型。Ofox 负责模型路由和故障转移，让你专注于真正重要的事。',
+    use_docs_pre: '有关详细的设置说明和配置选项，请访问',
+    use_docs_link: '{app} Ofox 文档',
+    empty: '暂无匹配应用',
+    hero_before: '用 ', hero_brand: 'Ofox', hero_after: ' 做点有趣的事',
+    stat_apps: '应用', stat_cats: '类别', stat_oss: '开源',
+    footer_pre: 'Powered by ', footer_suf: ' · 一个 Key，所有模型',
+  },
+  en: {
+    title: 'Works with Ofox',
+    sub: 'What are Ofox developers building that\u2019s worth checking out?',
+    submit_q: 'Want to add your app?',
+    submit_link: 'Submit a PR',
+    search: 'Search...',
+    about: 'About',
+    visit: 'Visit',
+    docs: 'Docs',
+    source: 'Source',
+    back: '\u2190 Back',
+    guide_title: 'Getting started with Ofox for {app}',
+    guide_s1_pre: 'Create an account at',
+    guide_s1_link: 'ofox.ai',
+    guide_s1_suf: '',
+    guide_s2_pre: 'Go to',
+    guide_s2_link: 'ofox.ai/console',
+    guide_s2_suf: 'to add credits and generate an API key',
+    guide_s3: 'Configure your API key in {app}',
+    guide_s3_docs_pre: ' — for setup details, see their',
+    guide_s3_docs_link: 'Ofox integration guide',
+    use_title: 'Using Ofox and {app}',
+    use_body: '{app} supports Ofox as a provider, giving you access to Claude, GPT, Gemini, DeepSeek and more with a single API key. Ofox handles model routing and fallbacks so you can focus on what matters.',
+    use_docs_pre: 'For detailed setup instructions and configuration options, visit the',
+    use_docs_link: '{app} Ofox documentation',
+    empty: 'No apps found',
+    hero_before: 'Do cool things with ', hero_brand: 'Ofox', hero_after: '',
+    stat_apps: 'Apps', stat_cats: 'Categories', stat_oss: 'Open Source',
+    footer_pre: 'Powered by ', footer_suf: ' · One key, every model',
+  }
+};
+function T(key) { var v = i18n[lang][key]; return v !== undefined ? v : key; }
+var tagMap = {
+  zh:{chat:'对话',coding:'编程',productivity:'效率',creative:'创作',research:'研究',education:'教育',agent:'智能体',translation:'翻译',other:'其他'},
+  en:{chat:'Chat',coding:'Code',productivity:'Productivity',creative:'Creative',research:'Research',education:'Education',agent:'Agent',translation:'Translation',other:'Other'}
+};
+function tagLabel(t) { return (tagMap[lang]||{})[t] || t; }
+
+/* ========== Data ========== */
+var apps = [];
+var EMBEDDED_APPS = [
+  {"slug":"aiflow","name":"AIFlow","description":"Visual workflow builder for AI automation. Drag-and-drop nodes to chain models, APIs, and data sources into production pipelines.","url":"https://example.com/aiflow","docs":"https://docs.example.com/aiflow/ofox","tags":["productivity","coding"],"models":["Claude 3.5","GPT-4o","DeepSeek V3"],"openSource":null,"dateAdded":"2026-04-01"},
+  {"slug":"codeflow","name":"CodeFlow","description":"Smart code review and refactoring tool. Analyze pull requests, suggest improvements, and auto-fix common issues across your codebase.","url":"https://example.com/codeflow","docs":"https://docs.example.com/codeflow/ofox","tags":["coding"],"models":["Claude 3.5","DeepSeek V3"],"openSource":null,"dateAdded":"2026-03-18"},
+  {"slug":"datawise","name":"DataWise","description":"Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly.","url":"https://example.com/datawise","docs":null,"tags":["research","productivity"],"models":["Claude 3.5","GPT-4o","DeepSeek V3"],"openSource":"https://github.com/example/datawise","dateAdded":"2026-03-26"},
+  {"slug":"deepchat","name":"DeepChat","description":"Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox.","url":"https://example.com/deepchat","docs":"https://docs.example.com/deepchat/ofox","tags":["chat","productivity"],"models":["Claude 3.5","GPT-4o","DeepSeek V3"],"openSource":"https://github.com/example/deepchat","dateAdded":"2026-03-20"},
+  {"slug":"docubot","name":"DocuBot","description":"Chat with your documents. Upload PDFs, Word files, or Notion pages and get accurate answers with source citations.","url":"https://example.com/docubot","docs":null,"tags":["chat","research"],"models":["Claude 3.5","Gemini Pro"],"openSource":"https://github.com/example/docubot","dateAdded":"2026-03-30"},
+  {"slug":"pixellab","name":"PixelLab","description":"AI-powered design tool for social media graphics, thumbnails, and banners. Generate and edit visuals with text prompts.","url":"https://example.com/pixellab","docs":"https://docs.example.com/pixellab/ofox","tags":["creative"],"models":["GPT-4o","Gemini Pro"],"openSource":null,"dateAdded":"2026-03-28"},
+  {"slug":"studymate","name":"StudyMate AI","description":"Adaptive learning companion that creates personalized study plans, generates practice questions, and explains concepts at your level.","url":"https://example.com/studymate","docs":null,"tags":["education"],"models":["Gemini Pro","Claude 3.5"],"openSource":"https://github.com/example/studymate","dateAdded":"2026-03-22"},
+  {"slug":"writecraft","name":"WriteCraft","description":"AI writing assistant for blogs, emails, and marketing copy. Supports tone adjustment, multi-language translation, and SEO optimization.","url":"https://example.com/writecraft","docs":"https://docs.example.com/writecraft/ofox","tags":["creative","productivity"],"models":["Claude 3.5","GPT-4o"],"openSource":null,"dateAdded":"2026-03-25"},
+  {"slug":"agentkit","name":"AgentKit","description":"Build and deploy autonomous AI agents in minutes. Pre-built tools for web browsing, file operations, and API calls.","url":"https://example.com/agentkit","docs":"https://docs.example.com/agentkit/ofox","tags":["agent","coding"],"models":["Claude 3.5","GPT-4o"],"openSource":"https://github.com/example/agentkit","dateAdded":"2026-04-02"},
+  {"slug":"transflow","name":"TransFlow","description":"Real-time translation for 50+ languages. Supports document, subtitle, and live conversation translation with context awareness.","url":"https://example.com/transflow","docs":null,"tags":["translation"],"models":["Claude 3.5","Gemini Pro","DeepSeek V3"],"openSource":null,"dateAdded":"2026-03-29"},
+  {"slug":"voicepod","name":"VoicePod","description":"AI podcast generator. Turn articles, papers, or topics into natural-sounding podcast episodes with multiple AI voices.","url":"https://example.com/voicepod","docs":"https://docs.example.com/voicepod/ofox","tags":["creative"],"models":["Claude 3.5","GPT-4o"],"openSource":null,"dateAdded":"2026-04-03"},
+  {"slug":"shellai","name":"ShellAI","description":"AI-powered terminal assistant. Describe what you want in natural language, get the exact shell command with explanation.","url":"https://example.com/shellai","docs":null,"tags":["coding"],"models":["Claude 3.5","DeepSeek V3"],"openSource":"https://github.com/example/shellai","dateAdded":"2026-03-24"}
+];
+
+/* ========== DOM helpers ========== */
+function clearEl(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+function txt(s) { return document.createTextNode(s); }
+function el(tag, attrs, children) {
+  var n = document.createElement(tag);
+  if (attrs) Object.keys(attrs).forEach(function(k) {
+    if (k === 'className') n.className = attrs[k];
+    else n.setAttribute(k, attrs[k]);
+  });
+  if (children) {
+    if (!Array.isArray(children)) children = [children];
+    children.forEach(function(c) {
+      if (typeof c === 'string') n.appendChild(txt(c));
+      else if (c) n.appendChild(c);
+    });
+  }
+  return n;
+}
+
+/* ========== List View ========== */
+function renderList() {
+  var h1 = document.getElementById('heroTitle');
+  clearEl(h1);
+  h1.appendChild(txt(T('hero_before')));
+  h1.appendChild(el('span',{className:'accent'},[T('hero_brand')]));
+  h1.appendChild(txt(T('hero_after')));
+  h1.appendChild(el('span',{className:'verified'},['\u2713']));
+
+  document.getElementById('heroSub').textContent = T('sub');
+
+  var acts = document.getElementById('heroActions');
+  clearEl(acts);
+  acts.appendChild(txt(T('submit_q') + ' '));
+  acts.appendChild(el('a',{href:'https://github.com/ofoxai/works-with-ofox',target:'_blank',rel:'noopener'},[T('submit_link')]));
+
+  // Stats
+  var bar = document.getElementById('statsBar');
+  clearEl(bar);
+  var cats = {}; var oss = 0;
+  apps.forEach(function(a){ (a.tags||[]).forEach(function(t){cats[t]=1}); if(a.openSource) oss++; });
+  var statIcons = ['\u25B6','\u2726','\u2B50'];
+  [[apps.length,T('stat_apps')],[Object.keys(cats).length,T('stat_cats')],[oss,T('stat_oss')]].forEach(function(s,i){
+    bar.appendChild(el('div',{className:'stat-item'},[
+      el('div',{className:'stat-num'},[el('span',{className:'stat-icon'},[statIcons[i]]),String(s[0])]),
+      el('div',{className:'stat-label'},[s[1]])
+    ]));
+  });
+
+  document.getElementById('searchInput').placeholder = T('search');
+  document.getElementById('btnSubmit').textContent = T('submit_link');
+
+  // Footer
+  var ft = document.getElementById('footerEl');
+  clearEl(ft);
+  ft.appendChild(txt(T('footer_pre')));
+  ft.appendChild(el('a',{href:'https://ofox.ai',target:'_blank',rel:'noopener'},['Ofox AI']));
+  ft.appendChild(txt(T('footer_suf')));
+  ft.style.display = '';
+}
+
+/* Lang toggle */
+document.getElementById('langToggle').textContent = lang === 'zh' ? 'EN' : '中文';
+document.getElementById('langToggle').addEventListener('click', function(){
+  lang = lang === 'zh' ? 'en' : 'zh';
+  localStorage.setItem('ofox_lang', lang);
+  this.textContent = lang === 'zh' ? 'EN' : '中文';
+  route();
+});
+document.getElementById('btnSubmit').addEventListener('click', function(){
+  window.open('https://github.com/ofoxai/works-with-ofox','_blank');
+});
+
+function renderGrid() {
+  var grid = document.getElementById('appGrid');
+  clearEl(grid);
+  var q = document.getElementById('searchInput').value.toLowerCase();
+  var list = apps.filter(function(a) {
+    if (!q) return true;
+    return (a.name + ' ' + a.description + ' ' + (a.tags||[]).join(' ')).toLowerCase().indexOf(q) !== -1;
+  });
+  list.sort(function(a,b) { return a.name.localeCompare(b.name); });
+
+  if (list.length === 0) {
+    grid.appendChild(el('div', {className:'empty'}, [T('empty')]));
+    return;
+  }
+  list.forEach(function(app) {
+    var logoEl = el('img', {className:'card-logo', src:'../apps/'+app.slug+'/logo.png', alt:app.name, width:'44', height:'44'});
+    logoEl.addEventListener('error', function() {
+      this.parentNode.replaceChild(el('div',{className:'card-logo-ph'},[app.name.charAt(0)]), this);
+    });
+
+    var nameChildren = [app.name];
+    if (app.openSource) nameChildren.push(el('span',{className:'oss-badge'},['\u2B50 OSS']));
+
+    var tags = el('div',{className:'card-tags'});
+    (app.tags||[]).forEach(function(t) { tags.appendChild(el('span',{className:'tag'},[tagLabel(t)])); });
+
+    // Check if added within last 14 days
+    var isNew = false;
+    if (app.dateAdded) {
+      var diff = (new Date() - new Date(app.dateAdded)) / 86400000;
+      if (diff <= 14) isNew = true;
+    }
+
+    var cardChildren = [];
+    if (isNew) cardChildren.push(el('span',{className:'new-badge'},['NEW']));
+    cardChildren.push(el('div',{className:'card-head'},[logoEl, el('div',{className:'card-name'},nameChildren)]));
+    cardChildren.push(el('div',{className:'card-desc'},[app.description]));
+    cardChildren.push(tags);
+    if (app.dateAdded) cardChildren.push(el('div',{className:'card-date'},[app.dateAdded]));
+
+    var card = el('div',{className:'card'},cardChildren);
+    card.addEventListener('click', function() {
+      history.pushState(null, '', '?app=' + app.slug);
+      route();
+    });
+    grid.appendChild(card);
+  });
+}
+
+/* ========== Detail View ========== */
+function renderDetail(app) {
+  var view = document.getElementById('detailView');
+  clearEl(view);
+  document.title = app.name + ' — Works with Ofox';
+
+  // Back link
+  var back = el('a',{className:'back',href:'?'},[T('back')]);
+  back.addEventListener('click', function(e) {
+    e.preventDefault();
+    history.pushState(null, '', location.pathname);
+    route();
+  });
+  view.appendChild(back);
+
+  // Banner with logo + name + tags
+  var logoEl = el('img',{className:'d-logo',src:'../apps/'+app.slug+'/logo.png',alt:app.name,width:'72',height:'72'});
+  logoEl.addEventListener('error', function() {
+    this.parentNode.replaceChild(el('div',{className:'d-logo-ph'},[app.name.charAt(0)]), this);
+  });
+
+  var dTags = el('div',{className:'d-tags'});
+  (app.tags||[]).forEach(function(t) { dTags.appendChild(el('span',{className:'tag'},[tagLabel(t)])); });
+  if (app.openSource) dTags.appendChild(el('span',{className:'tag'},[lang==='zh'?'开源':'Open Source']));
+
+  view.appendChild(el('div',{className:'d-banner'},[
+    el('div',{className:'d-header'},[
+      logoEl,
+      el('div',{},[
+        el('div',{className:'d-name'},[app.name, el('span',{className:'d-verified'},['\u2713'])]),
+        dTags
+      ])
+    ])
+  ]));
+
+  // About card
+  var aboutCard = el('div',{className:'d-card'});
+  aboutCard.appendChild(el('h2',{},[T('about') + ' ' + app.name]));
+  aboutCard.appendChild(el('p',{},[app.description]));
+  var btns = el('div',{className:'d-buttons'});
+  btns.appendChild(el('a',{className:'d-btn d-btn-primary',href:app.url,target:'_blank',rel:'noopener'},[T('visit') + ' ' + app.name + ' \u2197']));
+  if (app.docs) btns.appendChild(el('a',{className:'d-btn d-btn-secondary',href:app.docs,target:'_blank',rel:'noopener'},[T('docs') + ' \u2197']));
+  if (app.openSource) btns.appendChild(el('a',{className:'d-btn d-btn-secondary',href:app.openSource,target:'_blank',rel:'noopener'},[T('source') + ' \u2197']));
+  aboutCard.appendChild(btns);
+  view.appendChild(aboutCard);
+
+  // Getting started card
+  var guideCard = el('div',{className:'d-card'});
+  guideCard.appendChild(el('h2',{},[T('guide_title').replace('{app}', app.name)]));
+  var ol = el('ol');
+
+  // Step 1
+  var li1 = el('li');
+  if (T('guide_s1_pre')) li1.appendChild(txt(T('guide_s1_pre') + ' '));
+  li1.appendChild(el('a',{href:'https://ofox.ai',target:'_blank',rel:'noopener'},[T('guide_s1_link')]));
+  if (T('guide_s1_suf')) li1.appendChild(txt(' ' + T('guide_s1_suf')));
+  ol.appendChild(li1);
+
+  // Step 2
+  var li2 = el('li');
+  li2.appendChild(txt(T('guide_s2_pre') + ' '));
+  li2.appendChild(el('a',{href:'https://ofox.ai/console',target:'_blank',rel:'noopener'},[T('guide_s2_link')]));
+  if (T('guide_s2_suf')) li2.appendChild(txt(' ' + T('guide_s2_suf')));
+  ol.appendChild(li2);
+
+  // Step 3
+  var li3 = el('li');
+  li3.appendChild(txt(T('guide_s3').replace('{app}', app.name)));
+  if (app.docs) {
+    li3.appendChild(txt(T('guide_s3_docs_pre')));
+    li3.appendChild(el('a',{href:app.docs,target:'_blank',rel:'noopener'},[T('guide_s3_docs_link').replace('{app}', app.name)]));
+    li3.appendChild(txt('。'));
+  }
+  ol.appendChild(li3);
+
+  guideCard.appendChild(ol);
+  view.appendChild(guideCard);
+
+  // Using Ofox and {app} card
+  var useCard = el('div',{className:'d-card'});
+  useCard.appendChild(el('h2',{},[T('use_title').replace('{app}', app.name)]));
+  useCard.appendChild(el('p',{},[T('use_body').replace(/\{app\}/g, app.name)]));
+  if (app.docs) {
+    var docP = el('p');
+    docP.appendChild(txt(T('use_docs_pre') + ' '));
+    docP.appendChild(el('a',{href:app.docs,target:'_blank',rel:'noopener'},[T('use_docs_link').replace('{app}', app.name)]));
+    docP.appendChild(txt('。'));
+    useCard.appendChild(docP);
+  }
+  view.appendChild(useCard);
+}
+
+/* ========== Router ========== */
+function route() {
+  var params = new URLSearchParams(location.search);
+  var slug = params.get('app');
+  var listView = document.getElementById('listView');
+  var detailView = document.getElementById('detailView');
+
+  if (slug) {
+    var app = apps.find(function(a) { return a.slug === slug; });
+    if (app) {
+      listView.classList.add('hidden');
+      detailView.classList.add('active');
+      document.getElementById('footerEl').style.display = 'none';
+      renderDetail(app);
+      window.scrollTo(0, 0);
+      return;
+    }
+  }
+  // Show list
+  listView.classList.remove('hidden');
+  detailView.classList.remove('active');
+  document.title = 'Works with Ofox';
+  renderList();
+  renderGrid();
+}
+
+window.addEventListener('popstate', route);
+document.getElementById('searchInput').addEventListener('input', renderGrid);
+
+// Load data
+fetch('../apps.json')
+  .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(function(d) { apps = d; route(); })
+  .catch(function() { apps = EMBEDDED_APPS; route(); });
+</script>
+</body>
+</html>

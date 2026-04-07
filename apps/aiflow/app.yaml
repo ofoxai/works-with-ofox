@@ -1,0 +1,12 @@
+name: "AIFlow"
+description: "Visual workflow builder for AI automation. Drag-and-drop nodes to chain models, APIs, and data sources into production pipelines."
+url: "https://example.com/aiflow"
+docs: "https://docs.example.com/aiflow/ofox"
+tags:
+  - productivity
+  - coding
+models:
+  - "Claude 3.5"
+  - "GPT-4o"
+  - "DeepSeek V3"
+date_added: "2026-04-01"

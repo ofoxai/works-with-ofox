@@ -3,7 +3,7 @@
   "title": "Ofox App",
   "description": "Schema for apps that work with Ofox",
   "type": "object",
-  "required": ["name", "description", "url", "tags", "date_added"],
+  "required": ["name", "description", "url", "docs", "tags", "date_added"],
   "additionalProperties": false,
   "properties": {
     "name": {

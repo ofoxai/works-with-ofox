@@ -13,6 +13,7 @@
 - 支持用户填入自己的 Ofox API Key
 - 有公开可访问的页面
 - 有一个 Logo 图片（PNG 格式）
+- 提供 Ofox 集成配置文档链接（说明用户如何在你的应用中配置 Ofox API Key）
 - **有一定的影响力或用户基础** — 全新的、无用户的项目不太可能被合并。我们关注的信号包括：GitHub stars、活跃用户数、下载量、社区活跃度等。特别创新的项目可以例外。
 
 ## 提交步骤
@@ -35,7 +36,7 @@ apps/your-app-name/
 name: "你的应用名称"
 description: "一句话介绍你的应用（最多 300 字符）"
 url: "https://your-app-url.com"
-docs: "https://your-app-url.com/docs/ofox"   # Ofox 集成文档（选填）
+docs: "https://your-app-url.com/docs/ofox"   # Ofox 集成配置文档（必填）
 tags:
   - coding     # 可选：chat / coding / productivity / creative / research / education / other
 models:        # 选填：通过 Ofox 使用的模型
@@ -53,9 +54,10 @@ date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 
 ### 5. 提交 Pull Request
 
-- PR 会被自动验证（schema + logo 格式）
+- PR 提交后会先经过**自动验证**（字段完整性、logo 格式、链接有效性）
+- 自动验证通过后，进入**人工审核**流程，我们会检查应用质量、集成真实性等
 - **不要手动编辑 README.md** — 合并后由 GitHub Action 自动生成
-- 审核通过并合并后，你的应用会自动出现在展示墙上
+- 人工审核通过并合并后，你的应用会自动出现在展示墙上
 
 ## 标签说明
 
