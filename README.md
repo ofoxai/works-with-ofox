@@ -41,8 +41,6 @@ Visual workflow builder for AI automation. Drag-and-drop nodes to chain models, 
 
 `productivity` `coding`
 
-**Models:** Claude 3.5, GPT-4o, DeepSeek V3
-
 [Documentation](https://docs.example.com/aiflow/ofox)
 
 ---
@@ -55,8 +53,6 @@ Smart code review and refactoring tool. Analyze pull requests, suggest improveme
 
 `coding`
 
-**Models:** Claude 3.5, DeepSeek V3
-
 [Documentation](https://docs.example.com/codeflow/ofox)
 
 ---
@@ -67,9 +63,9 @@ Smart code review and refactoring tool. Analyze pull requests, suggest improveme
 
 Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly.
 
-`research` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/datawise)
+`data` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/datawise)
 
-**Models:** Claude 3.5, GPT-4o, DeepSeek V3
+[Documentation](https://docs.example.com/datawise/ofox)
 
 ---
 
@@ -80,8 +76,6 @@ Natural language data analysis. Upload CSV or connect databases, ask questions i
 Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox.
 
 `chat` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/deepchat)
-
-**Models:** Claude 3.5, GPT-4o, DeepSeek V3
 
 [Documentation](https://docs.example.com/deepchat/ofox)
 
@@ -95,7 +89,7 @@ Chat with your documents. Upload PDFs, Word files, or Notion pages and get accur
 
 `chat` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/docubot)
 
-**Models:** Claude 3.5, Gemini Pro
+[Documentation](https://docs.example.com/docubot/ofox)
 
 ---
 
@@ -105,9 +99,7 @@ Chat with your documents. Upload PDFs, Word files, or Notion pages and get accur
 
 AI-powered design tool for social media graphics, thumbnails, and banners. Generate and edit visuals with text prompts.
 
-`creative`
-
-**Models:** GPT-4o, Gemini Pro
+`media` `creative`
 
 [Documentation](https://docs.example.com/pixellab/ofox)
 
@@ -121,7 +113,7 @@ Adaptive learning companion that creates personalized study plans, generates pra
 
 `education` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/studymate)
 
-**Models:** Gemini Pro, Claude 3.5
+[Documentation](https://docs.example.com/studymate/ofox)
 
 ---
 
@@ -132,8 +124,6 @@ Adaptive learning companion that creates personalized study plans, generates pra
 AI writing assistant for blogs, emails, and marketing copy. Supports tone adjustment, multi-language translation, and SEO optimization.
 
 `creative` `productivity`
-
-**Models:** Claude 3.5, GPT-4o
 
 [Documentation](https://docs.example.com/writecraft/ofox)
 

@@ -5,7 +5,4 @@ docs: "https://docs.example.com/writecraft/ofox"
 tags:
   - creative
   - productivity
-models:
-  - "Claude 3.5"
-  - "GPT-4o"
 date_added: "2026-03-25"

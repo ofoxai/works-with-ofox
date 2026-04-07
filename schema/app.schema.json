@@ -37,7 +37,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "enum": ["chat", "coding", "productivity", "creative", "research", "education", "other"]
+        "enum": ["chat", "coding", "productivity", "creative", "research", "education", "data", "media", "devops", "other"]
       },
       "description": "分类标签"
     },
@@ -46,13 +46,6 @@
       "format": "uri",
       "pattern": "^https?://",
       "description": "开源仓库地址（选填）"
-    },
-    "models": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "通过 Ofox 使用的模型（选填）"
     },
     "date_added": {
       "type": "string",

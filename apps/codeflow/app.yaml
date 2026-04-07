@@ -4,7 +4,4 @@ url: "https://example.com/codeflow"
 docs: "https://docs.example.com/codeflow/ofox"
 tags:
   - coding
-models:
-  - "Claude 3.5"
-  - "DeepSeek V3"
 date_added: "2026-03-18"

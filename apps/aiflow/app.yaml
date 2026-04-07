@@ -5,8 +5,4 @@ docs: "https://docs.example.com/aiflow/ofox"
 tags:
   - productivity
   - coding
-models:
-  - "Claude 3.5"
-  - "GPT-4o"
-  - "DeepSeek V3"
 date_added: "2026-04-01"

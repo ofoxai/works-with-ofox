@@ -40,10 +40,7 @@ description: "A one-liner about your app (max 300 characters)"
 url: "https://your-app-url.com"
 docs: "https://your-app-url.com/docs/ofox"   # Ofox integration docs (required)
 tags:
-  - coding     # Options: chat / coding / productivity / creative / research / education / other
-models:        # Optional: models used via Ofox
-  - "Claude 3.5"
-  - "GPT-4o"
+  - coding     # Options: chat / coding / productivity / creative / research / education / data / media / devops / other
 open_source: "https://github.com/you/your-app"  # Optional: open source repo
 date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 ```
@@ -53,6 +50,7 @@ date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 - File must be named `logo.png`
 - Recommended size: 128x128 or 256x256 pixels
 - Square, PNG format
+- Max file size: 512KB
 
 ### 5. Submit a Pull Request
 
@@ -71,6 +69,9 @@ date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 | `creative` | Design, writing, music, content creation |
 | `research` | Analysis, search, knowledge management |
 | `education` | Learning, education, training |
+| `data` | Data analysis, visualization, BI |
+| `media` | Image/audio/video generation & editing |
+| `devops` | Deployment, CI/CD, infrastructure |
 | `other` | Other types |
 
 ## Example

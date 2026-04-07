@@ -40,10 +40,7 @@ description: "一句话介绍你的应用（最多 300 字符）"
 url: "https://your-app-url.com"
 docs: "https://your-app-url.com/docs/ofox"   # Ofox 集成配置文档（必填）
 tags:
-  - coding     # 可选：chat / coding / productivity / creative / research / education / other
-models:        # 选填：通过 Ofox 使用的模型
-  - "Claude 3.5"
-  - "GPT-4o"
+  - coding     # 可选：chat / coding / productivity / creative / research / education / data / media / devops / other
 open_source: "https://github.com/you/your-app"  # 选填：开源仓库
 date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 ```
@@ -53,6 +50,7 @@ date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 - 文件名必须为 `logo.png`
 - 推荐尺寸：128x128 或 256x256 像素
 - 正方形、PNG 格式
+- 文件大小不超过 512KB
 
 ### 5. 提交 Pull Request
 
@@ -71,6 +69,9 @@ date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 | `creative` | 设计、写作、音乐、内容创作 |
 | `research` | 分析、搜索、知识管理 |
 | `education` | 学习、教育、培训 |
+| `data` | 数据分析、可视化、BI |
+| `media` | 图片/音频/视频生成与编辑 |
+| `devops` | 部署、CI/CD、基础设施 |
 | `other` | 其他类型 |
 
 ## 示例

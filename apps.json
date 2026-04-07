@@ -9,11 +9,6 @@
       "productivity",
       "coding"
     ],
-    "models": [
-      "Claude 3.5",
-      "GPT-4o",
-      "DeepSeek V3"
-    ],
     "openSource": null,
     "dateAdded": "2026-04-01"
   },
@@ -26,10 +21,6 @@
     "tags": [
       "coding"
     ],
-    "models": [
-      "Claude 3.5",
-      "DeepSeek V3"
-    ],
     "openSource": null,
     "dateAdded": "2026-03-18"
   },
@@ -38,15 +29,10 @@
     "name": "DataWise",
     "description": "Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly.",
     "url": "https://example.com/datawise",
-    "docs": null,
+    "docs": "https://docs.example.com/datawise/ofox",
     "tags": [
-      "research",
-      "productivity"
-    ],
-    "models": [
-      "Claude 3.5",
-      "GPT-4o",
-      "DeepSeek V3"
+      "data",
+      "research"
     ],
     "openSource": "https://github.com/example/datawise",
     "dateAdded": "2026-03-26"
@@ -61,11 +47,6 @@
       "chat",
       "productivity"
     ],
-    "models": [
-      "Claude 3.5",
-      "GPT-4o",
-      "DeepSeek V3"
-    ],
     "openSource": "https://github.com/example/deepchat",
     "dateAdded": "2026-03-20"
   },
@@ -74,14 +55,10 @@
     "name": "DocuBot",
     "description": "Chat with your documents. Upload PDFs, Word files, or Notion pages and get accurate answers with source citations.",
     "url": "https://example.com/docubot",
-    "docs": null,
+    "docs": "https://docs.example.com/docubot/ofox",
     "tags": [
       "chat",
       "research"
-    ],
-    "models": [
-      "Claude 3.5",
-      "Gemini Pro"
     ],
     "openSource": "https://github.com/example/docubot",
     "dateAdded": "2026-03-30"
@@ -93,11 +70,8 @@
     "url": "https://example.com/pixellab",
     "docs": "https://docs.example.com/pixellab/ofox",
     "tags": [
+      "media",
       "creative"
-    ],
-    "models": [
-      "GPT-4o",
-      "Gemini Pro"
     ],
     "openSource": null,
     "dateAdded": "2026-03-28"
@@ -107,13 +81,9 @@
     "name": "StudyMate AI",
     "description": "Adaptive learning companion that creates personalized study plans, generates practice questions, and explains concepts at your level.",
     "url": "https://example.com/studymate",
-    "docs": null,
+    "docs": "https://docs.example.com/studymate/ofox",
     "tags": [
       "education"
-    ],
-    "models": [
-      "Gemini Pro",
-      "Claude 3.5"
     ],
     "openSource": "https://github.com/example/studymate",
     "dateAdded": "2026-03-22"
@@ -127,10 +97,6 @@
     "tags": [
       "creative",
       "productivity"
-    ],
-    "models": [
-      "Claude 3.5",
-      "GPT-4o"
     ],
     "openSource": null,
     "dateAdded": "2026-03-25"

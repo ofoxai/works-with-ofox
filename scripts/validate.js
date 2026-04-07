@@ -41,9 +41,23 @@ function checkUrlSecurity(url) {
   }
 }
 
+const MAX_LOGO_SIZE = 512 * 1024; // 512 KB
+
 function validateApp(appDir) {
   const errors = [];
+
+  // Path traversal protection
+  if (/[\/\\]|^\.\.?$/.test(appDir) || appDir.includes('..')) {
+    errors.push(`${appDir}: Invalid directory name (path traversal attempt)`);
+    return errors;
+  }
+
   const appPath = path.join(APPS_DIR, appDir);
+  const resolved = path.resolve(appPath);
+  if (!resolved.startsWith(path.resolve(APPS_DIR) + path.sep)) {
+    errors.push(`${appDir}: Path escapes apps directory`);
+    return errors;
+  }
 
   if (!fs.existsSync(appPath)) {
     errors.push(`Directory does not exist: ${appDir}`);
@@ -91,6 +105,9 @@ function validateApp(appDir) {
     const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
     if (buffer.length < 8 || !buffer.subarray(0, 8).equals(pngSignature)) {
       errors.push(`Invalid PNG file in ${appDir}: logo.png is not a valid PNG`);
+    }
+    if (buffer.length > MAX_LOGO_SIZE) {
+      errors.push(`${appDir}: logo.png exceeds ${MAX_LOGO_SIZE / 1024}KB limit (${Math.round(buffer.length / 1024)}KB)`);
     }
   }
 

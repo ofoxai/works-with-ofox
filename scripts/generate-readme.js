@@ -15,6 +15,9 @@ const TAG_LABELS = {
   creative: '创意',
   research: '研究',
   education: '教育',
+  data: '数据',
+  media: '媒体',
+  devops: 'DevOps',
   other: '其他',
 };
 
@@ -53,6 +56,14 @@ function generateAnchor(name) {
   return name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
 }
 
+// Sanitize text for safe markdown embedding
+function sanitizeMd(text) {
+  return String(text)
+    .replace(/[<>&"'`]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]))
+    .replace(/\[/g, '\\[')
+    .replace(/\]/g, '\\]');
+}
+
 function generateAppCard(app) {
   const logoUrl = app._hasLogo
     ? `./apps/${app._slug}/logo.png`
@@ -64,21 +75,20 @@ function generateAppCard(app) {
 
   const tags = app.tags.map(tag => `\`${tag}\``).join(' ');
 
-  const models = app.models && app.models.length > 0
-    ? `\n\n**Models:** ${app.models.join(', ')}`
-    : '';
-
   const docs = app.docs
     ? `\n\n[Documentation](${app.docs})`
     : '';
 
-  return `### [${app.name}](${app.url})
+  const safeName = sanitizeMd(app.name);
+  const safeDesc = sanitizeMd(app.description);
 
-<img src="${logoUrl}" alt="${app.name} logo" width="64" height="64">
+  return `### [${safeName}](${app.url})
 
-${app.description}
+<img src="${logoUrl}" alt="${safeName} logo" width="64" height="64">
 
-${tags}${openSourceBadge}${models}${docs}
+${safeDesc}
+
+${tags}${openSourceBadge}${docs}
 
 ---`;
 }
@@ -153,7 +163,6 @@ function main() {
     url: app.url,
     docs: app.docs || null,
     tags: app.tags,
-    models: app.models || [],
     openSource: app.open_source || null,
     dateAdded: app.date_added,
   }));

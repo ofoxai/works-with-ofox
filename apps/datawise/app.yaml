@@ -1,12 +1,9 @@
 name: "DataWise"
 description: "Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly."
 url: "https://example.com/datawise"
+docs: "https://docs.example.com/datawise/ofox"
 tags:
+  - data
   - research
-  - productivity
-models:
-  - "Claude 3.5"
-  - "GPT-4o"
-  - "DeepSeek V3"
 open_source: "https://github.com/example/datawise"
 date_added: "2026-03-26"

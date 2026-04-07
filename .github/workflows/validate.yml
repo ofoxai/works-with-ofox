@@ -34,7 +34,8 @@ jobs:
           CHANGED_DIRS: ${{ steps.changed.outputs.dirs }}
         run: |
           if [ -n "$CHANGED_DIRS" ]; then
-            node scripts/validate.js $CHANGED_DIRS
+            # Pass each dir as a separate quoted argument
+            echo "$CHANGED_DIRS" | tr ' ' '\n' | grep -E '^[a-z0-9-]+$' | xargs -I{} node scripts/validate.js "{}"
           else
             echo "No app changes detected"
           fi

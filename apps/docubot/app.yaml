@@ -1,11 +1,9 @@
 name: "DocuBot"
 description: "Chat with your documents. Upload PDFs, Word files, or Notion pages and get accurate answers with source citations."
 url: "https://example.com/docubot"
+docs: "https://docs.example.com/docubot/ofox"
 tags:
   - chat
   - research
-models:
-  - "Claude 3.5"
-  - "Gemini Pro"
 open_source: "https://github.com/example/docubot"
 date_added: "2026-03-30"

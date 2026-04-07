@@ -3,8 +3,6 @@ description: "AI-powered design tool for social media graphics, thumbnails, and 
 url: "https://example.com/pixellab"
 docs: "https://docs.example.com/pixellab/ofox"
 tags:
+  - media
   - creative
-models:
-  - "GPT-4o"
-  - "Gemini Pro"
 date_added: "2026-03-28"
