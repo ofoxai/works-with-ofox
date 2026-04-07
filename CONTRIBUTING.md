@@ -1,5 +1,7 @@
 # Contributing / 提交你的应用
 
+> **English version: [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md)**
+
 想把你的应用添加到 "Works with Ofox" 展示墙？按照以下步骤操作！
 
 **展示墙地址：[ofox.ai/awesome](https://ofox.ai/awesome)** — 你的提交会获得来自高流量 AI 网站的真实反链，有助于 SEO 和曝光。
