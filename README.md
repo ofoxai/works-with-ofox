@@ -27,6 +27,7 @@
 - [DataWise](#datawise)
 - [DeepChat](#deepchat)
 - [DocuBot](#docubot)
+- [Pipeline Test](#pipeline-test)
 - [PixelLab](#pixellab)
 - [StudyMate AI](#studymate-ai)
 - [WriteCraft](#writecraft)
@@ -90,6 +91,18 @@ Chat with your documents. Upload PDFs, Word files, or Notion pages and get accur
 `chat` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/docubot)
 
 [Documentation](https://docs.example.com/docubot/ofox)
+
+---
+
+### [Pipeline Test](https://ofox.ai)
+
+<img src="./apps/pipeline-test/logo.png" alt="Pipeline Test logo" width="64" height="64">
+
+End-to-end test entry to exercise the submission pipeline (PR → validate → merge → generate → wall). Safe to remove.
+
+`other`
+
+[Documentation](https://ofox.ai/zh/docs/integrations)
 
 ---
 
