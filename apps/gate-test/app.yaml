@@ -1,0 +1,7 @@
+name: "Gate Test"
+description: "Temporary test to verify the manual-approval gate blocks merge without review. Safe to remove."
+url: "https://ofox.ai"
+docs: "https://ofox.ai/zh/docs/integrations"
+tags:
+  - other
+date_added: "2026-06-23"
