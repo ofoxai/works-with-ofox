@@ -64,18 +64,6 @@
     "dateAdded": "2026-03-30"
   },
   {
-    "slug": "pipeline-test",
-    "name": "Pipeline Test",
-    "description": "End-to-end test entry to exercise the submission pipeline (PR → validate → merge → generate → wall). Safe to remove.",
-    "url": "https://ofox.ai",
-    "docs": "https://ofox.ai/zh/docs/integrations",
-    "tags": [
-      "other"
-    ],
-    "openSource": null,
-    "dateAdded": "2026-06-23"
-  },
-  {
     "slug": "pixellab",
     "name": "PixelLab",
     "description": "AI-powered design tool for social media graphics, thumbnails, and banners. Generate and edit visuals with text prompts.",
