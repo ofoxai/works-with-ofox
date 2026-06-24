@@ -15,8 +15,18 @@ export interface App {
 export const CATEGORIES = ['chat', 'coding', 'productivity', 'creative', 'research', 'other'] as const;
 export type Category = (typeof CATEGORIES)[number];
 
+// Only allow http(s) URLs into rendered href attributes — blocks javascript:/data:
+// (defense in depth; validate.js also enforces this in CI but not at build time).
+const safeUrl = (u: unknown): string | null =>
+  typeof u === 'string' && /^https?:\/\//i.test(u) ? u : null;
+
 export const apps: App[] = (appsData as App[])
-  .slice()
+  .map((a) => ({
+    ...a,
+    url: safeUrl(a.url) || '#',
+    docs: safeUrl(a.docs),
+    openSource: safeUrl(a.openSource),
+  }))
   .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
 
 export function getApp(slug: string): App | undefined {

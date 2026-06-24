@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 
 // Mirrors the blog/docs convention: own repo + own Vercel deploy, stitched under
 // ofox.ai via home-page rewrites. Pages live under /awesome/ (en) and
@@ -20,15 +19,9 @@ export default defineConfig({
   build: {
     assets: 'awesome/_assets',
   },
-  integrations: [
-    sitemap({
-      filter: (page) => page !== 'https://ofox.ai/',
-      serialize(item) {
-        item.url = item.url.replace('https://ofox.ai/en/awesome', 'https://ofox.ai/awesome');
-        return item;
-      },
-    }),
-  ],
+  // Sitemap is generated into public/awesome/sitemap.xml by scripts/prepare-assets.js
+  // so it is reachable under the /awesome/* proxy (the @astrojs/sitemap integration
+  // only emits to the site root, which the main-site rewrite does not cover).
   // Static output (default). For Vercel-specific features add @astrojs/vercel
   // pinned to the blog's version at deploy time.
 });

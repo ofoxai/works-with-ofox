@@ -40,8 +40,11 @@ const WALL_ORIGIN = process.env.WALL_ORIGIN || "https://works-with-ofox.vercel.a
 > 若主站对 HTML 做 origin 改写(像 `blog-proxy` 那样处理相对链接/Vary),可复用同一代理路由;
 > 本墙所有内部链接都是 `/awesome/...` 绝对路径,直接 rewrite 即可,无需改写 HTML。
 
-**c. sitemap**:墙自带 `/awesome/sitemap-index.xml`,`site` 设为 `https://ofox.ai`,
-en 已重写为 `/awesome`(无 `/en` 前缀)。按需在主站 robots/sitemap 索引里收录。
+**c. sitemap / robots**:构建时 `prepare-assets.js` 生成 `public/awesome/sitemap.xml`
+(列出全部 `/awesome` 与 `/{locale}/awesome` URL,`site=https://ofox.ai`,en 无 `/en` 前缀)
+和 `public/awesome/robots.txt`(`Sitemap: https://ofox.ai/awesome/sitemap.xml`)。二者都在 `/awesome/*`
+代理覆盖范围内,proxy 一开即可达。**建议**在主站根 `robots.txt` 里也加一行
+`Sitemap: https://ofox.ai/awesome/sitemap.xml`,或把这些 URL 收进主站 sitemap 索引。
 
 ## 3. 上线前检查清单(本仓库侧已就绪项打勾)
 

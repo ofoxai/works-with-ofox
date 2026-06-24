@@ -183,6 +183,23 @@ export const tagLabels: Record<string, Record<string, string>> = {
   ru: { chat: 'Чат', coding: 'Код', productivity: 'Продуктивность', creative: 'Творчество', research: 'Исследования', other: 'Другое' },
 };
 
+// Localized <title> for the list page (most important SEO tag → per-locale keywords).
+export const pageTitles: Record<string, string> = {
+  zh: 'Works with Ofox — Ofox 应用展示墙',
+  'zh-TW': 'Works with Ofox — Ofox 應用展示牆',
+  en: 'Works with Ofox — Apps & tools that work with Ofox',
+  ja: 'Works with Ofox — Ofox 対応アプリ＆ツール',
+  ko: 'Works with Ofox — Ofox 지원 앱 & 도구',
+  de: 'Works with Ofox — Apps & Tools, die mit Ofox funktionieren',
+  es: 'Works with Ofox — Apps y herramientas que funcionan con Ofox',
+  fr: 'Works with Ofox — Apps et outils compatibles avec Ofox',
+  pt: 'Works with Ofox — Apps e ferramentas que funcionam com a Ofox',
+  ru: 'Works with Ofox — Приложения и инструменты, работающие с Ofox',
+};
+export function pageTitle(locale: string): string {
+  return pageTitles[locale] || pageTitles.en;
+}
+
 export function t(locale: string, key: string): string {
   const d = i18n[locale] || i18n.en;
   return d[key] ?? i18n.en[key] ?? key;

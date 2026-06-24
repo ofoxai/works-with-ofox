@@ -4,5 +4,7 @@ dist/
 .vercel/
 *.log
 .DS_Store
-# generated at build by scripts/prepare-assets.js from apps/<slug>/logo.png
+# generated at build by scripts/prepare-assets.js
 public/awesome/logos/
+public/awesome/sitemap.xml
+public/awesome/robots.txt
