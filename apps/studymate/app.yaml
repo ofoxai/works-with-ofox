@@ -3,6 +3,7 @@ description: "Adaptive learning companion that creates personalized study plans,
 url: "https://example.com/studymate"
 docs: "https://docs.example.com/studymate/ofox"
 tags:
-  - education
+  - productivity
+  - research
 open_source: "https://github.com/example/studymate"
 date_added: "2026-03-22"

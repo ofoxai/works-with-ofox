@@ -26,7 +26,8 @@ jobs:
         env:
           BASE_REF: ${{ github.base_ref }}
         run: |
-          CHANGED_DIRS=$(git diff --name-only "origin/${BASE_REF}...HEAD" | grep '^apps/' | cut -d'/' -f2 | sort -u | tr '\n' ' ')
+          # --diff-filter=ACMR excludes Deleted dirs (removing an app must not fail validation)
+          CHANGED_DIRS=$(git diff --name-only --diff-filter=ACMR "origin/${BASE_REF}...HEAD" | grep '^apps/' | cut -d'/' -f2 | sort -u | tr '\n' ' ')
           echo "dirs=${CHANGED_DIRS}" >> "$GITHUB_OUTPUT"
 
       - name: Validate app submissions
@@ -38,4 +39,15 @@ jobs:
             echo "$CHANGED_DIRS" | tr ' ' '\n' | grep -E '^[a-z0-9-]+$' | xargs -I{} node scripts/validate.js "{}"
           else
             echo "No app changes detected"
+          fi
+
+      # Guard against drift: the committed apps.json / README must match what
+      # generate-readme.js produces from apps/*.yaml (prevents hand-edited or stale copies).
+      - name: Check apps.json / README are in sync
+        run: |
+          node scripts/generate-readme.js
+          if ! git diff --quiet apps.json README.md; then
+            echo "::error::apps.json/README.md are out of sync with apps/*.yaml. Do not edit them by hand — they are generated. Run 'node scripts/generate-readme.js' and commit."
+            git diff --stat apps.json README.md
+            exit 1
           fi
