@@ -1,6 +1,6 @@
 # Contributing
 
-> **中文版: [CONTRIBUTING.md](CONTRIBUTING.md)**
+> [← Back to README](README.md) · **中文版: [CONTRIBUTING.md](CONTRIBUTING.md)**
 
 Want to add your app to the "Works with Ofox" showcase? Follow the steps below!
 
