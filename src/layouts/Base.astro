@@ -1,0 +1,101 @@
+---
+import '../styles/wall.css';
+import { LOCALES, t, submitUrl, wallPath, htmlLang, languageLabel } from '../lib/i18n';
+
+interface Props {
+  locale: string;
+  title: string;
+  description?: string;
+  /** locale code -> URL of the current page in that locale */
+  localeUrls: Record<string, string>;
+}
+const { locale, title, description = '', localeUrls } = Astro.props;
+const abs = (p: string) => new URL(p, Astro.site).href;
+const canonical = abs(localeUrls[locale]);
+const ogImage = abs('/awesome/og.png');
+---
+<!doctype html>
+<html lang={htmlLang(locale)}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Tag Manager (same container as ofox.ai / blog → forwards to GA4) -->
+  <script is:inline>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TJPB6XKD');
+  </script>
+  <!-- End Google Tag Manager -->
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+  {LOCALES.map((l) => (
+    <link rel="alternate" hreflang={htmlLang(l.code)} href={abs(localeUrls[l.code])} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={abs(localeUrls['en'])} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Works with Ofox" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content={htmlLang(locale)} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJPB6XKD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href={wallPath(locale)}><span class="logo-dot"></span><span>Works with Ofox</span></a>
+      <div class="header-actions">
+        <select class="lang-toggle" id="langSelect" aria-label={languageLabel(locale)}>
+          {LOCALES.map((l) => (
+            <option value={localeUrls[l.code]} selected={l.code === locale}>{l.name}</option>
+          ))}
+        </select>
+        <a class="btn-submit" href={submitUrl(locale)} target="_blank" rel="noopener">{t(locale, 'submit_link')}</a>
+      </div>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="footer">
+    Powered by <a href="https://ofox.ai" target="_blank" rel="noopener">Ofox AI</a>{t(locale, 'footer_suf')}
+  </footer>
+
+  <script>
+    // --- GTM/GA4 event tracking (埋点) via dataLayer, delegated for list + detail ---
+    function trk(event: string, data: Record<string, unknown> = {}) {
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event, ...data });
+    }
+
+    const sel = document.getElementById('langSelect') as HTMLSelectElement | null;
+    sel?.addEventListener('change', () => {
+      trk('wall_language_switch', { to_url: sel.value });
+      if (sel.value) location.href = sel.value;
+    });
+
+    document.addEventListener('click', (e) => {
+      const el = (e.target as HTMLElement)?.closest('a, .cat-chip') as HTMLElement | null;
+      if (!el) return;
+      if (el.classList.contains('card')) {
+        trk('wall_app_click', { slug: el.getAttribute('data-slug') });
+      } else if (el.classList.contains('btn-submit')) {
+        trk('wall_submit_pr_click');
+      } else if (el.classList.contains('cat-chip') && !el.classList.contains('disabled')) {
+        trk('wall_category_filter', { category: el.getAttribute('data-cat') });
+      } else if (el.classList.contains('d-btn')) {
+        // outbound: visit app / docs / source from a detail page
+        trk('wall_outbound', { href: (el as HTMLAnchorElement).href });
+      }
+    });
+  </script>
+</body>
+</html>

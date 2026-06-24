@@ -1,0 +1,55 @@
+name: 提交应用 / Submit an app
+description: 申请把一个支持 Ofox 的应用加入展示墙 / Request to add an Ofox-compatible app to the wall
+title: "[App] <应用名 / app name>"
+labels: ["app-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢提交！直接提 PR 更快（见 [CONTRIBUTING.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING.md)）。
+        Thanks! Opening a PR is faster — see [CONTRIBUTING.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING.md).
+  - type: input
+    id: name
+    attributes:
+      label: 应用名称 / App name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: 应用链接 / App URL
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: ofox_doc
+    attributes:
+      label: 对方记录 Ofox 支持的页面 / Page where the app documents Ofox support
+      description: 上墙硬门槛——必须是对方自己官网/仓库里写明支持 Ofox 的链接。Required — a link on the app's own site/repo.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: tags
+    attributes:
+      label: 类别 / Category（可多选，最多 3 个）
+      multiple: true
+      options:
+        - chat
+        - coding
+        - productivity
+        - creative
+        - research
+        - other
+    validations:
+      required: true
+  - type: input
+    id: open_source
+    attributes:
+      label: 开源仓库（选填）/ Open-source repo (optional)
+      placeholder: https://github.com/
+  - type: textarea
+    id: notes
+    attributes:
+      label: 影响力 / 用户基础 / Traction
+      description: GitHub stars、用户数、下载量、社区活跃度等 / stars, users, downloads, community
