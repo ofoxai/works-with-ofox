@@ -1,6 +1,6 @@
 ---
 import '../styles/wall.css';
-import { LOCALES, t, submitUrl, wallPath, htmlLang } from '../lib/i18n';
+import { LOCALES, t, submitUrl, wallPath, htmlLang, languageLabel } from '../lib/i18n';
 
 interface Props {
   locale: string;
@@ -53,7 +53,7 @@ const ogImage = abs('/awesome/og.png');
     <div class="header-inner">
       <a class="logo" href={wallPath(locale)}><span class="logo-dot"></span><span>Works with Ofox</span></a>
       <div class="header-actions">
-        <select class="lang-toggle" id="langSelect" aria-label="Language">
+        <select class="lang-toggle" id="langSelect" aria-label={languageLabel(locale)}>
           {LOCALES.map((l) => (
             <option value={localeUrls[l.code]} selected={l.code === locale}>{l.name}</option>
           ))}
