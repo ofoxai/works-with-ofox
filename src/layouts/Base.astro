@@ -12,7 +12,7 @@ interface Props {
 const { locale, title, description = '', localeUrls } = Astro.props;
 const abs = (p: string) => new URL(p, Astro.site).href;
 const canonical = abs(localeUrls[locale]);
-const ogImage = abs('/awesome/og.png');
+const ogImage = abs('/awesome-ofox/og.png');
 ---
 <!doctype html>
 <html lang={htmlLang(locale)}>

@@ -4,7 +4,7 @@
 
 Want to add your app to the "Works with Ofox" showcase? Follow the steps below!
 
-**Showcase: [ofox.ai/awesome](https://ofox.ai/awesome)** — Your submission gets a real backlink from a high-traffic AI site, helping with SEO and visibility.
+**Showcase: [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox)** — Your submission gets a real backlink from a high-traffic AI site, helping with SEO and visibility.
 
 **🎁 What you get:**
 - **$5 dev incentive** — paid to the Ofox account you give in the PR after approval (only specify a team if you have multiple; a single team is credited automatically)

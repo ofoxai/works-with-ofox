@@ -4,7 +4,7 @@
 
 想把你的应用添加到 "Works with Ofox" 展示墙？按照以下步骤操作！
 
-**展示墙地址：[ofox.ai/awesome](https://ofox.ai/awesome)** — 你的提交会获得来自高流量 AI 网站的真实反链，有助于 SEO 和曝光。
+**展示墙地址：[ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox)** — 你的提交会获得来自高流量 AI 网站的真实反链，有助于 SEO 和曝光。
 
 **🎁 你能得到什么：**
 - **$5 开发激励金** —— 审核通过后发放到你在 PR 里填的 Ofox 账户（只在有多个团队时需指定 team，单团队自动发放）

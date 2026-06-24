@@ -329,10 +329,10 @@ export function localePrefix(locale: string): string {
   return locale === 'en' ? '' : `/${locale}`;
 }
 export function wallPath(locale: string): string {
-  return `${localePrefix(locale)}/awesome`;
+  return `${localePrefix(locale)}/awesome-ofox`;
 }
 export function detailPath(locale: string, slug: string): string {
-  return `${localePrefix(locale)}/awesome/${slug}`;
+  return `${localePrefix(locale)}/awesome-ofox/${slug}`;
 }
 export function period(locale: string): string {
   return locale === 'zh' || locale === 'zh-TW' || locale === 'ja' ? '。' : '.';
