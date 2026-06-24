@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # `secrets` cannot be used in step `if:` — map to env, then gate on env.
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
     steps:
       # Use BOT_TOKEN (a PAT/App token in the main ruleset bypass list) so this
       # post-merge auto-regenerate push can reach the protected main branch.
@@ -36,7 +39,7 @@ jobs:
       # and the default token cannot bypass it. Without the secret this step is
       # skipped (instead of failing the run with a confusing push rejection).
       - name: Commit and push if changed
-        if: ${{ secrets.BOT_TOKEN != '' }}
+        if: ${{ env.BOT_TOKEN != '' }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
@@ -45,5 +48,5 @@ jobs:
           git push
 
       - name: Note when BOT_TOKEN is absent
-        if: ${{ secrets.BOT_TOKEN == '' }}
+        if: ${{ env.BOT_TOKEN == '' }}
         run: echo "::notice::BOT_TOKEN not set — skipped pushing regenerated README/apps.json. Add BOT_TOKEN (in the main ruleset bypass) to enable auto-commit."
