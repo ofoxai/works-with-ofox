@@ -42,13 +42,13 @@ a:hover{color:var(--copper-dark)}
 .recruit-panel{max-width:900px;margin:0 auto 72px;padding:0 24px}
 .recruit-panel-inner{background:#fff;border:1px solid var(--border);border-radius:16px;padding:44px 36px;text-align:center}
 .recruit-panel h2{font-size:clamp(22px,4.5vw,30px);font-weight:700;line-height:1.25;margin-bottom:10px}
-.recruit-panel .lead{font-size:16px;color:var(--text-secondary);max-width:600px;margin:0 auto 30px}
-.perks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;text-align:left;margin-bottom:30px}
-.perk{display:flex;gap:12px;padding:16px 18px;border:1px solid var(--border);border-radius:12px;background:var(--bg)}
-.perk-ico{font-size:22px;line-height:1.2;flex-shrink:0}
-.perk-t{font-weight:700;font-size:15px;margin-bottom:2px;color:var(--text)}
-.perk-d{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.recruit-panel .lead{font-size:16px;color:var(--text-secondary);max-width:600px;margin:0 auto 20px}
+.perk-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:26px}
+.perk-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--border);border-radius:20px;background:var(--bg);font-size:14px;font-weight:500;color:var(--text)}
+.recruit-cta{display:flex;flex-direction:column;align-items:center;gap:12px}
 .recruit-panel .btn-submit{font-size:15px;padding:12px 28px}
+.recruit-more{font-size:13px;color:var(--text-tertiary);font-weight:500}
+.recruit-more:hover{color:var(--copper)}
 .ghosts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
 .ghost{border:2px dashed var(--border);border-radius:var(--radius);padding:34px 16px;color:var(--text-tertiary);font-size:14px;text-align:center}
 
@@ -114,7 +114,6 @@ a:hover{color:var(--copper-dark)}
   .hero{padding:40px 18px 28px}
   .hero .sub{font-size:15px}
   .stats{gap:24px}.stat-num{font-size:22px}
-  .perks{grid-template-columns:1fr}
   .ghosts{grid-template-columns:1fr}
   .recruit-panel-inner{padding:32px 22px}
   .d-header{flex-direction:column;align-items:center;text-align:center}

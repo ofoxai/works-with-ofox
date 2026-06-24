@@ -18,11 +18,11 @@ const stats = [
 
 const isEmpty = apps.length === 0;
 const submit = submitUrl(locale);
-const perks = [
-  ['💰', r(locale, 'cash_t'), r(locale, 'cash_d')],
-  ['✨', r(locale, 'show_t'), r(locale, 'show_d')],
-  ['🤝', r(locale, 'partner_t'), r(locale, 'partner_d')],
-  ['🎁', r(locale, 'refer_t'), r(locale, 'refer_d')],
+const perkChips = [
+  ['💰', r(locale, 'p_cash')],
+  ['🤝', r(locale, 'p_partner')],
+  ['✨', r(locale, 'p_show')],
+  ['🎁', r(locale, 'p_refer')],
 ] as const;
 ---
 <div class="hero">
@@ -47,18 +47,15 @@ const perks = [
     <div class="recruit-panel-inner">
       <h2>{r(locale, 'headline')}</h2>
       <p class="lead">{r(locale, 'lead')}</p>
-      <div class="perks">
-        {perks.map(([ico, title, desc]) => (
-          <div class="perk">
-            <span class="perk-ico" aria-hidden="true">{ico}</span>
-            <div>
-              <div class="perk-t">{title}</div>
-              <div class="perk-d">{desc}</div>
-            </div>
-          </div>
+      <div class="perk-chips">
+        {perkChips.map(([ico, label]) => (
+          <span class="perk-chip"><span aria-hidden="true">{ico}</span> {label}</span>
         ))}
       </div>
-      <a class="btn-submit" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')}</a>
+      <div class="recruit-cta">
+        <a class="btn-submit" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')}</a>
+        <a class="recruit-more" href={submit} target="_blank" rel="noopener">{r(locale, 'more')}</a>
+      </div>
       <div class="ghosts" aria-hidden="true">
         <div class="ghost">{r(locale, 'ghost')}</div>
         <div class="ghost">{r(locale, 'ghost')}</div>
