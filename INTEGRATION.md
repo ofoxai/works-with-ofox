@@ -42,6 +42,12 @@ const WALL_ORIGIN = process.env.WALL_ORIGIN || "https://works-with-ofox.vercel.a
 > 若主站对 HTML 做 origin 改写(像 `blog-proxy` 那样处理相对链接/Vary),可复用同一代理路由;
 > 本墙所有内部链接都是 `/awesome/...` 绝对路径,直接 rewrite 即可,无需改写 HTML。
 
+**说明:ofox.io 也会生效** — home-page 同一部署按 host 同时服务 `ofox.ai` 与 `ofox.io`,
+rewrite 按路径匹配、不分域名,所以 `ofox.io/awesome` 也会打开(与 `ofox.io/blog`、`/docs` 一致)。
+这是无害的:墙的 `canonical` / `hreflang` / `og:url` 全硬编码 `https://ofox.ai`,io 上的页面自我指向 ai 为规范页,
+SEO 权重全部归并到 ofox.ai,不会重复内容惩罚。若确实只想在 ai 暴露,给 rewrite 加 host 条件
+`has: [{ type: 'host', value: 'ofox.ai' }]` 即可(不推荐,破坏与 blog/docs 的一致性)。
+
 **c. sitemap / robots**:构建时 `prepare-assets.js` 生成 `public/awesome/sitemap.xml`
 (列出全部 `/awesome` 与 `/{locale}/awesome` URL,`site=https://ofox.ai`,en 无 `/en` 前缀)
 和 `public/awesome/robots.txt`(`Sitemap: https://ofox.ai/awesome/sitemap.xml`)。二者都在 `/awesome/*`
