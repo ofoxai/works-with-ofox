@@ -4,7 +4,7 @@
 
 想把你的应用添加到 "Works with Ofox" 展示墙？按照以下步骤操作！
 
-**展示墙地址：[ofox.ai/awesome](https://ofox.ai/awesome)** — 你的提交会获得来自高流量 AI 网站的真实反链，有助于 SEO 和曝光。
+**展示墙地址：[ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox)** — 你的提交会获得来自高流量 AI 网站的真实反链，有助于 SEO 和曝光。
 
 **🎁 你能得到什么：**
 - **$5 开发激励金** —— 审核通过后发放到你在 PR 里填的 Ofox 账户（只在有多个团队时需指定 team，单团队自动发放）
@@ -20,10 +20,8 @@
 ## 要求
 
 你的应用必须：
-- 使用 [Ofox](https://ofox.ai) 访问 AI 模型
-- 支持用户填入自己的 Ofox API Key
+- 使用 [Ofox](https://ofox.ai) 访问 AI 模型，支持用户填入自己的 Ofox API Key
 - 有公开可访问的页面
-- 有一个 Logo 图片（PNG 格式）
 - **在你自己的官网或仓库文档中已经记录了对 Ofox 的支持** —— 这是上墙的硬门槛：`docs` 字段必须指向你站点上写明“如何配置 Ofox API Key”的页面，而不是仅由 Ofox 单方面撰写的教程。
 - **有一定的影响力或用户基础** — 全新的、无用户的项目不太可能被合并。我们关注的信号包括：GitHub stars、活跃用户数、下载量、社区活跃度等。特别创新的项目可以例外。
 
@@ -51,7 +49,7 @@ description: "一句话介绍你的应用（最多 300 字符）"
 url: "https://your-app-url.com"
 docs: "https://your-app-url.com/docs/ofox"   # Ofox 集成配置文档（必填）
 tags:
-  - coding     # 可选：chat / coding / productivity / creative / research / education / data / media / devops / other
+  - coding     # 只能取自这 6 类：chat / coding / productivity / creative / research / other
 open_source: "https://github.com/you/your-app"  # 选填：开源仓库
 date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 ```
@@ -77,12 +75,8 @@ date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 | `chat` | 对话 AI、聊天机器人、助手 |
 | `coding` | 开发工具、代码生成、IDE |
 | `productivity` | 任务管理、自动化、工作流 |
-| `creative` | 设计、写作、音乐、内容创作 |
-| `research` | 分析、搜索、知识管理 |
-| `education` | 学习、教育、培训 |
-| `data` | 数据分析、可视化、BI |
-| `media` | 图片/音频/视频生成与编辑 |
-| `devops` | 部署、CI/CD、基础设施 |
+| `creative` | 设计、写作、音乐、媒体、内容创作 |
+| `research` | 分析、搜索、数据、知识管理 |
 | `other` | 其他类型 |
 
 ## 示例

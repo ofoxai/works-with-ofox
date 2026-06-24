@@ -10,7 +10,7 @@ const isNewApp = isNew(app.dateAdded);
 <a class="card" href={detailPath(locale, app.slug)} aria-label={app.name} data-slug={app.slug} data-tags={app.tags.join(' ')} data-name={app.name.toLowerCase()} data-desc={app.description.toLowerCase()}>
   {isNewApp && <span class="new-badge">NEW</span>}
   <div class="card-head">
-    <img class="card-logo" src={`/awesome/logos/${app.slug}.png`} alt={`${app.name} logo`} width="44" height="44" loading="lazy" />
+    <img class="card-logo" src={`/awesome-ofox/logos/${app.slug}.png`} alt={`${app.name} logo`} width="44" height="44" loading="lazy" />
     <h3 class="card-name">
       {app.name}
       {app.openSource && <span class="oss-badge"><span aria-hidden="true">⭐</span> OSS</span>}
