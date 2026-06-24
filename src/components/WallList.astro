@@ -51,7 +51,7 @@ const stats = [
 
 <div class="grid" id="appGrid">
   {apps.map((app) => <AppCard app={app} locale={locale} />)}
-  <div class="empty" id="emptyMsg" style="display:none">{t(locale, 'empty')}</div>
+  <div class="empty" id="emptyMsg" role="status" aria-live="polite" style="display:none">{t(locale, 'empty')}</div>
 </div>
 
 <script>

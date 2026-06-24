@@ -14,6 +14,8 @@
   → `prepare-assets`(拷 logo 到 `public/awesome/logos/`)→ `astro build`。
 - 纯静态输出(SSG),无需 SSR 适配器。**若要 Vercel 专属特性**(ISR/图片优化),
   再装 `@astrojs/vercel`,版本对齐 blog 锁定版(注意 10.0.7+ 已要求 astro 6)。
+  ⚠️ 上适配器时**必须删掉 `vercel.json` 里的 `outputDirectory: dist`**——适配器会把产物
+  改到 `.vercel/output`,保留旧的 `outputDirectory` 会导致整站 404。
 - 产物路径已对齐:页面 `/awesome/`、`/{locale}/awesome/`;资源 `/awesome/_assets/`、
   logo `/awesome/logos/`。整站都在 `/awesome/*` 前缀下 → 主站一条 rewrite 即可覆盖。
 - 部署后拿到 origin,例如 `https://works-with-ofox.vercel.app`,记为 `WALL_ORIGIN`。

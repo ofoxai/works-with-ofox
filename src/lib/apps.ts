@@ -39,8 +39,14 @@ export function categoryCounts(): Record<string, number> {
   return counts;
 }
 
-export function isNew(dateAdded: string, today = new Date()): boolean {
-  const d = new Date(dateAdded);
-  if (isNaN(d.getTime())) return false;
-  return (today.getTime() - d.getTime()) / 86400000 <= 14;
+const parseDate = (s: string): number => {
+  const t = Date.parse(s);
+  return isNaN(t) ? 0 : t;
+};
+// Newest dateAdded in the dataset — used as the reference so NEW badges are
+// deterministic across builds (not dependent on the build-machine clock).
+export const newestDate = apps.reduce((m, a) => Math.max(m, parseDate(a.dateAdded)), 0);
+export function isNew(dateAdded: string): boolean {
+  const d = parseDate(dateAdded);
+  return d > 0 && (newestDate - d) / 86400000 <= 14;
 }

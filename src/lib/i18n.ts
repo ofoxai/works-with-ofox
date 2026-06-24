@@ -200,6 +200,15 @@ export function pageTitle(locale: string): string {
   return pageTitles[locale] || pageTitles.en;
 }
 
+// Accessible name for the language switcher, localized.
+export const langAria: Record<string, string> = {
+  zh: '语言', 'zh-TW': '語言', en: 'Language', ja: '言語', ko: '언어',
+  de: 'Sprache', es: 'Idioma', fr: 'Langue', pt: 'Idioma', ru: 'Язык',
+};
+export function languageLabel(locale: string): string {
+  return langAria[locale] || langAria.en;
+}
+
 export function t(locale: string, key: string): string {
   const d = i18n[locale] || i18n.en;
   return d[key] ?? i18n.en[key] ?? key;

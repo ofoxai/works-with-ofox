@@ -7,6 +7,9 @@ const { app, locale } = Astro.props;
 const name = app.name;
 const fill = (k: string) => t(locale, k).replace(/\{app\}/g, name);
 const dot = period(locale);
+// CJK scripts don't use inter-word spaces — drop the template-injected space there.
+const cjk = locale === 'zh' || locale === 'zh-TW' || locale === 'ja' || locale === 'ko';
+const sp = cjk ? '' : ' ';
 ---
 <div class="detail">
   <a class="back" href={wallPath(locale)}>{t(locale, 'back')}</a>
@@ -18,7 +21,7 @@ const dot = period(locale);
         <div class="d-name">{name}<span class="d-verified">✓</span></div>
         <div class="d-tags">
           {app.tags.map((tg) => <span class="tag">{tagLabel(locale, tg)}</span>)}
-          {app.openSource && <span class="tag">{locale === 'zh' || locale === 'zh-TW' ? '开源' : 'Open Source'}</span>}
+          {app.openSource && <span class="tag">{t(locale, 'stat_oss')}</span>}
         </div>
       </div>
     </div>
@@ -38,14 +41,14 @@ const dot = period(locale);
     <h2>{fill('guide_title')}</h2>
     <ol>
       <li>
-        {t(locale, 'g1_pre') && <>{t(locale, 'g1_pre')} </>}
+        {t(locale, 'g1_pre') && <>{t(locale, 'g1_pre')}{sp}</>}
         <a href="https://app.ofox.ai" target="_blank" rel="noopener">{t(locale, 'g1_link')}</a>
-        {t(locale, 'g1_suf') && <> {t(locale, 'g1_suf')}</>}
+        {t(locale, 'g1_suf') && <>{sp}{t(locale, 'g1_suf')}</>}
       </li>
       <li>
-        {t(locale, 'g2_pre') && <>{t(locale, 'g2_pre')} </>}
+        {t(locale, 'g2_pre') && <>{t(locale, 'g2_pre')}{sp}</>}
         <a href="https://app.ofox.ai/manage/api-keys" target="_blank" rel="noopener">{t(locale, 'g2_link')}</a>
-        {t(locale, 'g2_suf') && <> {t(locale, 'g2_suf')}</>}
+        {t(locale, 'g2_suf') && <>{sp}{t(locale, 'g2_suf')}</>}
       </li>
       <li>
         {fill('g3')}

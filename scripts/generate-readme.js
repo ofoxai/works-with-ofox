@@ -10,19 +10,6 @@ const APPS_DIR = path.join(__dirname, '..', 'apps');
 const README_PATH = path.join(__dirname, '..', 'README.md');
 const APPS_JSON_PATH = path.join(__dirname, '..', 'apps.json');
 
-const TAG_LABELS = {
-  chat: '聊天',
-  coding: '编程',
-  productivity: '效率',
-  creative: '创意',
-  research: '研究',
-  education: '教育',
-  data: '数据',
-  media: '媒体',
-  devops: 'DevOps',
-  other: '其他',
-};
-
 function loadApps() {
   const apps = [];
   if (!fs.existsSync(APPS_DIR)) return apps;
