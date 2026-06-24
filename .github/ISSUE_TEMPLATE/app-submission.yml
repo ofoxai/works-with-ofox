@@ -6,8 +6,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        感谢提交！直接提 PR 更快（见 [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md)）。
-        Thanks! Opening a PR is faster — see CONTRIBUTING.md.
+        感谢提交！直接提 PR 更快（见 [CONTRIBUTING.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING.md)）。
+        Thanks! Opening a PR is faster — see [CONTRIBUTING.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING.md).
   - type: input
     id: name
     attributes:
