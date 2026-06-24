@@ -251,6 +251,10 @@ export function submitUrl(locale: string): string {
   const zh = locale === 'zh' || locale === 'zh-TW';
   return `https://github.com/ofoxai/works-with-ofox/blob/main/${zh ? 'CONTRIBUTING.md' : 'CONTRIBUTING_EN.md'}`;
 }
+export function readmeUrl(locale: string): string {
+  const zh = locale === 'zh' || locale === 'zh-TW';
+  return `https://github.com/ofoxai/works-with-ofox/blob/main/${zh ? 'README.zh-CN.md' : 'README.md'}`;
+}
 export function htmlLang(locale: string): string {
   return locale === 'zh' ? 'zh-CN' : locale === 'zh-TW' ? 'zh-TW' : locale;
 }

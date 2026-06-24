@@ -1,6 +1,6 @@
 # Contributing / 提交你的应用
 
-> **English version: [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md)**
+> [← 返回 README](README.zh-CN.md) · **English version: [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md)**
 
 想把你的应用添加到 "Works with Ofox" 展示墙？按照以下步骤操作！
 
