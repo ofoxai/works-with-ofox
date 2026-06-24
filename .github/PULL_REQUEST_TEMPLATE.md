@@ -6,6 +6,16 @@
 - **链接 / URL:**
 - **slug（`apps/` 下的目录名 / folder name）:**
 
+## 💰 领取 $5 开发激励金 / Claim your $5
+
+> 审核通过后,$5 开发激励金会发放到你下面填的 Ofox 账户。**这些信息只用于发放,不会写进 `app.yaml`、不会公开到墙上。**
+> The $5 dev incentive is paid to the Ofox account below after approval. Used only for payout — never added to `app.yaml` or shown on the wall.
+
+- **Ofox 账户(注册邮箱)/ Ofox account (email):**
+- **接收 $5 的 team 名称 / Team to credit（选填 / optional）:**
+  <!-- 只在你有多个 Ofox 团队时填;只有一个团队会自动发放到该团队。
+       Only if you have multiple Ofox teams — with a single team it's credited there automatically. -->
+
 ## 提交清单 / Checklist
 
 - [ ] 在 `apps/<slug>/` 下新增了 `app.yaml` 和 `logo.png`
