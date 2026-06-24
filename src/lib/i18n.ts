@@ -183,6 +183,115 @@ export const tagLabels: Record<string, Record<string, string>> = {
   ru: { chat: 'Чат', coding: 'Код', productivity: 'Продуктивность', creative: 'Творчество', research: 'Исследования', other: 'Другое' },
 };
 
+// Recruitment band (always-on, slim) + empty-wall perks panel.
+// `headline` is the slogan — still being finalized; swap it freely without touching the rest.
+export const recruitText: Record<string, Record<string, string>> = {
+  zh: {
+    band: '把你的应用加入展示墙 —— $5 + Partner 返利 + 高流量反链',
+    headline: '和 Ofox 一起，被更多人看到',
+    lead: '第一个位置在等你。提交一个用 Ofox 构建的应用，你将获得：',
+    cash_t: '$5 开发激励金', cash_d: '上墙后发放到你的 Ofox 账户',
+    show_t: '应用展示', show_d: '登上 Ofox 开发墙，被更多开发者看到',
+    partner_t: '成为 Partner', partner_d: '专属推广链接 + 返利',
+    refer_t: '推荐用户', refer_d: '终身绑定 + 礼遇',
+    cta: '提交你的应用', ghost: '你的应用？',
+  },
+  'zh-TW': {
+    band: '把你的應用加入展示牆 —— $5 + Partner 返利 + 高流量反向連結',
+    headline: '和 Ofox 一起，被更多人看到',
+    lead: '第一個位置在等你。提交一個用 Ofox 打造的應用，你將獲得：',
+    cash_t: '$5 開發獎勵金', cash_d: '上牆後發放到你的 Ofox 帳戶',
+    show_t: '應用展示', show_d: '登上 Ofox 開發牆，被更多開發者看到',
+    partner_t: '成為 Partner', partner_d: '專屬推廣連結 + 返利',
+    refer_t: '推薦用戶', refer_d: '終身綁定 + 禮遇',
+    cta: '提交你的應用', ghost: '你的應用？',
+  },
+  en: {
+    band: 'Add your app to the wall — $5 + Partner rebate + high-traffic backlink',
+    headline: 'Get seen, with Ofox',
+    lead: 'The first spot is yours. Submit an app built with Ofox and get:',
+    cash_t: '$5 dev incentive', cash_d: 'Paid to your Ofox account once listed',
+    show_t: 'App showcase', show_d: 'Featured on the Ofox wall for developers to find',
+    partner_t: 'Become a Partner', partner_d: 'Referral link + rebate',
+    refer_t: 'Refer users', refer_d: 'Lifetime binding + gift',
+    cta: 'Submit your app', ghost: 'Your app?',
+  },
+  ja: {
+    band: 'あなたのアプリをウォールに追加 —— $5 + Partner リベート + 高トラフィックの被リンク',
+    headline: 'Ofox とともに、もっと見つけてもらう',
+    lead: '最初の枠が空いています。Ofox で作ったアプリを投稿すると：',
+    cash_t: '$5 開発インセンティブ', cash_d: '掲載後、あなたの Ofox アカウントに付与',
+    show_t: 'アプリ掲載', show_d: 'Ofox のウォールに掲載され、開発者に見つけてもらえます',
+    partner_t: 'Partner になる', partner_d: '専用リンク + リベート',
+    refer_t: 'ユーザー紹介', refer_d: '永久バインド + ギフト',
+    cta: 'アプリを投稿', ghost: 'あなたのアプリ？',
+  },
+  ko: {
+    band: '당신의 앱을 월에 추가하세요 —— $5 + Partner 리베이트 + 고트래픽 백링크',
+    headline: 'Ofox와 함께, 더 많은 사람에게',
+    lead: '첫 자리가 비어 있습니다. Ofox로 만든 앱을 제출하면：',
+    cash_t: '$5 개발 인센티브', cash_d: '등재 후 Ofox 계정으로 지급',
+    show_t: '앱 전시', show_d: 'Ofox 월에 게시되어 개발자에게 노출',
+    partner_t: 'Partner 되기', partner_d: '전용 링크 + 리베이트',
+    refer_t: '사용자 추천', refer_d: '평생 바인딩 + 선물',
+    cta: '앱 제출하기', ghost: '당신의 앱?',
+  },
+  de: {
+    band: 'Füge deine App zur Wall hinzu — $5 + Partner-Rückvergütung + Backlink mit hohem Traffic',
+    headline: 'Mit Ofox sichtbar werden',
+    lead: 'Der erste Platz ist frei. Reiche eine mit Ofox gebaute App ein und erhalte:',
+    cash_t: '$5 Entwickler-Bonus', cash_d: 'Nach Listung deinem Ofox-Konto gutgeschrieben',
+    show_t: 'App-Präsentation', show_d: 'Auf der Ofox-Wall für Entwickler sichtbar',
+    partner_t: 'Partner werden', partner_d: 'Empfehlungslink + Rückvergütung',
+    refer_t: 'Nutzer empfehlen', refer_d: 'Lebenslange Bindung + Geschenk',
+    cta: 'App einreichen', ghost: 'Deine App?',
+  },
+  es: {
+    band: 'Añade tu app al muro — $5 + reembolso de Partner + backlink de alto tráfico',
+    headline: 'Hazte ver, con Ofox',
+    lead: 'El primer lugar es tuyo. Envía una app creada con Ofox y obtén:',
+    cash_t: '$5 de incentivo', cash_d: 'Pagado a tu cuenta de Ofox una vez publicada',
+    show_t: 'Vitrina de apps', show_d: 'Destacada en el muro de Ofox para desarrolladores',
+    partner_t: 'Conviértete en Partner', partner_d: 'Enlace de referido + reembolso',
+    refer_t: 'Refiere usuarios', refer_d: 'Vinculación de por vida + regalo',
+    cta: 'Envía tu app', ghost: '¿Tu app?',
+  },
+  fr: {
+    band: 'Ajoutez votre app au mur — 5 $ + rétrocommission Partner + backlink à fort trafic',
+    headline: 'Faites-vous voir, avec Ofox',
+    lead: 'La première place est pour vous. Soumettez une app conçue avec Ofox et obtenez :',
+    cash_t: '5 $ d’incitation', cash_d: 'Versé sur votre compte Ofox une fois publiée',
+    show_t: 'Vitrine d’apps', show_d: 'Mise en avant sur le mur Ofox pour les développeurs',
+    partner_t: 'Devenez Partner', partner_d: 'Lien de parrainage + rétrocommission',
+    refer_t: 'Parrainez des utilisateurs', refer_d: 'Liaison à vie + cadeau',
+    cta: 'Soumettre votre app', ghost: 'Votre app ?',
+  },
+  pt: {
+    band: 'Adicione seu app ao mural — $5 + reembolso de Partner + backlink de alto tráfego',
+    headline: 'Seja visto, com a Ofox',
+    lead: 'O primeiro lugar é seu. Envie um app criado com a Ofox e ganhe:',
+    cash_t: '$5 de incentivo', cash_d: 'Pago à sua conta Ofox após a publicação',
+    show_t: 'Vitrine de apps', show_d: 'Em destaque no mural da Ofox para desenvolvedores',
+    partner_t: 'Torne-se Partner', partner_d: 'Link de indicação + reembolso',
+    refer_t: 'Indique usuários', refer_d: 'Vínculo vitalício + presente',
+    cta: 'Enviar seu app', ghost: 'Seu app?',
+  },
+  ru: {
+    band: 'Добавьте приложение на стену — $5 + возврат Partner + обратная ссылка с высоким трафиком',
+    headline: 'Будьте замечены вместе с Ofox',
+    lead: 'Первое место — ваше. Отправьте приложение, созданное с Ofox, и получите:',
+    cash_t: '$5 за разработку', cash_d: 'Зачисляется на ваш аккаунт Ofox после публикации',
+    show_t: 'Витрина приложений', show_d: 'На стене Ofox — вас увидят разработчики',
+    partner_t: 'Станьте Partner', partner_d: 'Реферальная ссылка + возврат',
+    refer_t: 'Приглашайте пользователей', refer_d: 'Пожизненная привязка + подарок',
+    cta: 'Отправить приложение', ghost: 'Ваше приложение?',
+  },
+};
+export function r(locale: string, key: string): string {
+  const d = recruitText[locale] || recruitText.en;
+  return d[key] ?? recruitText.en[key] ?? key;
+}
+
 // Localized <title> for the list page (most important SEO tag → per-locale keywords).
 export const pageTitles: Record<string, string> = {
   zh: 'Works with Ofox — Ofox 应用展示墙',

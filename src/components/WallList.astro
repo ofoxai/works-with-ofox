@@ -1,7 +1,7 @@
 ---
 import AppCard from './AppCard.astro';
 import { apps, categoryCounts, CATEGORIES } from '../lib/apps';
-import { t, tagLabel } from '../lib/i18n';
+import { t, tagLabel, r, submitUrl } from '../lib/i18n';
 
 interface Props { locale: string; }
 const { locale } = Astro.props;
@@ -15,6 +15,15 @@ const stats = [
   [catsPresent, t(locale, 'stat_cats')],
   [ossCount, t(locale, 'stat_oss')],
 ] as const;
+
+const isEmpty = apps.length === 0;
+const submit = submitUrl(locale);
+const perks = [
+  ['💰', r(locale, 'cash_t'), r(locale, 'cash_d')],
+  ['✨', r(locale, 'show_t'), r(locale, 'show_d')],
+  ['🤝', r(locale, 'partner_t'), r(locale, 'partner_d')],
+  ['🎁', r(locale, 'refer_t'), r(locale, 'refer_d')],
+] as const;
 ---
 <div class="hero">
   <h1>
@@ -22,37 +31,69 @@ const stats = [
     <span class="verified" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px">✓</span>
   </h1>
   <div class="sub">{t(locale, 'sub')}</div>
-  <div class="actions">{t(locale, 'submit_q')} </div>
-  <div class="stats">
+  {!isEmpty && <div class="actions">{t(locale, 'submit_q')} </div>}
+  {!isEmpty && <div class="stats">
     {stats.map(([n, label], i) => (
       <div class="stat-item">
         <div class="stat-num"><span class="stat-icon">{statIcons[i]}</span>{n}</div>
         <div class="stat-label">{label}</div>
       </div>
     ))}
-  </div>
+  </div>}
 </div>
 
-<div class="search-wrap">
-  <input type="search" id="searchInput" placeholder={t(locale, 'search')} aria-label={t(locale, 'search')} />
-</div>
+{isEmpty ? (
+  <section class="recruit-panel">
+    <div class="recruit-panel-inner">
+      <h2>{r(locale, 'headline')}</h2>
+      <p class="lead">{r(locale, 'lead')}</p>
+      <div class="perks">
+        {perks.map(([ico, title, desc]) => (
+          <div class="perk">
+            <span class="perk-ico" aria-hidden="true">{ico}</span>
+            <div>
+              <div class="perk-t">{title}</div>
+              <div class="perk-d">{desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <a class="btn-submit" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')}</a>
+      <div class="ghosts" aria-hidden="true">
+        <div class="ghost">{r(locale, 'ghost')}</div>
+        <div class="ghost">{r(locale, 'ghost')}</div>
+        <div class="ghost">{r(locale, 'ghost')}</div>
+      </div>
+    </div>
+  </section>
+) : (
+  <>
+    <div class="recruit-band-wrap">
+      <a class="recruit-band" href={submit} target="_blank" rel="noopener">🎁 {r(locale, 'band')} <span class="arrow">→</span></a>
+    </div>
 
-<div class="cat-filter" id="catFilter">
-  <button type="button" class="cat-chip active" data-cat="all" aria-pressed="true">{t(locale, 'all')}<span class="cat-count">{apps.length}</span></button>
-  {CATEGORIES.map((cat) => {
-    const n = counts[cat] || 0;
-    return (
-      <button type="button" class={`cat-chip${n === 0 ? ' disabled' : ''}`} data-cat={cat} aria-pressed="false" disabled={n === 0}>
-        {tagLabel(locale, cat)}<span class="cat-count">{n}</span>
-      </button>
-    );
-  })}
-</div>
+    <div class="search-wrap">
+      <input type="search" id="searchInput" placeholder={t(locale, 'search')} aria-label={t(locale, 'search')} />
+    </div>
 
-<div class="grid" id="appGrid">
-  {apps.map((app) => <AppCard app={app} locale={locale} />)}
-  <div class="empty" id="emptyMsg" role="status" aria-live="polite" style="display:none">{t(locale, 'empty')}</div>
-</div>
+    <div class="cat-filter" id="catFilter">
+      <button type="button" class="cat-chip active" data-cat="all" aria-pressed="true">{t(locale, 'all')}<span class="cat-count">{apps.length}</span></button>
+      {CATEGORIES.map((cat) => {
+        const n = counts[cat] || 0;
+        return (
+          <button type="button" class={`cat-chip${n === 0 ? ' disabled' : ''}`} data-cat={cat} aria-pressed="false" disabled={n === 0}>
+            {tagLabel(locale, cat)}<span class="cat-count">{n}</span>
+          </button>
+        );
+      })}
+    </div>
+
+    <div class="grid" id="appGrid">
+      {apps.map((app) => <AppCard app={app} locale={locale} />)}
+      <div class="empty" id="emptyMsg" role="status" aria-live="polite" style="display:none">{t(locale, 'empty')}</div>
+    </div>
+  </>
+)}
 
 <script>
   const grid = document.getElementById('appGrid');

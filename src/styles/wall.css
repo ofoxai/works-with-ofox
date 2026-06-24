@@ -31,6 +31,27 @@ a:hover{color:var(--copper-dark)}
 .stat-icon{font-size:16px;opacity:.7}
 .stat-label{font-size:13px;color:var(--text-tertiary);margin-top:4px;text-align:center}
 
+/* Always-on slim recruitment band (shown when the wall has apps) */
+.recruit-band-wrap{text-align:center;padding:0 24px;margin:-8px 0 24px}
+.recruit-band{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:10px 20px;background:linear-gradient(90deg,#FEF3EF,#FFF7F3);border:1px solid var(--copper-light);border-radius:24px;color:var(--copper-dark);font-size:14px;font-weight:600;line-height:1.4;transition:all .2s}
+.recruit-band:hover{background:var(--copper);border-color:var(--copper);color:#fff}
+.recruit-band .arrow{transition:transform .2s}
+.recruit-band:hover .arrow{transform:translateX(3px)}
+
+/* Empty-wall perks panel (shown when there are no apps yet) */
+.recruit-panel{max-width:900px;margin:0 auto 72px;padding:0 24px}
+.recruit-panel-inner{background:#fff;border:1px solid var(--border);border-radius:16px;padding:44px 36px;text-align:center}
+.recruit-panel h2{font-size:clamp(22px,4.5vw,30px);font-weight:700;line-height:1.25;margin-bottom:10px}
+.recruit-panel .lead{font-size:16px;color:var(--text-secondary);max-width:600px;margin:0 auto 30px}
+.perks{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;text-align:left;margin-bottom:30px}
+.perk{display:flex;gap:12px;padding:16px 18px;border:1px solid var(--border);border-radius:12px;background:var(--bg)}
+.perk-ico{font-size:22px;line-height:1.2;flex-shrink:0}
+.perk-t{font-weight:700;font-size:15px;margin-bottom:2px;color:var(--text)}
+.perk-d{font-size:13px;color:var(--text-secondary);line-height:1.5}
+.recruit-panel .btn-submit{font-size:15px;padding:12px 28px}
+.ghosts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.ghost{border:2px dashed var(--border);border-radius:var(--radius);padding:34px 16px;color:var(--text-tertiary);font-size:14px;text-align:center}
+
 .search-wrap{max-width:1200px;margin:0 auto;padding:0 24px 24px}
 .search-wrap input{width:100%;padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#fff;outline:none;transition:border-color .2s}
 .search-wrap input:focus{border-color:var(--copper)}
@@ -93,6 +114,9 @@ a:hover{color:var(--copper-dark)}
   .hero{padding:40px 18px 28px}
   .hero .sub{font-size:15px}
   .stats{gap:24px}.stat-num{font-size:22px}
+  .perks{grid-template-columns:1fr}
+  .ghosts{grid-template-columns:1fr}
+  .recruit-panel-inner{padding:32px 22px}
   .d-header{flex-direction:column;align-items:center;text-align:center}
   .d-tags{justify-content:center}
   .d-banner{padding:28px 20px}
