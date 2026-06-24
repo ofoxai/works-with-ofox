@@ -1,0 +1,66 @@
+---
+import type { App } from '../lib/apps';
+import { t, tagLabel, wallPath, period } from '../lib/i18n';
+
+interface Props { app: App; locale: string; }
+const { app, locale } = Astro.props;
+const name = app.name;
+const fill = (k: string) => t(locale, k).replace(/\{app\}/g, name);
+const dot = period(locale);
+---
+<div class="detail">
+  <a class="back" href={wallPath(locale)}>{t(locale, 'back')}</a>
+
+  <div class="d-banner">
+    <div class="d-header">
+      <img class="d-logo" src={`/awesome/logos/${app.slug}.png`} alt={`${name} logo`} width="72" height="72" />
+      <div>
+        <div class="d-name">{name}<span class="d-verified">✓</span></div>
+        <div class="d-tags">
+          {app.tags.map((tg) => <span class="tag">{tagLabel(locale, tg)}</span>)}
+          {app.openSource && <span class="tag">{locale === 'zh' || locale === 'zh-TW' ? '开源' : 'Open Source'}</span>}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-card">
+    <h2>{t(locale, 'about')} {name}</h2>
+    <p>{app.description}</p>
+    <div class="d-buttons">
+      <a class="d-btn d-btn-primary" href={app.url} target="_blank" rel="noopener">{t(locale, 'visit')} {name} ↗</a>
+      {app.docs && <a class="d-btn d-btn-secondary" href={app.docs} target="_blank" rel="noopener">{t(locale, 'docs')} ↗</a>}
+      {app.openSource && <a class="d-btn d-btn-secondary" href={app.openSource} target="_blank" rel="noopener">{t(locale, 'source')} ↗</a>}
+    </div>
+  </div>
+
+  <div class="d-card">
+    <h2>{fill('guide_title')}</h2>
+    <ol>
+      <li>
+        {t(locale, 'g1_pre') && <>{t(locale, 'g1_pre')} </>}
+        <a href="https://app.ofox.ai" target="_blank" rel="noopener">{t(locale, 'g1_link')}</a>
+        {t(locale, 'g1_suf') && <> {t(locale, 'g1_suf')}</>}
+      </li>
+      <li>
+        {t(locale, 'g2_pre') && <>{t(locale, 'g2_pre')} </>}
+        <a href="https://app.ofox.ai/manage/api-keys" target="_blank" rel="noopener">{t(locale, 'g2_link')}</a>
+        {t(locale, 'g2_suf') && <> {t(locale, 'g2_suf')}</>}
+      </li>
+      <li>
+        {fill('g3')}
+        {app.docs && <>{t(locale, 'g3_docs_pre')}<a href={app.docs} target="_blank" rel="noopener">{fill('g3_docs_link')}</a>{dot}</>}
+      </li>
+    </ol>
+  </div>
+
+  <div class="d-card">
+    <h2>{fill('use_title')}</h2>
+    <p>{fill('use_body')}</p>
+    {app.docs && (
+      <p>
+        {t(locale, 'use_docs_pre')} <a href={app.docs} target="_blank" rel="noopener">{fill('use_docs_link')}</a>{dot}
+      </p>
+    )}
+  </div>
+</div>

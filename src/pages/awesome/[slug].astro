@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import AppDetail from '../../components/AppDetail.astro';
+import { apps, getApp } from '../../lib/apps';
+import { LOCALE_CODES, detailPath } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return apps.map((a) => ({ params: { slug: a.slug } }));
+}
+
+const locale = 'en';
+const { slug } = Astro.params;
+const app = getApp(slug!)!;
+const localeUrls = Object.fromEntries(LOCALE_CODES.map((l) => [l, detailPath(l, app.slug)]));
+---
+<Base locale={locale} title={`${app.name} — Works with Ofox`} description={app.description} localeUrls={localeUrls}>
+  <AppDetail app={app} locale={locale} />
+</Base>
