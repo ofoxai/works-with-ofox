@@ -5,6 +5,6 @@ dist/
 *.log
 .DS_Store
 # generated at build by scripts/prepare-assets.js
-public/awesome/logos/
-public/awesome/sitemap.xml
-public/awesome/robots.txt
+public/awesome-ofox/logos/
+public/awesome-ofox/sitemap.xml
+public/awesome-ofox/robots.txt

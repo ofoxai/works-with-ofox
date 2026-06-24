@@ -183,6 +183,25 @@ export const tagLabels: Record<string, Record<string, string>> = {
   ru: { chat: 'Чат', coding: 'Код', productivity: 'Продуктивность', creative: 'Творчество', research: 'Исследования', other: 'Другое' },
 };
 
+// Hero rewards card ("limited-time call"). Intentionally teasing — $5 is the
+// hook, the rest stays vague ("+ more"); full perks live in CONTRIBUTING.
+export const recruitText: Record<string, Record<string, string>> = {
+  zh:      { promo_badge: '限时征集',          hook: '开发激励 + 更多惊喜', cta: '提交你的应用', learn: '了解详情' },
+  'zh-TW': { promo_badge: '限時徵集',          hook: '開發獎勵 + 更多驚喜', cta: '提交你的應用', learn: '了解詳情' },
+  en:      { promo_badge: 'Limited-time call', hook: 'Dev reward + more',   cta: 'Submit your app', learn: 'Learn more' },
+  ja:      { promo_badge: '期間限定募集',      hook: '開発報酬 + さらに特典', cta: 'アプリを投稿', learn: '詳細を見る' },
+  ko:      { promo_badge: '한정 모집',         hook: '개발 보상 + 더 많은 혜택', cta: '앱 제출하기', learn: '자세히 보기' },
+  de:      { promo_badge: 'Zeitlich begrenzt', hook: 'Bonus + mehr',        cta: 'App einreichen', learn: 'Mehr erfahren' },
+  es:      { promo_badge: 'Convocatoria limitada', hook: 'Recompensa + más', cta: 'Envía tu app', learn: 'Saber más' },
+  fr:      { promo_badge: 'Appel limité',      hook: 'Récompense + plus',   cta: 'Soumettre votre app', learn: 'En savoir plus' },
+  pt:      { promo_badge: 'Chamada limitada',  hook: 'Recompensa + mais',   cta: 'Enviar seu app', learn: 'Saiba mais' },
+  ru:      { promo_badge: 'Ограниченный приём', hook: 'Награда + бонусы',    cta: 'Отправить приложение', learn: 'Подробнее' },
+};
+export function r(locale: string, key: string): string {
+  const d = recruitText[locale] || recruitText.en;
+  return d[key] ?? recruitText.en[key] ?? key;
+}
+
 // Localized <title> for the list page (most important SEO tag → per-locale keywords).
 export const pageTitles: Record<string, string> = {
   zh: 'Works with Ofox — Ofox 应用展示墙',
@@ -220,10 +239,10 @@ export function localePrefix(locale: string): string {
   return locale === 'en' ? '' : `/${locale}`;
 }
 export function wallPath(locale: string): string {
-  return `${localePrefix(locale)}/awesome`;
+  return `${localePrefix(locale)}/awesome-ofox`;
 }
 export function detailPath(locale: string, slug: string): string {
-  return `${localePrefix(locale)}/awesome/${slug}`;
+  return `${localePrefix(locale)}/awesome-ofox/${slug}`;
 }
 export function period(locale: string): string {
   return locale === 'zh' || locale === 'zh-TW' || locale === 'ja' ? '。' : '.';

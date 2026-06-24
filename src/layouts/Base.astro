@@ -12,7 +12,7 @@ interface Props {
 const { locale, title, description = '', localeUrls } = Astro.props;
 const abs = (p: string) => new URL(p, Astro.site).href;
 const canonical = abs(localeUrls[locale]);
-const ogImage = abs('/awesome/og.png');
+const ogImage = abs('/awesome-ofox/og.png');
 ---
 <!doctype html>
 <html lang={htmlLang(locale)}>
@@ -88,7 +88,9 @@ const ogImage = abs('/awesome/og.png');
       if (el.classList.contains('card')) {
         trk('wall_app_click', { slug: el.getAttribute('data-slug') });
       } else if (el.classList.contains('btn-submit')) {
-        trk('wall_submit_pr_click');
+        trk('wall_submit_pr_click', { from: el.closest('.recruit-panel') ? 'recruit_panel' : 'header' });
+      } else if (el.classList.contains('recruit-band')) {
+        trk('wall_submit_pr_click', { from: 'recruit_band' });
       } else if (el.classList.contains('cat-chip') && !el.classList.contains('disabled')) {
         trk('wall_category_filter', { category: el.getAttribute('data-cat') });
       } else if (el.classList.contains('d-btn')) {
