@@ -29,30 +29,29 @@
 WALL_ORIGIN = https://works-with-ofox.vercel.app
 ```
 
-**b. `next.config.ts` 的 `rewrites().beforeFiles` 增加**(放在 locale 中间件之前):
-```ts
-const WALL_ORIGIN = process.env.WALL_ORIGIN || "https://works-with-ofox.vercel.app";
-// ...
-{ source: "/awesome", destination: `${WALL_ORIGIN}/awesome` },
-{ source: "/awesome/:path*", destination: `${WALL_ORIGIN}/awesome/:path*` },
-// 本地化前缀(可选,墙自身已生成 /zh/awesome 等):
-{ source: "/:locale(zh|zh-TW|ja|ko|ru|es|fr|de|pt)/awesome/:path*",
-  destination: `${WALL_ORIGIN}/:locale/awesome/:path*` },
-```
-> 若主站对 HTML 做 origin 改写(像 `blog-proxy` 那样处理相对链接/Vary),可复用同一代理路由;
-> 本墙所有内部链接都是 `/awesome/...` 绝对路径,直接 rewrite 即可,无需改写 HTML。
+**b. 必须走 blog 式的"改写型代理路由",不能用普通 rewrite。**
+原因:home-page 同一部署按 host 同时服务 `ofox.ai` 和 `ofox.io`,SEO 策略要求**每个域名各自自指**
+(io 页面 canonical/og/hreflang 指向 io)且**对 Googlebot 把 io 设为 noindex**(Google 只收 ai,Bing 等收 io)。
+普通 `next.config` rewrite 会把墙静态 HTML 里硬编码的 `https://ofox.ai` 原样发给 io → io 错误地自指 ai,策略失效。
 
-**说明:ofox.io 也会生效** — home-page 同一部署按 host 同时服务 `ofox.ai` 与 `ofox.io`,
-rewrite 按路径匹配、不分域名,所以 `ofox.io/awesome` 也会打开(与 `ofox.io/blog`、`/docs` 一致)。
-这是无害的:墙的 `canonical` / `hreflang` / `og:url` 全硬编码 `https://ofox.ai`,io 上的页面自我指向 ai 为规范页,
-SEO 权重全部归并到 ofox.ai,不会重复内容惩罚。若确实只想在 ai 暴露,给 rewrite 加 host 条件
-`has: [{ type: 'host', value: 'ofox.ai' }]` 即可(不推荐,破坏与 blog/docs 的一致性)。
+照抄 `app/api/blog-proxy/[...path]/route.ts` 新建 `app/api/awesome-proxy/[...path]/route.ts`,复用其:
+- `siteOriginFromRequest` + `transformHtml`:io 请求时把 HTML 内 `https://ofox.ai` → `https://ofox.io`(io 自指 io);
+- `applyMirrorRobotsTag`:io 上对 Googlebot 打 `X-Robots-Tag: noindex, follow`;
+- `Vary: Host, User-Agent`、`copyResponseHeaders`、`force-dynamic` 等照搬;
+- 上游 `WALL_ORIGIN` 替换 `BLOG_ORIGIN`,路径前缀 `/awesome`。
+
+middleware.ts 里像 `handleBlogRewrite` 那样把 `/awesome`、`/:locale/awesome/*` rewrite 到
+`/api/awesome-proxy/...`(en 无前缀;其余 9 个 locale 透传;不要把 `/en/awesome` 发上游,会触发
+Astro `prefixDefaultLocale:false` 的 301 回环)。
+
+> 墙本身用 `site=https://ofox.ai` 作基准(与 blog 一致),无需改动——io 的改写在代理层完成。
 
 **c. sitemap / robots**:构建时 `prepare-assets.js` 生成 `public/awesome/sitemap.xml`
 (列出全部 `/awesome` 与 `/{locale}/awesome` URL,`site=https://ofox.ai`,en 无 `/en` 前缀)
 和 `public/awesome/robots.txt`(`Sitemap: https://ofox.ai/awesome/sitemap.xml`)。二者都在 `/awesome/*`
-代理覆盖范围内,proxy 一开即可达。**建议**在主站根 `robots.txt` 里也加一行
-`Sitemap: https://ofox.ai/awesome/sitemap.xml`,或把这些 URL 收进主站 sitemap 索引。
+代理覆盖范围内,proxy 一开即可达。awesome-proxy 的 `transformText` 在 io 请求时会把 sitemap/robots 里的
+`ofox.ai` 一并改写为 `ofox.io`(与 blog 一致),所以 io 的 sitemap 列的是 io URL。**建议**在主站根 `robots.txt`
+里也加一行 `Sitemap: https://ofox.ai/awesome/sitemap.xml`,或把这些 URL 收进主站 sitemap 索引。
 
 ## 3. 上线前检查清单(本仓库侧已就绪项打勾)
 
