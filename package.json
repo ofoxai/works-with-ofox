@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/prepare-assets.js && astro build",
+    "build": "node scripts/generate-readme.js && node scripts/prepare-assets.js && astro build",
     "preview": "astro preview",
     "astro": "astro",
     "validate": "node scripts/validate.js",

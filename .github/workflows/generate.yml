@@ -14,7 +14,12 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Use BOT_TOKEN (a PAT/App token in the main ruleset bypass list) so this
+      # post-merge auto-regenerate push can reach the protected main branch.
+      # Falls back to the default token when the secret is absent.
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BOT_TOKEN || github.token }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
