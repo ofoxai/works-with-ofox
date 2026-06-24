@@ -10,6 +10,9 @@ interface Props {
   localeUrls: Record<string, string>;
 }
 const { locale, title, description = '', localeUrls } = Astro.props;
+const abs = (p: string) => new URL(p, Astro.site).href;
+const canonical = abs(localeUrls[locale]);
+const ogImage = abs('/awesome/og.png');
 ---
 <!doctype html>
 <html lang={htmlLang(locale)}>
@@ -23,6 +26,22 @@ const { locale, title, description = '', localeUrls } = Astro.props;
   <!-- End Google Tag Manager -->
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
+  <link rel="canonical" href={canonical} />
+  {LOCALES.map((l) => (
+    <link rel="alternate" hreflang={htmlLang(l.code)} href={abs(localeUrls[l.code])} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={abs(localeUrls['en'])} />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Works with Ofox" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content={htmlLang(locale)} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />

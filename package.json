@@ -13,7 +13,6 @@
     "generate": "node scripts/generate-readme.js"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.17.1"
   },
   "devDependencies": {

@@ -32,10 +32,18 @@ jobs:
       - name: Generate README and apps.json
         run: node scripts/generate-readme.js
 
+      # Only push when BOT_TOKEN exists — main is protected (manual-approval ruleset)
+      # and the default token cannot bypass it. Without the secret this step is
+      # skipped (instead of failing the run with a confusing push rejection).
       - name: Commit and push if changed
+        if: ${{ secrets.BOT_TOKEN != '' }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add README.md apps.json
           git diff --staged --quiet || git commit -m "docs: regenerate README and apps.json"
           git push
+
+      - name: Note when BOT_TOKEN is absent
+        if: ${{ secrets.BOT_TOKEN == '' }}
+        run: echo "::notice::BOT_TOKEN not set — skipped pushing regenerated README/apps.json. Add BOT_TOKEN (in the main ruleset bypass) to enable auto-commit."
