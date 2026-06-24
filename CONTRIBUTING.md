@@ -51,7 +51,7 @@ description: "一句话介绍你的应用（最多 300 字符）"
 url: "https://your-app-url.com"
 docs: "https://your-app-url.com/docs/ofox"   # Ofox 集成配置文档（必填）
 tags:
-  - coding     # 可选：chat / coding / productivity / creative / research / education / data / media / devops / other
+  - coding     # 只能取自这 6 类：chat / coding / productivity / creative / research / other
 open_source: "https://github.com/you/your-app"  # 选填：开源仓库
 date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 ```
@@ -77,12 +77,8 @@ date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 | `chat` | 对话 AI、聊天机器人、助手 |
 | `coding` | 开发工具、代码生成、IDE |
 | `productivity` | 任务管理、自动化、工作流 |
-| `creative` | 设计、写作、音乐、内容创作 |
-| `research` | 分析、搜索、知识管理 |
-| `education` | 学习、教育、培训 |
-| `data` | 数据分析、可视化、BI |
-| `media` | 图片/音频/视频生成与编辑 |
-| `devops` | 部署、CI/CD、基础设施 |
+| `creative` | 设计、写作、音乐、媒体、内容创作 |
+| `research` | 分析、搜索、数据、知识管理 |
 | `other` | 其他类型 |
 
 ## 示例

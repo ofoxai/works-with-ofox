@@ -51,7 +51,7 @@ description: "A one-liner about your app (max 300 characters)"
 url: "https://your-app-url.com"
 docs: "https://your-app-url.com/docs/ofox"   # Ofox integration docs (required)
 tags:
-  - coding     # Options: chat / coding / productivity / creative / research / education / data / media / devops / other
+  - coding     # Must be one of these 6: chat / coding / productivity / creative / research / other
 open_source: "https://github.com/you/your-app"  # Optional: open source repo
 date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 ```
@@ -77,12 +77,8 @@ date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 | `chat` | Conversational AI, chatbots, assistants |
 | `coding` | Dev tools, code generation, IDEs |
 | `productivity` | Task management, automation, workflows |
-| `creative` | Design, writing, music, content creation |
-| `research` | Analysis, search, knowledge management |
-| `education` | Learning, education, training |
-| `data` | Data analysis, visualization, BI |
-| `media` | Image/audio/video generation & editing |
-| `devops` | Deployment, CI/CD, infrastructure |
+| `creative` | Design, writing, music, media, content creation |
+| `research` | Analysis, search, data, knowledge management |
 | `other` | Other types |
 
 ## Example
