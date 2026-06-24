@@ -44,6 +44,19 @@ body:
     validations:
       required: true
   - type: input
+    id: ofox_account
+    attributes:
+      label: Ofox 账户（注册邮箱）/ Ofox account (email)
+      description: 用于发放 $5 开发激励金;仅用于发放,不会公开。Only for the $5 payout — never shown publicly.
+      placeholder: you@example.com
+    validations:
+      required: true
+  - type: input
+    id: ofox_team
+    attributes:
+      label: 接收 $5 的 team 名称（选填）/ Team to credit (optional)
+      description: 只在你有多个 Ofox 团队时填;只有一个团队会自动发放到该团队。Only if you have multiple teams — a single team is credited automatically.
+  - type: input
     id: open_source
     attributes:
       label: 开源仓库（选填）/ Open-source repo (optional)
