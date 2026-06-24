@@ -37,7 +37,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "enum": ["chat", "coding", "productivity", "creative", "research", "education", "data", "media", "devops", "other"]
+        "enum": ["chat", "coding", "productivity", "creative", "research", "other"]
       },
       "description": "分类标签"
     },

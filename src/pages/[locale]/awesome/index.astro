@@ -1,0 +1,15 @@
+---
+import Base from '../../../layouts/Base.astro';
+import WallList from '../../../components/WallList.astro';
+import { NON_DEFAULT_LOCALES, LOCALE_CODES, wallPath, t } from '../../../lib/i18n';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((l) => ({ params: { locale: l } }));
+}
+
+const { locale } = Astro.params;
+const localeUrls = Object.fromEntries(LOCALE_CODES.map((l) => [l, wallPath(l)]));
+---
+<Base locale={locale!} title="Works with Ofox" description={t(locale!, 'sub')} localeUrls={localeUrls}>
+  <WallList locale={locale!} />
+</Base>

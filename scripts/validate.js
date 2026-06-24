@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
-const yaml = require('js-yaml');
-const Ajv = require('ajv');
-const addFormats = require('ajv-formats');
+import fs from 'node:fs';
+import path from 'node:path';
+import yaml from 'js-yaml';
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+import { fileURLToPath } from 'node:url';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const APPS_DIR = path.join(__dirname, '..', 'apps');
 const SCHEMA_PATH = path.join(__dirname, '..', 'schema', 'app.schema.json');
 

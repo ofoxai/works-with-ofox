@@ -63,7 +63,7 @@ Smart code review and refactoring tool. Analyze pull requests, suggest improveme
 
 Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly.
 
-`data` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/datawise)
+`research` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/datawise)
 
 [Documentation](https://docs.example.com/datawise/ofox)
 
@@ -99,7 +99,7 @@ Chat with your documents. Upload PDFs, Word files, or Notion pages and get accur
 
 AI-powered design tool for social media graphics, thumbnails, and banners. Generate and edit visuals with text prompts.
 
-`media` `creative`
+`creative`
 
 [Documentation](https://docs.example.com/pixellab/ofox)
 
@@ -111,7 +111,7 @@ AI-powered design tool for social media graphics, thumbnails, and banners. Gener
 
 Adaptive learning companion that creates personalized study plans, generates practice questions, and explains concepts at your level.
 
-`education` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/studymate)
+`productivity` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/studymate)
 
 [Documentation](https://docs.example.com/studymate/ofox)
 

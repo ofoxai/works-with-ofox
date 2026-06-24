@@ -1,1 +1,8 @@
 node_modules/
+dist/
+.astro/
+.vercel/
+*.log
+.DS_Store
+# generated at build by scripts/prepare-assets.js from apps/<slug>/logo.png
+public/awesome/logos/
