@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "Ofox 应用展示墙 — 基于 Ofox 构建的应用精选列表",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/generate-readme.js && node scripts/prepare-assets.js && astro build",
@@ -13,7 +16,7 @@
     "generate": "node scripts/generate-readme.js"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "astro": "^7.0.2"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
