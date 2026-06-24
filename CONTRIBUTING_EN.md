@@ -15,8 +15,10 @@ Your app must:
 - Support users entering their own Ofox API Key
 - Have a publicly accessible page
 - Have a logo image (PNG format)
-- Provide an Ofox integration docs link (explaining how users configure Ofox API Key in your app)
+- **Already document Ofox support on your own site or repo** — this is the bar for listing: the `docs` field must point to a page on *your* site explaining how to configure an Ofox API Key, not a guide written solely by Ofox.
 - **Have some traction or user base** — Brand new projects with no users are unlikely to be merged. Signals we look for: GitHub stars, active users, downloads, community activity, etc. Exceptionally innovative projects may be considered.
+
+> Categories (`tags`) must be chosen from these 6: `chat / coding / productivity / creative / research / other`.
 
 ## Steps
 
