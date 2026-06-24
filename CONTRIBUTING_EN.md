@@ -6,6 +6,15 @@ Want to add your app to the "Works with Ofox" showcase? Follow the steps below!
 
 **Showcase: [ofox.ai/awesome](https://ofox.ai/awesome)** — Your submission gets a real backlink from a high-traffic AI site, helping with SEO and visibility.
 
+**🎁 What you get:**
+- **$5 dev incentive** — paid to the Ofox account you give in the PR after approval (only specify a team if you have multiple; a single team is credited automatically)
+- **App showcase** — featured on the Ofox wall
+- **Become a Partner** — referral link + rebate (enabled on the [ofox.io](https://ofox.io) platform)
+- **Refer users** — lifetime binding + gift (same, platform side)
+
+> When opening the PR, **fill in your Ofox account email accurately** (the $5 is paid to it). You'll be notified via GitHub email on approval (watch your GitHub-linked inbox).
+> Account info is used only for payout — **never added to `app.yaml` or shown on the wall.**
+
 ---
 
 ## Requirements
