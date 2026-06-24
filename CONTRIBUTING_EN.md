@@ -20,10 +20,8 @@ Want to add your app to the "Works with Ofox" showcase? Follow the steps below!
 ## Requirements
 
 Your app must:
-- Use [Ofox](https://ofox.ai) to access AI models
-- Support users entering their own Ofox API Key
+- Use [Ofox](https://ofox.ai) to access AI models, with support for users entering their own Ofox API Key
 - Have a publicly accessible page
-- Have a logo image (PNG format)
 - **Already document Ofox support on your own site or repo** — this is the bar for listing: the `docs` field must point to a page on *your* site explaining how to configure an Ofox API Key, not a guide written solely by Ofox.
 - **Have some traction or user base** — Brand new projects with no users are unlikely to be merged. Signals we look for: GitHub stars, active users, downloads, community activity, etc. Exceptionally innovative projects may be considered.
 
