@@ -183,79 +183,79 @@ export const tagLabels: Record<string, Record<string, string>> = {
   ru: { chat: 'Чат', coding: 'Код', productivity: 'Продуктивность', creative: 'Творчество', research: 'Исследования', other: 'Другое' },
 };
 
-// Recruitment band (always-on, slim) + empty-wall perks panel.
-// `headline` is the slogan. Perks are shown as short chips only — full perks
-// & rules live in CONTRIBUTING (linked via `more`), so keep these terse.
+// Empty-wall perks panel + floating "limited-time call" promo widget.
+// `headline` is the slogan. Perks are short chips only — full perks & rules
+// live in CONTRIBUTING (linked via `more`), so keep these terse.
 export const recruitText: Record<string, Record<string, string>> = {
   zh: {
-    band: '把你的应用加入展示墙 —— $5 + Partner 返利 + 高流量反链',
     headline: '和 Ofox 一起，玩转 AI',
     lead: '加入计划，你能得到：',
     p_cash: '$5 激励金', p_partner: 'Partner 返利', p_show: '应用展示', p_refer: '推荐奖励',
     cta: '提交你的应用', more: '完整权益与规则见 GitHub →', ghost: '你的应用？',
+    promo_badge: '限时征集', promo_desc: '上墙激励 + Partner 返利',
   },
   'zh-TW': {
-    band: '把你的應用加入展示牆 —— $5 + Partner 返利 + 高流量反向連結',
     headline: '和 Ofox 一起，玩轉 AI',
     lead: '加入計畫，你能得到：',
     p_cash: '$5 獎勵金', p_partner: 'Partner 返利', p_show: '應用展示', p_refer: '推薦獎勵',
     cta: '提交你的應用', more: '完整權益與規則見 GitHub →', ghost: '你的應用？',
+    promo_badge: '限時徵集', promo_desc: '上牆獎勵 + Partner 返利',
   },
   en: {
-    band: 'Add your app to the wall — $5 + Partner rebate + high-traffic backlink',
     headline: 'Have fun with AI, with Ofox',
     lead: 'Join the program and get:',
     p_cash: '$5 incentive', p_partner: 'Partner rebate', p_show: 'App showcase', p_refer: 'Refer & earn',
     cta: 'Submit your app', more: 'Full perks & rules on GitHub →', ghost: 'Your app?',
+    promo_badge: 'Limited-time call', promo_desc: 'Listing reward + Partner rebate',
   },
   ja: {
-    band: 'あなたのアプリをウォールに追加 —— $5 + Partner リベート + 高トラフィックの被リンク',
     headline: 'Ofox と一緒に、AI を使いこなそう',
     lead: 'プログラムに参加すると：',
     p_cash: '$5 インセンティブ', p_partner: 'Partner リベート', p_show: 'アプリ掲載', p_refer: '紹介報酬',
     cta: 'アプリを投稿', more: '特典とルールの詳細は GitHub で →', ghost: 'あなたのアプリ？',
+    promo_badge: '期間限定募集', promo_desc: '掲載報酬 + Partner リベート',
   },
   ko: {
-    band: '당신의 앱을 월에 추가하세요 —— $5 + Partner 리베이트 + 고트래픽 백링크',
     headline: 'Ofox와 함께, AI를 자유자재로',
     lead: '프로그램에 참여하면：',
     p_cash: '$5 인센티브', p_partner: 'Partner 리베이트', p_show: '앱 전시', p_refer: '추천 보상',
     cta: '앱 제출하기', more: '전체 혜택과 규칙은 GitHub에서 →', ghost: '당신의 앱?',
+    promo_badge: '한정 모집', promo_desc: '등재 보상 + Partner 리베이트',
   },
   de: {
-    band: 'Füge deine App zur Wall hinzu — $5 + Partner-Rückvergütung + Backlink mit hohem Traffic',
     headline: 'Mit Ofox spielend leicht zu KI',
     lead: 'Mach mit und erhalte:',
     p_cash: '$5 Bonus', p_partner: 'Partner-Rückvergütung', p_show: 'App-Präsentation', p_refer: 'Empfehlungsprämie',
     cta: 'App einreichen', more: 'Alle Vorteile & Regeln auf GitHub →', ghost: 'Deine App?',
+    promo_badge: 'Zeitlich begrenzt', promo_desc: 'Listing-Prämie + Partner-Rückvergütung',
   },
   es: {
-    band: 'Añade tu app al muro — $5 + reembolso de Partner + backlink de alto tráfico',
     headline: 'Domina la IA, con Ofox',
     lead: 'Únete al programa y obtén:',
     p_cash: '$5 de incentivo', p_partner: 'Reembolso Partner', p_show: 'Vitrina de apps', p_refer: 'Refiere y gana',
     cta: 'Envía tu app', more: 'Todas las ventajas y reglas en GitHub →', ghost: '¿Tu app?',
+    promo_badge: 'Convocatoria limitada', promo_desc: 'Recompensa + reembolso Partner',
   },
   fr: {
-    band: 'Ajoutez votre app au mur — 5 $ + rétrocommission Partner + backlink à fort trafic',
     headline: 'Maîtrisez l’IA, avec Ofox',
     lead: 'Rejoignez le programme et obtenez :',
     p_cash: '5 $ d’incitation', p_partner: 'Rétrocommission Partner', p_show: 'Vitrine d’apps', p_refer: 'Parrainez et gagnez',
     cta: 'Soumettre votre app', more: 'Avantages & règles complets sur GitHub →', ghost: 'Votre app ?',
+    promo_badge: 'Appel limité', promo_desc: 'Récompense + rétrocommission Partner',
   },
   pt: {
-    band: 'Adicione seu app ao mural — $5 + reembolso de Partner + backlink de alto tráfego',
     headline: 'Domine a IA, com a Ofox',
     lead: 'Participe do programa e ganhe:',
     p_cash: '$5 de incentivo', p_partner: 'Reembolso Partner', p_show: 'Vitrine de apps', p_refer: 'Indique e ganhe',
     cta: 'Enviar seu app', more: 'Benefícios e regras completos no GitHub →', ghost: 'Seu app?',
+    promo_badge: 'Chamada limitada', promo_desc: 'Recompensa + reembolso Partner',
   },
   ru: {
-    band: 'Добавьте приложение на стену — $5 + возврат Partner + обратная ссылка с высоким трафиком',
     headline: 'Освойте ИИ вместе с Ofox',
     lead: 'Участвуйте в программе и получите:',
     p_cash: '$5 за разработку', p_partner: 'Возврат Partner', p_show: 'Витрина приложений', p_refer: 'Реферальное вознаграждение',
     cta: 'Отправить приложение', more: 'Все бонусы и правила на GitHub →', ghost: 'Ваше приложение?',
+    promo_badge: 'Ограниченный приём', promo_desc: 'Награда + возврат Partner',
   },
 };
 export function r(locale: string, key: string): string {

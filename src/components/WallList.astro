@@ -16,9 +16,8 @@ const stats = [
   [ossCount, t(locale, 'stat_oss')],
 ] as const;
 
-const isEmpty = apps.length === 0;
 const submit = submitUrl(locale);
-const perkChips = [
+const perks = [
   ['💰', r(locale, 'p_cash')],
   ['🤝', r(locale, 'p_partner')],
   ['✨', r(locale, 'p_show')],
@@ -26,74 +25,57 @@ const perkChips = [
 ] as const;
 ---
 <div class="hero">
-  <h1>
-    {t(locale, 'hero_before')}<span class="accent">Ofox</span>{t(locale, 'hero_after')}
-    <span class="verified" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px">✓</span>
-  </h1>
-  <div class="sub">{t(locale, 'sub')}</div>
-  {!isEmpty && <div class="actions">{t(locale, 'submit_q')} </div>}
-  {!isEmpty && <div class="stats">
-    {stats.map(([n, label], i) => (
-      <div class="stat-item">
-        <div class="stat-num"><span class="stat-icon">{statIcons[i]}</span>{n}</div>
-        <div class="stat-label">{label}</div>
-      </div>
-    ))}
-  </div>}
+  <div class="hero-text">
+    <h1>
+      {t(locale, 'hero_before')}<span class="accent">Ofox</span>{t(locale, 'hero_after')}
+      <span class="verified" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px">✓</span>
+    </h1>
+    <div class="sub">{t(locale, 'sub')}</div>
+    <div class="actions">{t(locale, 'submit_q')}</div>
+    <div class="stats">
+      {stats.map(([n, label], i) => (
+        <div class="stat-item">
+          <div class="stat-num"><span class="stat-icon">{statIcons[i]}</span>{n}</div>
+          <div class="stat-label">{label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <aside class="hero-promo" aria-label={r(locale, 'promo_badge')}>
+    <div class="hp-badge">🎁 {r(locale, 'promo_badge')}</div>
+    <ul class="hp-perks">
+      {perks.map(([ico, label]) => (
+        <li><span class="hp-ico" aria-hidden="true">{ico}</span> {label}</li>
+      ))}
+    </ul>
+    <a class="hp-cta recruit-band" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')} →</a>
+    <a class="hp-more" href={submit} target="_blank" rel="noopener">{r(locale, 'more')}</a>
+  </aside>
 </div>
 
-{isEmpty ? (
-  <section class="recruit-panel">
-    <div class="recruit-panel-inner">
-      <h2>{r(locale, 'headline')}</h2>
-      <p class="lead">{r(locale, 'lead')}</p>
-      <div class="perk-chips">
-        {perkChips.map(([ico, label]) => (
-          <span class="perk-chip"><span aria-hidden="true">{ico}</span> {label}</span>
-        ))}
-      </div>
-      <div class="recruit-cta">
-        <a class="btn-submit" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')}</a>
-        <a class="recruit-more" href={submit} target="_blank" rel="noopener">{r(locale, 'more')}</a>
-      </div>
-      <div class="ghosts" aria-hidden="true">
-        <div class="ghost">{r(locale, 'ghost')}</div>
-        <div class="ghost">{r(locale, 'ghost')}</div>
-        <div class="ghost">{r(locale, 'ghost')}</div>
-      </div>
-    </div>
-  </section>
-) : (
-  <>
-    <div class="recruit-band-wrap">
-      <a class="recruit-band" href={submit} target="_blank" rel="noopener">🎁 {r(locale, 'band')} <span class="arrow">→</span></a>
-    </div>
+<div class="search-wrap">
+  <input type="search" id="searchInput" placeholder={t(locale, 'search')} aria-label={t(locale, 'search')} />
+</div>
 
-    <div class="search-wrap">
-      <input type="search" id="searchInput" placeholder={t(locale, 'search')} aria-label={t(locale, 'search')} />
-    </div>
+<div class="cat-filter" id="catFilter">
+  <button type="button" class="cat-chip active" data-cat="all" aria-pressed="true">{t(locale, 'all')}<span class="cat-count">{apps.length}</span></button>
+  {CATEGORIES.map((cat) => {
+    const n = counts[cat] || 0;
+    return (
+      <button type="button" class={`cat-chip${n === 0 ? ' disabled' : ''}`} data-cat={cat} aria-pressed="false" disabled={n === 0}>
+        {tagLabel(locale, cat)}<span class="cat-count">{n}</span>
+      </button>
+    );
+  })}
+</div>
 
-    <div class="cat-filter" id="catFilter">
-      <button type="button" class="cat-chip active" data-cat="all" aria-pressed="true">{t(locale, 'all')}<span class="cat-count">{apps.length}</span></button>
-      {CATEGORIES.map((cat) => {
-        const n = counts[cat] || 0;
-        return (
-          <button type="button" class={`cat-chip${n === 0 ? ' disabled' : ''}`} data-cat={cat} aria-pressed="false" disabled={n === 0}>
-            {tagLabel(locale, cat)}<span class="cat-count">{n}</span>
-          </button>
-        );
-      })}
-    </div>
-
-    <div class="grid" id="appGrid">
-      {apps.map((app) => <AppCard app={app} locale={locale} />)}
-      <div class="empty" id="emptyMsg" role="status" aria-live="polite" style="display:none">{t(locale, 'empty')}</div>
-    </div>
-  </>
-)}
+<div class="grid" id="appGrid">
+  {apps.map((app) => <AppCard app={app} locale={locale} />)}
+  <div class="empty" id="emptyMsg" role="status" aria-live="polite" style="display:none">{t(locale, 'empty')}</div>
+</div>
 
 <script>
-  const grid = document.getElementById('appGrid');
   const cards = Array.from(document.querySelectorAll<HTMLElement>('#appGrid .card'));
   const empty = document.getElementById('emptyMsg');
   const search = document.getElementById('searchInput') as HTMLInputElement;
