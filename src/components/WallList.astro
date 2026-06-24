@@ -17,41 +17,33 @@ const stats = [
 ] as const;
 
 const submit = submitUrl(locale);
-const perks = [
-  ['💰', r(locale, 'p_cash')],
-  ['🤝', r(locale, 'p_partner')],
-  ['✨', r(locale, 'p_show')],
-  ['🎁', r(locale, 'p_refer')],
-] as const;
 ---
 <div class="hero">
-  <div class="hero-text">
-    <h1>
-      {t(locale, 'hero_before')}<span class="accent">Ofox</span>{t(locale, 'hero_after')}
-      <span class="verified" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px">✓</span>
-    </h1>
-    <div class="sub">{t(locale, 'sub')}</div>
-    <div class="actions">{t(locale, 'submit_q')}</div>
-    <div class="stats">
-      {stats.map(([n, label], i) => (
-        <div class="stat-item">
-          <div class="stat-num"><span class="stat-icon">{statIcons[i]}</span>{n}</div>
-          <div class="stat-label">{label}</div>
-        </div>
-      ))}
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>
+        {t(locale, 'hero_before')}<span class="accent">Ofox</span>{t(locale, 'hero_after')}
+        <span class="verified" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px">✓</span>
+      </h1>
+      <div class="sub">{t(locale, 'sub')}</div>
+      <div class="stats">
+        {stats.map(([n, label], i) => (
+          <div class="stat-item">
+            <div class="stat-num"><span class="stat-icon">{statIcons[i]}</span>{n}</div>
+            <div class="stat-label">{label}</div>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
 
-  <aside class="hero-promo" aria-label={r(locale, 'promo_badge')}>
-    <div class="hp-badge">🎁 {r(locale, 'promo_badge')}</div>
-    <ul class="hp-perks">
-      {perks.map(([ico, label]) => (
-        <li><span class="hp-ico" aria-hidden="true">{ico}</span> {label}</li>
-      ))}
-    </ul>
-    <a class="hp-cta recruit-band" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')} →</a>
-    <a class="hp-more" href={submit} target="_blank" rel="noopener">{r(locale, 'more')}</a>
-  </aside>
+    <aside class="hero-promo" aria-label={r(locale, 'promo_badge')}>
+      <div class="hp-badge">{r(locale, 'promo_badge')}</div>
+      <div class="hp-amount">$5<span class="hp-plus">+</span></div>
+      <div class="hp-hook">{r(locale, 'hook')}</div>
+      <a class="hp-cta recruit-band" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')} →</a>
+      <a class="hp-more" href={submit} target="_blank" rel="noopener">{r(locale, 'learn')} →</a>
+    </aside>
+  </div>
 </div>
 
 <div class="search-wrap">
