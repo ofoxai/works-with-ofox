@@ -55,7 +55,7 @@ const ogImage = abs('/awesome-ofox/og.png');
       <div class="header-actions">
         <select class="lang-toggle" id="langSelect" aria-label={languageLabel(locale)}>
           {LOCALES.map((l) => (
-            <option value={localeUrls[l.code]} selected={l.code === locale}>{l.name}</option>
+            <option value={localeUrls[l.code]} data-loc={l.code} selected={l.code === locale}>{l.name}</option>
           ))}
         </select>
         <a class="btn-submit" href={submitUrl(locale)} target="_blank" rel="noopener">{t(locale, 'submit_link')}</a>
@@ -78,6 +78,11 @@ const ogImage = abs('/awesome-ofox/og.png');
 
     const sel = document.getElementById('langSelect') as HTMLSelectElement | null;
     sel?.addEventListener('change', () => {
+      // Persist the choice in the same NEXT_LOCALE cookie the rest of ofox.ai uses,
+      // so an explicit language pick here sticks and propagates site-wide (and the
+      // main-site middleware won't bounce a deliberate English choice back).
+      const loc = sel.options[sel.selectedIndex]?.dataset.loc;
+      if (loc) document.cookie = `NEXT_LOCALE=${loc};path=/;max-age=31536000;SameSite=Lax;Secure`;
       trk('wall_language_switch', { to_url: sel.value });
       if (sel.value) location.href = sel.value;
     });
