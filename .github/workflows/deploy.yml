@@ -25,6 +25,10 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      # Optional Lark/Feishu deploy notification (same as home-page). No-op if unset.
+      LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+      SITE_NAME: "Works with Ofox"
+      SITE_URL: "https://ofox.ai/awesome-ofox"
     steps:
       - name: Note when Vercel secrets are absent
         if: ${{ env.VERCEL_TOKEN == '' }}
@@ -76,3 +80,40 @@ jobs:
             echo "- **Commit**: ${{ github.sha }}"
             echo "- **Author**: ${{ github.actor }}"
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Notify Lark — success
+        if: ${{ env.VERCEL_TOKEN != '' && env.LARK_WEBHOOK != '' && success() }}
+        env:
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          ACTOR: ${{ github.actor }}
+          ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE=$(printf '%s' "$COMMIT_MSG" | head -1 | cut -c1-60 | sed 's/"/\\"/g')
+          cat > payload.json <<EOF
+          {"msg_type":"interactive","card":{"header":{"template":"green","title":{"tag":"plain_text","content":"🎉 ${SITE_NAME} 部署成功"}},"elements":[
+            {"tag":"div","fields":[
+              {"is_short":true,"text":{"tag":"lark_md","content":"**📝 提交**\n${TITLE}"}},
+              {"is_short":true,"text":{"tag":"lark_md","content":"**👤 触发**\n${ACTOR}"}}
+            ]},
+            {"tag":"action","actions":[
+              {"tag":"button","text":{"tag":"plain_text","content":"🔗 访问展示墙"},"type":"primary","url":"${SITE_URL}"},
+              {"tag":"button","text":{"tag":"plain_text","content":"📊 查看日志"},"type":"default","url":"${ACTION_URL}"}
+            ]}
+          ]}}
+          EOF
+          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
+
+      - name: Notify Lark — failure
+        if: ${{ env.VERCEL_TOKEN != '' && env.LARK_WEBHOOK != '' && failure() }}
+        env:
+          ACTION_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          cat > payload.json <<EOF
+          {"msg_type":"interactive","card":{"header":{"template":"red","title":{"tag":"plain_text","content":"❌ ${SITE_NAME} 部署失败"}},"elements":[
+            {"tag":"div","text":{"tag":"lark_md","content":"部署过程中出错,请查看日志。"}},
+            {"tag":"action","actions":[
+              {"tag":"button","text":{"tag":"plain_text","content":"📊 查看日志"},"type":"danger","url":"${ACTION_URL}"}
+            ]}
+          ]}}
+          EOF
+          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
