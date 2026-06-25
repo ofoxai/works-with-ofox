@@ -4,6 +4,16 @@
 
 A curated list of apps and tools built with [Ofox](https://ofox.ai). Ofox is a unified gateway — one API key to reach Claude, GPT, Gemini, DeepSeek and more.
 
+## 🚀 Add your app in 3 steps
+
+Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real backlinks from a high-traffic AI site, plus a **$5 dev reward** when approved.
+
+1. Copy [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml) to `apps/your-app-name/app.yaml` and fill it in (every field is commented).
+2. Add a square `logo.png` (≤ 1MB) in the same folder.
+3. Open a Pull Request. **Don't** edit `README.md` / `apps.json` — they regenerate automatically.
+
+**Bar to get listed:** your `docs` link must point to a page **on your own site** that documents how to configure Ofox. Full rules → [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md).
+
 ## What is Ofox?
 
 [Ofox](https://ofox.ai) gives you a single interface to AI models across providers, through one API.

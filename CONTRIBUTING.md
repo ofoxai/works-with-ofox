@@ -43,6 +43,8 @@ apps/your-app-name/
 
 ### 3. 创建 `app.yaml`
 
+> 最简单的方式：直接复制 [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml)（每个字段都有注释）到你的文件夹里再改。
+
 ```yaml
 name: "你的应用名称"
 description: "一句话介绍你的应用（最多 300 字符）"
