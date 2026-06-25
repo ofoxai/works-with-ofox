@@ -102,6 +102,7 @@ a:hover{color:var(--copper-dark)}
 .d-card p{font-size:15px;color:var(--text-secondary);line-height:1.7}
 .d-buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
 .d-btn{padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.btn-icon{width:15px;height:15px;flex-shrink:0}
 .d-btn-primary{background:var(--copper);color:#fff}
 .d-btn-primary:hover{background:var(--copper-dark);color:#fff}
 .d-btn-secondary{border:1px solid var(--border);color:var(--text)}
