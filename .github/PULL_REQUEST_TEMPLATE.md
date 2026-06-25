@@ -22,15 +22,19 @@
 ## 提交清单 / Checklist
 
 - [ ] 在 `apps/<slug>/` 下新增了 `app.yaml` 和 `logo.png`
-- [ ] `app.yaml` 字段完整（name / description / url / docs / tags / date_added）；`tags` 取自 `chat / coding / productivity / creative / research / other`
+- [ ] `app.yaml` 字段完整（name / **category** / description / url / tags / date_added；`integration` 还需 `docs`）；`tags` 取自 `chat / coding / productivity / creative / research / other`
 - [ ] `logo.png` 为正方形 PNG，≤ 1MB（推荐 256×256）
-- [ ] **该应用已在自己的官网 / 仓库文档中记录了对 Ofox 的支持**，`docs` 指向那个页面 — ⚠️ 上墙硬门槛 / the bar for listing
+- [ ] 我属于（在 `app.yaml` 的 `category` 里声明） / My category (declared in `app.yaml`):
+  - [ ] **`integration`** — 用户填自己的 Ofox Key，且 `docs` 指向我的接入文档 / users bring their own key; `docs` points to my setup page
+  - [ ] **`powered-by`** — 产品基于 Ofox 构建，可配合邮件核实 Ofox 账户及用量 / built on Ofox; can verify Ofox account & usage by email
 - [ ] 我**没有**手动改 `README.md` / `apps.json`（合并后自动生成）
 
-## 对方收录 Ofox 的证据 / Proof the app documents Ofox
+## 资格说明 / Eligibility
 
-<!-- 通常就是你 app.yaml 里的 `docs` 链接(你站点上写明支持/接入 Ofox 的页面)。再贴一次方便审核。
-     Usually the same `docs` link from your app.yaml — paste it here for review convenience. -->
+<!-- integration：贴你站点上的 Ofox 接入文档链接（通常即 app.yaml 的 docs）。
+     powered-by：说明你基于 Ofox 构建；我们会邮件核实你的 Ofox 账户及用量。
+     integration: paste your Ofox setup doc link (usually the docs in app.yaml).
+     powered-by: note you're built on Ofox; we'll verify your account & usage by email. -->
 
 -
 
@@ -39,9 +43,10 @@
 
 ```yaml
 name: "Your App"
+category: "integration"   # integration（用户填自己的 Key，需 docs）/ powered-by（基于 Ofox 构建）
 description: "一句话介绍你的应用 / one-line description"
 url: "https://your-app.com"
-docs: "https://your-app.com/docs/ofox"   # 你站点上的 Ofox 接入页 / your Ofox setup page
+docs: "https://your-app.com/docs/ofox"   # integration 必填 / powered-by 可删
 tags:
   - coding
 open_source: "https://github.com/you/your-app"   # 选填 / optional

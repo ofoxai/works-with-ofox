@@ -12,7 +12,7 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 2. Add a square `logo.png` (≤ 1MB) in the same folder.
 3. Open a Pull Request. **Don't** edit `README.md` / `apps.json` — they regenerate automatically.
 
-**Bar to get listed:** your `docs` link must point to a page **on your own site** that documents how to configure Ofox. Full rules → [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md).
+**Who can be listed (pick one in `app.yaml`):** `integration` — users bring their own Ofox key (needs a `docs` setup page); or `powered-by` — your product is built on Ofox (account verified by email). Full rules → [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md).
 
 ## What is Ofox?
 

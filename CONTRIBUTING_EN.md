@@ -17,15 +17,21 @@ Want to add your app to the "Works with Ofox" showcase? Follow the steps below!
 
 ---
 
-## Requirements
+## Who can be listed
 
-Your app must:
-- Use [Ofox](https://ofox.ai) to access AI models, with support for users entering their own Ofox API Key
-- Have a publicly accessible page
-- **Already document Ofox support on your own site or repo** — this is the bar for listing: the `docs` field must point to a page on *your* site explaining how to configure an Ofox API Key, not a guide written solely by Ofox.
-- **Have some traction or user base** — Brand new projects with no users are unlikely to be merged. Signals we look for: GitHub stars, active users, downloads, community activity, etc. Exceptionally innovative projects may be considered.
+Qualify under **either** category — declare it in the `category` field of `app.yaml`:
 
-> Categories (`tags`) must be chosen from these 6: `chat / coding / productivity / creative / research / other`.
+| Category | What it is | How eligibility is verified | `docs` |
+|----------|-----------|------------------------------|--------|
+| **`integration` · Integrates Ofox** | Users enter **their own** Ofox API key in your app to use models | A page on your site/repo showing **how to configure Ofox in your app**; `docs` points to it | **required** |
+| **`powered-by` · Built on Ofox** | Your product **itself** is built on the AI service Ofox provides | We verify your **Ofox account & usage by email** at review | optional |
+
+Both also need:
+- A **publicly accessible** app page;
+- **Some traction / user base** (GitHub stars, active users, downloads, community activity; exceptionally innovative projects may be considered).
+
+> Auto-validation checks against your declared `category`: `integration` must include `docs` or CI blocks the PR; `powered-by` may omit it.
+> Tags must be one of these 6: `chat / coding / productivity / creative / research / other`.
 
 ## Steps
 
@@ -47,9 +53,10 @@ Folder name should use lowercase letters, numbers, and hyphens (e.g. `my-cool-ap
 
 ```yaml
 name: "Your App Name"
+category: "integration"   # integration (users bring their own key — needs docs) / powered-by (built on Ofox)
 description: "A one-liner about your app (max 300 characters)"
 url: "https://your-app-url.com"
-docs: "https://your-app-url.com/docs/ofox"   # Ofox integration docs (required)
+docs: "https://your-app-url.com/docs/ofox"   # required for integration; delete for powered-by
 tags:
   - coding     # Must be one of these 6: chat / coding / productivity / creative / research / other
 open_source: "https://github.com/you/your-app"  # Optional: open source repo

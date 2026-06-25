@@ -1,4 +1,5 @@
 name: "DeepChat"
+category: "integration"
 description: "Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox."
 url: "https://example.com/deepchat"
 docs: "https://docs.example.com/deepchat/ofox"

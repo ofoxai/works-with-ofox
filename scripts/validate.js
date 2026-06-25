@@ -90,6 +90,13 @@ function validateApp(appDir) {
     }
   }
 
+  // Category-conditional docs rule: integration apps (user brings their own Ofox
+  // API key) must link a docs page that documents the setup; powered-by apps
+  // (built on Ofox) may omit docs — verified by email at review instead.
+  if (app.category === 'integration' && !app.docs) {
+    errors.push(`${appDir}: category "integration" requires a "docs" link (your page documenting how to configure Ofox)`);
+  }
+
   // URL security checks
   for (const field of ['url', 'docs', 'open_source']) {
     if (app[field]) {

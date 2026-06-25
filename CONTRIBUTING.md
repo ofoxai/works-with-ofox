@@ -17,15 +17,21 @@
 
 ---
 
-## 要求
+## 谁可以上墙
 
-你的应用必须：
-- 使用 [Ofox](https://ofox.ai) 访问 AI 模型，支持用户填入自己的 Ofox API Key
-- 有公开可访问的页面
-- **在你自己的官网或仓库文档中已经记录了对 Ofox 的支持** —— 这是上墙的硬门槛：`docs` 字段必须指向你站点上写明“如何配置 Ofox API Key”的页面，而不是仅由 Ofox 单方面撰写的教程。
-- **有一定的影响力或用户基础** — 全新的、无用户的项目不太可能被合并。我们关注的信号包括：GitHub stars、活跃用户数、下载量、社区活跃度等。特别创新的项目可以例外。
+满足以下**任一类**即可（在 `app.yaml` 的 `category` 字段里声明属于哪类）：
 
-> 类别（`tags`）只能从这 6 个里选：`chat / coding / productivity / creative / research / other`。
+| 类别 | 是什么 | 怎么证明资格 | `docs` |
+|------|--------|--------------|--------|
+| **`integration` · 集成 Ofox** | 用户在你的应用里填入**自己的** Ofox API Key 来用模型 | 你站点/仓库上有一页说明**如何在你的应用里配置 Ofox**，`docs` 指向它 | **必填** |
+| **`powered-by` · 基于 Ofox 构建** | 你的产品**自身**基于 Ofox 的 AI 服务开发 | 审核时我们通过**邮件核实你的 Ofox 账户及用量** | 选填 |
+
+两类都还需要：
+- **公开可访问**的应用页面；
+- **有一定的影响力或用户基础**（GitHub stars、活跃用户、下载量、社区活跃度等；特别创新的项目可以例外）。
+
+> 自动校验会按你声明的 `category` 检查：`integration` 必须填 `docs`，否则 CI 直接拦下；`powered-by` 可不填。
+> 类别标签（`tags`）只能从这 6 个里选：`chat / coding / productivity / creative / research / other`。
 
 ## 提交步骤
 
@@ -47,9 +53,10 @@ apps/your-app-name/
 
 ```yaml
 name: "你的应用名称"
+category: "integration"   # integration（用户填自己的 Key，需 docs）/ powered-by（基于 Ofox 构建）
 description: "一句话介绍你的应用（最多 300 字符）"
 url: "https://your-app-url.com"
-docs: "https://your-app-url.com/docs/ofox"   # Ofox 集成配置文档（必填）
+docs: "https://your-app-url.com/docs/ofox"   # integration 必填；powered-by 可删此行
 tags:
   - coding     # 只能取自这 6 类：chat / coding / productivity / creative / research / other
 open_source: "https://github.com/you/your-app"  # 选填：开源仓库

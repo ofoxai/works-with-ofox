@@ -12,7 +12,7 @@
 2. 在同一目录放一张正方形 `logo.png`（≤ 1MB）。
 3. 提交 Pull Request。**不要**改 `README.md` / `apps.json` —— 它们会自动重新生成。
 
-**上墙门槛：** 你的 `docs` 链接必须指向**你自己网站上**说明如何配置 Ofox 的页面。完整规则 → [CONTRIBUTING.md](CONTRIBUTING.md)。
+**谁能上墙（在 `app.yaml` 里二选一）：** `integration` —— 用户填自己的 Ofox Key（需配 `docs` 接入文档）；或 `powered-by` —— 你的产品基于 Ofox 构建（邮件核实账户）。完整规则 → [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 什么是 Ofox？
 

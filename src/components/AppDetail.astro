@@ -52,14 +52,16 @@ const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
     </div>
   </div>
 
-  <div class="d-card">
-    <h2>{fill('guide_title')}</h2>
-    <ol>
-      <li>{pre('g1_pre')}<a href="https://app.ofox.ai" target="_blank" rel="noopener">{t(locale, 'g1_link')}</a>{suf('g1_suf')}</li>
-      <li>{pre('g2_pre')}<a href="https://app.ofox.ai/manage/api-keys" target="_blank" rel="noopener">{t(locale, 'g2_link')}</a>{suf('g2_suf')}</li>
-      <li>{fill('g3')}{app.docs && <>{t(locale, 'g3_docs_pre')}{sp}<a href={app.docs} target="_blank" rel="noopener">{fill('g3_docs_link')}</a>{dot}</>}</li>
-    </ol>
-  </div>
+  {app.category === 'integration' && (
+    <div class="d-card">
+      <h2>{fill('guide_title')}</h2>
+      <ol>
+        <li>{pre('g1_pre')}<a href="https://app.ofox.ai" target="_blank" rel="noopener">{t(locale, 'g1_link')}</a>{suf('g1_suf')}</li>
+        <li>{pre('g2_pre')}<a href="https://app.ofox.ai/manage/api-keys" target="_blank" rel="noopener">{t(locale, 'g2_link')}</a>{suf('g2_suf')}</li>
+        <li>{fill('g3')}{app.docs && <>{t(locale, 'g3_docs_pre')}{sp}<a href={app.docs} target="_blank" rel="noopener">{fill('g3_docs_link')}</a>{dot}</>}</li>
+      </ol>
+    </div>
+  )}
 
   <div class="d-card">
     <h2>{fill('use_title')}</h2>
