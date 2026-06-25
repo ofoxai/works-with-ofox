@@ -1,8 +1,0 @@
-name: "TestFlow"
-description: "A workflow automation tool — connect your tasks to AI through Ofox. (流程测试件,合并后会删除)"
-url: "https://example.com/testflow"
-docs: "https://example.com/testflow/docs/ofox"
-tags:
-  - productivity
-open_source: "https://github.com/example/testflow"
-date_added: "2026-06-25"
