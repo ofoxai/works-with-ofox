@@ -1,0 +1,75 @@
+---
+import type { App } from '../lib/apps';
+import { t, tagLabel, wallPath, period } from '../lib/i18n';
+
+interface Props { app: App; locale: string; }
+const { app, locale } = Astro.props;
+const name = app.name;
+const fill = (k: string) => t(locale, k).replace(/\{app\}/g, name);
+const dot = period(locale);
+// CJK scripts don't use inter-word spaces — drop the template-injected space there.
+// (Must bake the space into the string; JSX source whitespace between elements
+// would otherwise re-introduce a space regardless of `sp`.)
+const cjk = locale === 'zh' || locale === 'zh-TW' || locale === 'ja' || locale === 'ko';
+const sp = cjk ? '' : ' ';
+const pre = (k: string) => { const v = t(locale, k); return v ? v + sp : ''; };
+const suf = (k: string) => { const v = t(locale, k); return v ? sp + v : ''; };
+// Open-source link: show "GitHub" when the repo is on github.com (instantly
+// recognizable), else fall back to the localized "source" label.
+const isGitHub = !!app.openSource && /:\/\/(www\.)?github\.com\//i.test(app.openSource);
+const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
+---
+<div class="detail">
+  <a class="back" href={wallPath(locale)}>{t(locale, 'back')}</a>
+
+  <div class="d-banner">
+    <div class="d-header">
+      <img class="d-logo" src={`/awesome-ofox/logos/${app.slug}.png`} alt={`${name} logo`} width="72" height="72" />
+      <div>
+        <div class="d-name">{name}<span class="d-verified">✓</span></div>
+        <div class="d-tags">
+          {app.tags.map((tg) => <span class="tag">{tagLabel(locale, tg)}</span>)}
+          {app.openSource && <span class="tag">{t(locale, 'stat_oss')}</span>}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-card">
+    <h2>{t(locale, 'about')} {name}</h2>
+    <p>{app.description}</p>
+    <div class="d-buttons">
+      <a class="d-btn d-btn-primary" href={app.url} target="_blank" rel="noopener">{t(locale, 'visit')} {name} ↗</a>
+      {app.docs && <a class="d-btn d-btn-secondary" href={app.docs} target="_blank" rel="noopener">{t(locale, 'docs')} ↗</a>}
+      {app.openSource && (
+        <a class="d-btn d-btn-secondary" href={app.openSource} target="_blank" rel="noopener">
+          {isGitHub && (
+            <svg class="btn-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A8.013 8.013 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>
+          )}
+          {sourceLabel} ↗
+        </a>
+      )}
+    </div>
+  </div>
+
+  {app.category === 'integration' && (
+    <div class="d-card">
+      <h2>{fill('guide_title')}</h2>
+      <ol>
+        <li>{pre('g1_pre')}<a href="https://app.ofox.ai" target="_blank" rel="noopener">{t(locale, 'g1_link')}</a>{suf('g1_suf')}</li>
+        <li>{pre('g2_pre')}<a href="https://app.ofox.ai/manage/api-keys" target="_blank" rel="noopener">{t(locale, 'g2_link')}</a>{suf('g2_suf')}</li>
+        <li>{fill('g3')}{app.docs && <>{t(locale, 'g3_docs_pre')}{sp}<a href={app.docs} target="_blank" rel="noopener">{fill('g3_docs_link')}</a>{dot}</>}</li>
+      </ol>
+    </div>
+  )}
+
+  <div class="d-card">
+    <h2>{fill('use_title')}</h2>
+    <p>{fill('use_body')}</p>
+    {app.docs && (
+      <p>
+        {t(locale, 'use_docs_pre')} <a href={app.docs} target="_blank" rel="noopener">{fill('use_docs_link')}</a>{dot}
+      </p>
+    )}
+  </div>
+</div>

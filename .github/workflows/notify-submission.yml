@@ -1,0 +1,143 @@
+name: Notify submission
+
+# On a new app-submission PR: (1) ping Lark so a maintainer goes and reviews it,
+# and (2) post a "review summary" comment that surfaces the submitted fields and
+# a jump-link to the app.yaml — so the reviewer sees the real submitted content
+# (name/description/url/docs/tags) at a glance and knows the one thing to verify
+# by hand: the docs link (bar A — CI never visits links).
+#
+# Uses pull_request_target (not pull_request) so it works on fork PRs and can
+# post a comment. SECURITY: never checks out or RUNS the PR's code. It only reads
+# event metadata and the submitted app.yaml as DATA (fetched read-only, parsed by
+# a tiny dependency-free reader, sanitized before embedding). No PR code runs.
+
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
+    paths:
+      - 'apps/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+    steps:
+      - name: Detect newly added app
+        id: detect
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          # Only a real submission when the PR ADDS a new apps/<slug>/app.yaml
+          # (status=added, lowercase slug → excludes _TEMPLATE and maintainer edits
+          # to existing apps/config). Prevents false "new submission" pings on
+          # maintainer PRs that merely touch apps/**.
+          ADDED=$(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[] | select(.status=="added") | .filename' | grep -E '^apps/[a-z0-9-]+/app\.yaml$' || true)
+          if [ -z "$ADDED" ]; then
+            echo "is_submission=false" >> "$GITHUB_OUTPUT"
+            echo "No newly-added app.yaml — maintainer edit, not a submission. Skipping."
+          else
+            echo "is_submission=true" >> "$GITHUB_OUTPUT"
+            echo "New submission detected:"; echo "$ADDED"
+          fi
+
+      - name: Notify Lark of new submission
+        if: ${{ steps.detect.outputs.is_submission == 'true' && env.LARK_WEBHOOK != '' }}
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          # Sanitize untrusted PR title for JSON: escape backslashes/quotes, single line, cap length.
+          TITLE=$(printf '%s' "$PR_TITLE" | tr '\n\r' '  ' | sed 's/\\/\\\\/g; s/"/\\"/g' | cut -c1-80)
+          cat > payload.json <<EOF
+          {"msg_type":"interactive","card":{"header":{"template":"orange","title":{"tag":"plain_text","content":"📥 Works with Ofox 有新投稿待审核"}},"elements":[
+            {"tag":"div","fields":[
+              {"is_short":true,"text":{"tag":"lark_md","content":"**📝 PR**\n#${PR_NUMBER} ${TITLE}"}},
+              {"is_short":true,"text":{"tag":"lark_md","content":"**👤 提交者**\n${PR_AUTHOR}"}}
+            ]},
+            {"tag":"action","actions":[
+              {"tag":"button","text":{"tag":"plain_text","content":"🔍 去审核 / Review"},"type":"primary","url":"${PR_URL}"}
+            ]}
+          ]}}
+          EOF
+          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
+
+      # Review-aid comment. continue-on-error so a hiccup here never blocks the PR.
+      - name: Post submission review summary
+        if: ${{ steps.detect.outputs.is_submission == 'true' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+          HEADSHA: ${{ github.event.pull_request.head.sha }}
+          HEADREPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          mapfile -t FILES < <(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[] | select(.status=="added") | .filename' | grep -E '^apps/[a-z0-9-]+/app\.yaml$' || true)
+          if [ ${#FILES[@]} -eq 0 ]; then echo "No app.yaml added — skip review comment."; exit 0; fi
+          mkdir -p _rev
+          for f in "${FILES[@]}"; do
+            slug=$(printf '%s' "$f" | cut -d/ -f2)
+            curl -sL "https://raw.githubusercontent.com/$HEADREPO/$HEADSHA/$f" -o "_rev/$slug.yaml" || true
+          done
+          python3 - "$REPO" "$HEADSHA" > comment.md <<'PY'
+          import sys, os, glob
+          repo, headsha = sys.argv[1], sys.argv[2]
+          def unq(s): return s.strip().strip('"').strip("'")
+          def esc(v): return str(v).replace("\n", " ").replace("\r", " ").replace("|", "\\|").strip()[:200]
+          def parse(path):
+              d, cur = {}, None
+              for line in open(path, encoding="utf-8"):
+                  s = line.rstrip("\n")
+                  if not s.strip() or s.lstrip().startswith("#"):
+                      continue
+                  ls = s.lstrip()
+                  if ls.startswith("- ") and cur:
+                      d.setdefault(cur, []).append(unq(ls[2:]))
+                      continue
+                  if (not s[:1].isspace()) and ":" in s:
+                      k, _, v = s.partition(":")
+                      k, v = k.strip(), v.strip()
+                      if v == "":
+                          cur = k; d.setdefault(k, [])
+                      else:
+                          cur = None; d[k] = unq(v)
+              return d
+          out = ["## 📋 投稿审核助手 / Submission review\n\n"]
+          for f in sorted(glob.glob("_rev/*.yaml")):
+              slug = os.path.basename(f)[:-5]
+              blob = f"https://github.com/{repo}/blob/{headsha}/apps/{slug}/app.yaml"
+              d = parse(f)
+              tags = d.get("tags") or []
+              tags = ", ".join(tags) if isinstance(tags, list) else str(tags)
+              docs = d.get("docs", "")
+              cat = d.get("category", "")
+              out.append(f"### `apps/{slug}/`  ·  [📄 查看完整文件 / view file]({blob})\n\n")
+              out.append("| 字段 | 投稿者填写的内容 |\n|---|---|\n")
+              out.append(f"| Name | {esc(d.get('name',''))} |\n")
+              out.append(f"| **Category 类别** | {esc(cat)} |\n")
+              out.append(f"| Description | {esc(d.get('description',''))} |\n")
+              out.append(f"| URL | {esc(d.get('url',''))} |\n")
+              out.append(f"| Docs | {esc(docs)} |\n")
+              out.append(f"| Tags | {esc(tags)} |\n")
+              if d.get("open_source"):
+                  out.append(f"| Open source | {esc(d.get('open_source'))} |\n")
+              out.append("\n")
+              if cat == "integration":
+                  out.append(f"> **① integration** —— 请点开 Docs 链接确认对方站点确实写明了如何配置 Ofox(CI 不访问链接):{esc(docs)}\n\n")
+              elif cat == "powered-by":
+                  out.append("> **② powered-by** —— 通过**邮件核实其 Ofox 账户及用量**后再批准(docs 选填)。\n\n")
+          out.append("---\n")
+          out.append("**已机器校验**(validate CI):字段完整 · category 合法 · tags 取自 6 类 · logo 为 PNG 且不超过 1MB · URL 安全(不访问链接) · `integration` 已含 docs\n\n")
+          out.append("**需人工确认**:① `integration` → 点开 Docs 确认是真实 Ofox 接入文档;② `powered-by` → 邮件核实 Ofox 账户及用量;③ Files changed 里只新增了 apps/<slug>/(app.yaml + logo.png),没动其他文件\n")
+          print("".join(out))
+          PY
+          gh pr comment "$PR" --body-file comment.md

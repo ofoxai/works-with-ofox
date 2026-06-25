@@ -1,0 +1,52 @@
+name: Generate README
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apps/**'
+      - 'scripts/generate-readme.js'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      # `secrets` cannot be used in step `if:` — map to env, then gate on env.
+      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+    steps:
+      # Use BOT_TOKEN (a PAT/App token in the main ruleset bypass list) so this
+      # post-merge auto-regenerate push can reach the protected main branch.
+      # Falls back to the default token when the secret is absent.
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.BOT_TOKEN || github.token }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate README and apps.json
+        run: node scripts/generate-readme.js
+
+      # Only push when BOT_TOKEN exists — main is protected (manual-approval ruleset)
+      # and the default token cannot bypass it. Without the secret this step is
+      # skipped (instead of failing the run with a confusing push rejection).
+      - name: Commit and push if changed
+        if: ${{ env.BOT_TOKEN != '' }}
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add README.md README.zh-CN.md apps.json
+          git diff --staged --quiet || git commit -m "docs: regenerate README and apps.json"
+          git push
+
+      - name: Note when BOT_TOKEN is absent
+        if: ${{ env.BOT_TOKEN == '' }}
+        run: echo "::notice::BOT_TOKEN not set — skipped pushing regenerated README/apps.json. Add BOT_TOKEN (in the main ruleset bypass) to enable auto-commit."
