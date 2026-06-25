@@ -1,0 +1,7 @@
+name: "Pipeline Test"
+description: "Temporary submission to test the PR → approval → merge → deploy → wall pipeline. Will be removed."
+url: "https://example.com/pipeline-test"
+docs: "https://example.com/pipeline-test/docs/ofox"
+tags:
+  - other
+date_added: "2026-06-25"
