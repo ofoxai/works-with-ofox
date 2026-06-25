@@ -54,10 +54,18 @@ function sanitizeMd(text) {
     .replace(/\]/g, '\\]');
 }
 
-// Per-language README copy. App names/descriptions come from app.yaml (single
-// language) so only the surrounding chrome is translated.
+// description may be a string or a per-locale map; resolve for a README language.
+function descOf(desc, lang) {
+  if (typeof desc === 'string') return desc;
+  if (desc && typeof desc === 'object') return desc[lang] || desc.en || Object.values(desc)[0] || '';
+  return '';
+}
+
+// Per-language README copy. App descriptions resolve per README language
+// (string apps render the same in both); surrounding chrome is translated.
 const LANGS = {
   en: {
+    lang: 'en',
     file: 'README.md',
     switcher: '**English** · [中文](README.zh-CN.md)',
     intro: 'A curated list of apps and tools built with [Ofox](https://ofox.ai). Ofox is a unified gateway — one API key to reach Claude, GPT, Gemini, DeepSeek and more.',
@@ -84,6 +92,7 @@ const LANGS = {
     footer: 'Powered by [Ofox AI](https://ofox.ai) · One key, every model',
   },
   zh: {
+    lang: 'zh',
     file: 'README.zh-CN.md',
     switcher: '[English](README.md) · **中文**',
     intro: '使用 [Ofox](https://ofox.ai) 构建的应用与工具精选。Ofox 是统一网关——一个 API Key 即可接入 Claude、GPT、Gemini、DeepSeek 等众多模型。',
@@ -127,7 +136,7 @@ function generateAppCard(app, s) {
     : '';
 
   const safeName = sanitizeMd(app.name);
-  const safeDesc = sanitizeMd(app.description);
+  const safeDesc = sanitizeMd(descOf(app.description, s.lang));
 
   return `### [${safeName}](${app.url})
 

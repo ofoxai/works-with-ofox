@@ -42,7 +42,7 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 
 <img src="./apps/ofox-chat/logo.png" alt="Ofox Chat logo" width="64" height="64">
 
-Ofox&#39;s official AI chat — reach a wide range of models through a single interface.
+Ofox&#39;s official AI chat. Use a wide range of leading models from one place and switch between them freely as you chat — no juggling separate accounts or keys. Built on Ofox&#39;s unified gateway, so model routing, load balancing and automatic failover are handled for you: one account, every model.
 
 `chat` `productivity`
 

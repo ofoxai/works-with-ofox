@@ -1,5 +1,6 @@
 ---
 import type { App } from '../lib/apps';
+import { describe } from '../lib/apps';
 import { t, tagLabel, wallPath, period } from '../lib/i18n';
 
 interface Props { app: App; locale: string; }
@@ -37,7 +38,7 @@ const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
 
   <div class="d-card">
     <h2>{t(locale, 'about')} {name}</h2>
-    <p>{app.description}</p>
+    <p>{describe(app, locale)}</p>
     <div class="d-buttons">
       <a class="d-btn d-btn-primary" href={app.url} target="_blank" rel="noopener">{t(locale, 'visit')} {name} ↗</a>
       {app.docs && <a class="d-btn d-btn-secondary" href={app.docs} target="_blank" rel="noopener">{t(locale, 'docs')} ↗</a>}

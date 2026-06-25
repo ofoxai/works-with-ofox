@@ -18,10 +18,18 @@
       "description": "上墙类别（必填）：integration = 用户在你的应用里填自己的 Ofox API Key（需填 docs）；powered-by = 你的产品本身基于 Ofox 构建（docs 选填，审核时邮件核实 Ofox 账户及用量）"
     },
     "description": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 300,
-      "description": "一句话介绍（1-2 句，最多 300 字符）"
+      "description": "一句话介绍（1-2 句，每种语言最多 300 字符）。可填单个字符串，或按语言的对象 {en, zh, ...}（必须含 en 作为回退；缺的语言回退到 en）",
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 300 },
+        {
+          "type": "object",
+          "required": ["en"],
+          "minProperties": 1,
+          "additionalProperties": false,
+          "propertyNames": { "enum": ["en", "zh", "zh-TW", "ja", "ko", "ru", "es", "fr", "de", "pt"] },
+          "patternProperties": { ".*": { "type": "string", "minLength": 1, "maxLength": 300 } }
+        }
+      ]
     },
     "url": {
       "type": "string",

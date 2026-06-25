@@ -4,7 +4,7 @@ export interface App {
   slug: string;
   name: string;
   category: 'integration' | 'powered-by';
-  description: string;
+  description: string | Record<string, string>;
   url: string;
   docs: string | null;
   tags: string[];
@@ -32,6 +32,15 @@ export const apps: App[] = (appsData as App[])
 
 export function getApp(slug: string): App | undefined {
   return apps.find((a) => a.slug === slug);
+}
+
+// Resolve an app's description for a locale. description may be a single string
+// or a per-locale map; fall back to en, then any available value.
+export function describe(app: App, locale: string): string {
+  const d = app.description;
+  if (typeof d === 'string') return d;
+  if (d && typeof d === 'object') return d[locale] || d.en || Object.values(d)[0] || '';
+  return '';
 }
 
 export function categoryCounts(): Record<string, number> {
