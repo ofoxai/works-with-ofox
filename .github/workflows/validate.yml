@@ -41,13 +41,8 @@ jobs:
             echo "No app changes detected"
           fi
 
-      # Guard against drift: the committed apps.json / README must match what
-      # generate-readme.js produces from apps/*.yaml (prevents hand-edited or stale copies).
-      - name: Check apps.json / README are in sync
-        run: |
-          node scripts/generate-readme.js
-          if ! git diff --quiet apps.json README.md; then
-            echo "::error::apps.json/README.md are out of sync with apps/*.yaml. Do not edit them by hand — they are generated. Run 'node scripts/generate-readme.js' and commit."
-            git diff --stat apps.json README.md
-            exit 1
-          fi
+      # NOTE: no apps.json/README drift check here on purpose. Contributors only
+      # add apps/<slug>/{app.yaml,logo.png} — they must NOT have to regenerate or
+      # commit apps.json/README. Those are regenerated automatically: at deploy
+      # build time (always correct on the live wall) and post-merge by
+      # generate.yml (BOT_TOKEN) which commits the refreshed files to main.
