@@ -1,0 +1,28 @@
+# Code owners for security-sensitive paths.
+#
+# Why: this is a public community repo. A normal app submission ONLY touches
+# apps/<slug>/ (app.yaml + logo.png). Anything below runs in CI or affects the
+# build/deploy — a "submission" PR that edits these is a red flag. Requiring a
+# maintainer (code owner) review on these paths is a tripwire against a PR that
+# sneaks in a malicious workflow / script / dependency.
+#
+# Enforced only when branch protection has "Require review from Code Owners"
+# enabled for main. apps/** is intentionally NOT listed — that is the free
+# contribution zone (still gated by the manual-approval ruleset, just not by
+# code-owner review).
+
+# CI / automation (workflows, this file, PR & issue templates)
+/.github/            @celeste1900 @larrykoo711
+
+# Build & validation scripts that run in CI
+/scripts/            @celeste1900 @larrykoo711
+
+# Dependencies (npm ci runs lifecycle scripts) and build/deploy config
+/package.json        @celeste1900 @larrykoo711
+/package-lock.json   @celeste1900 @larrykoo711
+/astro.config.mjs    @celeste1900 @larrykoo711
+/vercel.json         @celeste1900 @larrykoo711
+/tsconfig.json       @celeste1900 @larrykoo711
+
+# Submission schema (defines what app.yaml is allowed to contain)
+/schema/             @celeste1900 @larrykoo711
