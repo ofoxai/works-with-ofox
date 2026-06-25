@@ -28,7 +28,7 @@
       "type": "string",
       "format": "uri",
       "pattern": "^https?://",
-      "description": "Ofox 集成文档链接（选填）"
+      "description": "Ofox 集成文档链接（必填，指向你站点上写明如何配置 Ofox 的页面 = 上墙门槛）"
     },
     "tags": {
       "type": "array",
