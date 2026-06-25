@@ -3,6 +3,7 @@ import appsData from '../../apps.json';
 export interface App {
   slug: string;
   name: string;
+  category: 'integration' | 'powered-by';
   description: string;
   url: string;
   docs: string | null;

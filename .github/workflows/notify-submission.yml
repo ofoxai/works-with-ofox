@@ -98,21 +98,25 @@ jobs:
               tags = d.get("tags") or []
               tags = ", ".join(tags) if isinstance(tags, list) else str(tags)
               docs = d.get("docs", "")
+              cat = d.get("category", "")
               out.append(f"### `apps/{slug}/`  ·  [📄 查看完整文件 / view file]({blob})\n\n")
               out.append("| 字段 | 投稿者填写的内容 |\n|---|---|\n")
               out.append(f"| Name | {esc(d.get('name',''))} |\n")
+              out.append(f"| **Category 类别** | {esc(cat)} |\n")
               out.append(f"| Description | {esc(d.get('description',''))} |\n")
               out.append(f"| URL | {esc(d.get('url',''))} |\n")
-              out.append(f"| **Docs(上墙门槛 A)** | {esc(docs)} |\n")
+              out.append(f"| Docs | {esc(docs)} |\n")
               out.append(f"| Tags | {esc(tags)} |\n")
               if d.get("open_source"):
                   out.append(f"| Open source | {esc(d.get('open_source'))} |\n")
               out.append("\n")
-              if docs:
-                  out.append(f"> 请点开 Docs 链接确认对方文档确实写明了 Ofox 配置(CI 不会访问链接):{esc(docs)}\n\n")
+              if cat == "integration":
+                  out.append(f"> **① integration** —— 请点开 Docs 链接确认对方站点确实写明了如何配置 Ofox(CI 不访问链接):{esc(docs)}\n\n")
+              elif cat == "powered-by":
+                  out.append("> **② powered-by** —— 通过**邮件核实其 Ofox 账户及用量**后再批准(docs 选填)。\n\n")
           out.append("---\n")
-          out.append("**已机器校验**(validate CI):字段完整 / tags 取自 6 类 / logo 为 PNG 且不超过 1MB / URL 安全(不访问链接)\n\n")
-          out.append("**需人工确认**:1) 上面 Docs 链接是真实的 Ofox 集成文档;2) Files changed 里只新增了 apps/<slug>/(app.yaml + logo.png),没动其他文件\n")
+          out.append("**已机器校验**(validate CI):字段完整 · category 合法 · tags 取自 6 类 · logo 为 PNG 且不超过 1MB · URL 安全(不访问链接) · `integration` 已含 docs\n\n")
+          out.append("**需人工确认**:① `integration` → 点开 Docs 确认是真实 Ofox 接入文档;② `powered-by` → 邮件核实 Ofox 账户及用量;③ Files changed 里只新增了 apps/<slug>/(app.yaml + logo.png),没动其他文件\n")
           print("".join(out))
           PY
           gh pr comment "$PR" --body-file comment.md
