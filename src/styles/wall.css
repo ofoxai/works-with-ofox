@@ -10,8 +10,12 @@ a:hover{color:var(--copper-dark)}
 
 .header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
 .header-inner{max-width:1200px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:20px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:8px}
-.logo-dot{width:10px;height:10px;background:var(--copper);border-radius:50%;display:inline-block}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center}
+.logo-mark{height:26px;width:auto;display:block}
+.brand-divider{width:1px;height:20px;background:var(--border)}
+.wall-name{font-size:18px;font-weight:700;color:var(--text)}
+.wall-name:hover{color:var(--copper-dark)}
 .header-actions{display:flex;align-items:center;gap:12px}
 .lang-toggle{padding:6px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;cursor:pointer;font-size:13px;color:var(--text-secondary);transition:all .2s}
 .lang-toggle:hover{border-color:var(--copper);color:var(--copper)}
@@ -123,7 +127,7 @@ a:hover{color:var(--copper-dark)}
 }
 @media(max-width:400px){
   .header-inner{gap:8px}
-  .logo span:last-child{font-size:17px}
+  .wall-name{font-size:15px}
   .lang-toggle{max-width:108px}
   .stats{gap:16px}
 }

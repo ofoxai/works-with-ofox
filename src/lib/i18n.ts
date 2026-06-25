@@ -241,6 +241,11 @@ export function localePrefix(locale: string): string {
 export function wallPath(locale: string): string {
   return `${localePrefix(locale)}/awesome-ofox`;
 }
+// Back to the main ofox.ai site in the current locale (as-needed prefix, en = root).
+// Absolute ofox.ai URL like the footer link — the io proxy rewrites it to ofox.io.
+export function homeUrl(locale: string): string {
+  return `https://ofox.ai${localePrefix(locale)}`;
+}
 export function detailPath(locale: string, slug: string): string {
   return `${localePrefix(locale)}/awesome-ofox/${slug}`;
 }
