@@ -1,0 +1,66 @@
+name: Deploy
+
+# Mirrors home-page's deploy flow: GitHub Actions + Vercel token (no Vercel
+# GitHub-app git integration). Configure these repo secrets to enable it —
+# until then the job no-ops (no red failures):
+#   VERCEL_TOKEN       — Vercel access token (scoped to the Ofox team)
+#   VERCEL_ORG_ID      — the Ofox Vercel team id
+#   VERCEL_PROJECT_ID  — the works-with-ofox project id under that team
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    env:
+      # secrets can't be used in step `if:` — map to env first
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Note when Vercel secrets are absent
+        if: ${{ env.VERCEL_TOKEN == '' }}
+        run: echo "::notice::VERCEL_TOKEN not set — skipping deploy. Add VERCEL_TOKEN / VERCEL_ORG_ID / VERCEL_PROJECT_ID (Ofox team) to enable auto-deploy."
+
+      - uses: actions/checkout@v4
+        if: ${{ env.VERCEL_TOKEN != '' }}
+
+      - name: Setup Node.js
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Pull Vercel environment (production)
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build (Vercel, production)
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: npx vercel@latest build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy prebuilt to production
+        id: deploy
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: |
+          URL=$(npx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Deployed to: $URL"
+
+      - name: Summary
+        if: ${{ env.VERCEL_TOKEN != '' && success() }}
+        run: |
+          {
+            echo "## Deployment Successful"
+            echo "- **URL**: ${{ steps.deploy.outputs.url }}"
+            echo "- **Commit**: ${{ github.sha }}"
+            echo "- **Author**: ${{ github.actor }}"
+          } >> "$GITHUB_STEP_SUMMARY"
