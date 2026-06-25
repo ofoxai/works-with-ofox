@@ -32,12 +32,24 @@ jobs:
 
       - uses: actions/checkout@v4
         if: ${{ env.VERCEL_TOKEN != '' }}
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         if: ${{ env.VERCEL_TOKEN != '' }}
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      # Vercel CLI tags each deployment with the current git HEAD. Add a clean
+      # empty commit (with [skip ci] so it can't re-trigger this workflow) so
+      # the production deploy carries its own marker — mirrors home-page.
+      - name: Create empty commit for Vercel
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: |
+          git config --global user.email "larry.koo711@gmail.com"
+          git config --global user.name "larrykoo711"
+          git commit --allow-empty -m "chore: trigger Vercel deployment [skip ci]"
 
       - name: Pull Vercel environment (production)
         if: ${{ env.VERCEL_TOKEN != '' }}
