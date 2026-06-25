@@ -30,9 +30,11 @@ jobs:
           REPO: ${{ github.repository }}
           PR: ${{ github.event.pull_request.number }}
         run: |
-          SLUGS=$(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[].filename' \
-            | grep -E '^apps/[^/]+/(app\.yaml|logo\.png)$' | cut -d/ -f2 | sort -u | paste -sd', ' -)
-          if [ -z "$SLUGS" ]; then echo "No app dir in this PR — skip."; exit 0; fi
+          # Only when the PR ADDED a new apps/<slug>/app.yaml (a real new listing),
+          # not a maintainer edit to an existing app / template / config.
+          SLUGS=$(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[] | select(.status=="added") | .filename' \
+            | grep -E '^apps/[a-z0-9-]+/app\.yaml$' | cut -d/ -f2 | sort -u | paste -sd', ' -)
+          if [ -z "$SLUGS" ]; then echo "No newly-added app — maintainer edit, skip claim reminder."; exit 0; fi
           cat > claim.md <<EOF
           🎉 已合并,应用即将上墙!/ Merged — your app will appear on the wall shortly.
 

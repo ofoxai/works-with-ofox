@@ -27,8 +27,28 @@ jobs:
     env:
       LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
     steps:
+      - name: Detect newly added app
+        id: detect
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          # Only a real submission when the PR ADDS a new apps/<slug>/app.yaml
+          # (status=added, lowercase slug → excludes _TEMPLATE and maintainer edits
+          # to existing apps/config). Prevents false "new submission" pings on
+          # maintainer PRs that merely touch apps/**.
+          ADDED=$(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[] | select(.status=="added") | .filename' | grep -E '^apps/[a-z0-9-]+/app\.yaml$' || true)
+          if [ -z "$ADDED" ]; then
+            echo "is_submission=false" >> "$GITHUB_OUTPUT"
+            echo "No newly-added app.yaml — maintainer edit, not a submission. Skipping."
+          else
+            echo "is_submission=true" >> "$GITHUB_OUTPUT"
+            echo "New submission detected:"; echo "$ADDED"
+          fi
+
       - name: Notify Lark of new submission
-        if: ${{ env.LARK_WEBHOOK != '' }}
+        if: ${{ steps.detect.outputs.is_submission == 'true' && env.LARK_WEBHOOK != '' }}
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_AUTHOR: ${{ github.event.pull_request.user.login }}
@@ -52,6 +72,7 @@ jobs:
 
       # Review-aid comment. continue-on-error so a hiccup here never blocks the PR.
       - name: Post submission review summary
+        if: ${{ steps.detect.outputs.is_submission == 'true' }}
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
@@ -60,7 +81,7 @@ jobs:
           HEADSHA: ${{ github.event.pull_request.head.sha }}
           HEADREPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
-          mapfile -t FILES < <(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[].filename' | grep -E '^apps/[^/]+/app\.yaml$' || true)
+          mapfile -t FILES < <(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[] | select(.status=="added") | .filename' | grep -E '^apps/[a-z0-9-]+/app\.yaml$' || true)
           if [ ${#FILES[@]} -eq 0 ]; then echo "No app.yaml added — skip review comment."; exit 0; fi
           mkdir -p _rev
           for f in "${FILES[@]}"; do
