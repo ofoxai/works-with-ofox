@@ -34,19 +34,17 @@
 
 ## 目录
 
-- [DeepChat](#deepchat)
+- [Ofox Chat](#ofox-chat)
 
 ## 应用
 
-### [DeepChat](https://example.com/deepchat)
+### [Ofox Chat](https://chat.ofox.ai)
 
-<img src="./apps/deepchat/logo.png" alt="DeepChat logo" width="64" height="64">
+<img src="./apps/ofox-chat/logo.png" alt="Ofox Chat logo" width="64" height="64">
 
-Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox.
+Ofox&#39;s official AI chat — reach a wide range of models through a single interface.
 
-`chat` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/deepchat)
-
-[文档](https://docs.example.com/deepchat/ofox)
+`chat` `productivity`
 
 ---
 

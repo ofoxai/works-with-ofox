@@ -1,16 +1,16 @@
 [
   {
-    "slug": "deepchat",
-    "name": "DeepChat",
-    "category": "integration",
-    "description": "Multi-model chat interface with conversation branching, prompt templates, and team collaboration. Supports 20+ models through Ofox.",
-    "url": "https://example.com/deepchat",
-    "docs": "https://docs.example.com/deepchat/ofox",
+    "slug": "ofox-chat",
+    "name": "Ofox Chat",
+    "category": "powered-by",
+    "description": "Ofox's official AI chat — reach a wide range of models through a single interface.",
+    "url": "https://chat.ofox.ai",
+    "docs": null,
     "tags": [
       "chat",
       "productivity"
     ],
-    "openSource": "https://github.com/example/deepchat",
-    "dateAdded": "2026-03-20"
+    "openSource": null,
+    "dateAdded": "2026-06-25"
   }
 ]
