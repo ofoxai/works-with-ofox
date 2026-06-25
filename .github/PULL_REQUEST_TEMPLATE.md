@@ -1,4 +1,4 @@
-> 📋 提交前请先读 **[CONTRIBUTING.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING.md)** · Read CONTRIBUTING.md first.
+> 📋 提交前请先读 **[CONTRIBUTING.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING.md)**(中文)· Read **[CONTRIBUTING_EN.md](https://github.com/ofoxai/works-with-ofox/blob/main/CONTRIBUTING_EN.md)** first (English).
 
 ## 应用 / App
 
@@ -26,7 +26,8 @@
 
 ## 对方收录 Ofox 的证据 / Proof the app documents Ofox
 
-<!-- 贴出对方官网或仓库里写明“支持 / 接入 Ofox”的页面链接 -->
+<!-- 通常就是你 app.yaml 里的 `docs` 链接(你站点上写明支持/接入 Ofox 的页面)。再贴一次方便审核。
+     Usually the same `docs` link from your app.yaml — paste it here for review convenience. -->
 
 -
 
