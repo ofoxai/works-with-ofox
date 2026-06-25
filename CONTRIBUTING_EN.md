@@ -90,7 +90,7 @@ date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 
 ## Example
 
-See [`apps/deepchat/`](apps/deepchat/) for a complete example.
+Copy [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml) (every field is commented) as your starting point.
 
 ## Questions?
 

@@ -90,7 +90,7 @@ date_added: "2026-04-03"                          # 今天的日期 YYYY-MM-DD
 
 ## 示例
 
-参考 [`apps/deepchat/`](apps/deepchat/) 获取完整示例。
+复制 [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml)（每个字段都有注释）作为起点。
 
 ## 有问题？
 
