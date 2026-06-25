@@ -14,6 +14,10 @@ const cjk = locale === 'zh' || locale === 'zh-TW' || locale === 'ja' || locale =
 const sp = cjk ? '' : ' ';
 const pre = (k: string) => { const v = t(locale, k); return v ? v + sp : ''; };
 const suf = (k: string) => { const v = t(locale, k); return v ? sp + v : ''; };
+// Open-source link: show "GitHub" when the repo is on github.com (instantly
+// recognizable), else fall back to the localized "source" label.
+const isGitHub = !!app.openSource && /:\/\/(www\.)?github\.com\//i.test(app.openSource);
+const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
 ---
 <div class="detail">
   <a class="back" href={wallPath(locale)}>{t(locale, 'back')}</a>
@@ -37,7 +41,7 @@ const suf = (k: string) => { const v = t(locale, k); return v ? sp + v : ''; };
     <div class="d-buttons">
       <a class="d-btn d-btn-primary" href={app.url} target="_blank" rel="noopener">{t(locale, 'visit')} {name} ↗</a>
       {app.docs && <a class="d-btn d-btn-secondary" href={app.docs} target="_blank" rel="noopener">{t(locale, 'docs')} ↗</a>}
-      {app.openSource && <a class="d-btn d-btn-secondary" href={app.openSource} target="_blank" rel="noopener">{t(locale, 'source')} ↗</a>}
+      {app.openSource && <a class="d-btn d-btn-secondary" href={app.openSource} target="_blank" rel="noopener">{sourceLabel} ↗</a>}
     </div>
   </div>
 

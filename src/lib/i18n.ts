@@ -21,7 +21,7 @@ export const i18n: Record<string, Dict> = {
   zh: {
     sub: '用 Ofox 的开发者做了哪些值得关注的应用？',
     submit_q: '想添加你的应用？', submit_link: '提交 PR', search: '搜索应用...',
-    about: '关于', visit: '访问', docs: '文档', source: '源代码', back: '← 返回列表',
+    about: '关于', visit: '访问', docs: '文档', source: '源码', back: '← 返回列表',
     guide_title: 'Ofox for {app} 入门指南',
     g1_pre: '在', g1_link: 'app.ofox.ai', g1_suf: '创建账户',
     g2_pre: '前往', g2_link: 'app.ofox.ai 控制台', g2_suf: '充值并生成 API Key',
