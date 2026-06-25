@@ -6,15 +6,18 @@
 - **链接 / URL:**
 - **slug（`apps/` 下的目录名 / folder name）:**
 
-## 💰 领取 $5 开发激励金 / Claim your $5
+## 💰 $5 开发激励金 + Partner / $5 dev reward + Partner
 
-> 审核通过后,$5 开发激励金会发放到你下面填的 Ofox 账户。**这些信息只用于发放,不会写进 `app.yaml`、不会公开到墙上。**
-> The $5 dev incentive is paid to the Ofox account below after approval. Used only for payout — never added to `app.yaml` or shown on the wall.
+发放方式 = 邮件确认后打入你的 Ofox 账户（此处无需填账户）。流程 / How it works:
 
-- **Ofox 账户(注册邮箱)/ Ofox account (email):**
-- **接收 $5 的 team 名称 / Team to credit（选填 / optional）:**
-  <!-- 只在你有多个 Ofox 团队时填;只有一个团队会自动发放到该团队。
-       Only if you have multiple Ofox teams — with a single team it's credited there automatically. -->
+1. 提交本 PR / Open this PR
+2. 通过审核、应用上墙 / Reviewed & listed on the wall
+3. 发邮件到 **hi@ofox.ai**，注明:Ofox 注册邮箱 · 团队 ID（有多个团队时） · 通过审核的应用名称
+   Email **hi@ofox.ai** with: your Ofox account email · team ID (if you have multiple) · the approved app name
+4. 核实后把 $5 打入该账户 / We verify and credit the $5
+5. 同时绑定 Partner 资格（返利详情见 [Partner](https://ofox.ai/partner)） / You also get Partner status — see [Partner](https://ofox.ai/partner)
+
+> 合并后我们会在本 PR 里 @ 你并附上领取指引。/ We'll @ you here after merge with the claim steps.
 
 ## 提交清单 / Checklist
 
