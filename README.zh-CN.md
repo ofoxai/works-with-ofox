@@ -24,52 +24,9 @@
 
 ## 目录
 
-- [AIFlow](#aiflow)
-- [CodeFlow](#codeflow)
-- [DataWise](#datawise)
 - [DeepChat](#deepchat)
-- [DocuBot](#docubot)
-- [PixelLab](#pixellab)
-- [StudyMate AI](#studymate-ai)
-- [WriteCraft](#writecraft)
 
 ## 应用
-
-### [AIFlow](https://example.com/aiflow)
-
-<img src="./apps/aiflow/logo.png" alt="AIFlow logo" width="64" height="64">
-
-Visual workflow builder for AI automation. Drag-and-drop nodes to chain models, APIs, and data sources into production pipelines.
-
-`productivity` `coding`
-
-[文档](https://docs.example.com/aiflow/ofox)
-
----
-
-### [CodeFlow](https://example.com/codeflow)
-
-<img src="./apps/codeflow/logo.png" alt="CodeFlow logo" width="64" height="64">
-
-Smart code review and refactoring tool. Analyze pull requests, suggest improvements, and auto-fix common issues across your codebase.
-
-`coding`
-
-[文档](https://docs.example.com/codeflow/ofox)
-
----
-
-### [DataWise](https://example.com/datawise)
-
-<img src="./apps/datawise/logo.png" alt="DataWise logo" width="64" height="64">
-
-Natural language data analysis. Upload CSV or connect databases, ask questions in plain language, get charts and insights instantly.
-
-`research` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/datawise)
-
-[文档](https://docs.example.com/datawise/ofox)
-
----
 
 ### [DeepChat](https://example.com/deepchat)
 
@@ -80,54 +37,6 @@ Multi-model chat interface with conversation branching, prompt templates, and te
 `chat` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/deepchat)
 
 [文档](https://docs.example.com/deepchat/ofox)
-
----
-
-### [DocuBot](https://example.com/docubot)
-
-<img src="./apps/docubot/logo.png" alt="DocuBot logo" width="64" height="64">
-
-Chat with your documents. Upload PDFs, Word files, or Notion pages and get accurate answers with source citations.
-
-`chat` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/docubot)
-
-[文档](https://docs.example.com/docubot/ofox)
-
----
-
-### [PixelLab](https://example.com/pixellab)
-
-<img src="./apps/pixellab/logo.png" alt="PixelLab logo" width="64" height="64">
-
-AI-powered design tool for social media graphics, thumbnails, and banners. Generate and edit visuals with text prompts.
-
-`creative`
-
-[文档](https://docs.example.com/pixellab/ofox)
-
----
-
-### [StudyMate AI](https://example.com/studymate)
-
-<img src="./apps/studymate/logo.png" alt="StudyMate AI logo" width="64" height="64">
-
-Adaptive learning companion that creates personalized study plans, generates practice questions, and explains concepts at your level.
-
-`productivity` `research` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/example/studymate)
-
-[文档](https://docs.example.com/studymate/ofox)
-
----
-
-### [WriteCraft](https://example.com/writecraft)
-
-<img src="./apps/writecraft/logo.png" alt="WriteCraft logo" width="64" height="64">
-
-AI writing assistant for blogs, emails, and marketing copy. Supports tone adjustment, multi-language translation, and SEO optimization.
-
-`creative` `productivity`
-
-[文档](https://docs.example.com/writecraft/ofox)
 
 ---
 
