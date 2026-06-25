@@ -20,7 +20,7 @@
 
 - [ ] 在 `apps/<slug>/` 下新增了 `app.yaml` 和 `logo.png`
 - [ ] `app.yaml` 字段完整（name / description / url / docs / tags / date_added）；`tags` 取自 `chat / coding / productivity / creative / research / other`
-- [ ] `logo.png` 为正方形 PNG，≤ 512KB（推荐 256×256）
+- [ ] `logo.png` 为正方形 PNG，≤ 1MB（推荐 256×256）
 - [ ] **该应用已在自己的官网 / 仓库文档中记录了对 Ofox 的支持**，`docs` 指向那个页面 — ⚠️ 上墙硬门槛 / the bar for listing
 - [ ] 我**没有**手动改 `README.md` / `apps.json`（合并后自动生成）
 

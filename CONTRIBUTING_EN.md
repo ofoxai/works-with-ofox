@@ -59,7 +59,7 @@ date_added: "2026-04-03"                          # Today's date YYYY-MM-DD
 - File must be named `logo.png`
 - Recommended size: 128x128 or 256x256 pixels
 - Square, PNG format
-- Max file size: 512KB
+- Max file size: 1MB
 
 ### 5. Submit a Pull Request
 
