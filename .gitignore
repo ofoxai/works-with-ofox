@@ -8,3 +8,4 @@ dist/
 public/awesome-ofox/logos/
 public/awesome-ofox/sitemap.xml
 public/awesome-ofox/robots.txt
+.vercel
