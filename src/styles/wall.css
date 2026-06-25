@@ -51,10 +51,11 @@ a:hover{color:var(--copper-dark)}
 .hp-more{display:block;font-size:12px;color:var(--text-tertiary);margin-top:11px}
 .hp-more:hover{color:var(--copper)}
 @media(max-width:1080px){
-  .hero-inner{flex-direction:column;align-items:center;gap:28px}
+  /* Below two-column width: hide the promo card instead of dropping it under
+     the title (the header "提交 PR" button stays as the submit entry). */
   .hero-spacer{display:none}
+  .hero-promo{display:none}
   .hero-text{flex:none;width:100%}
-  .hero-promo{width:min(300px,100%)}
 }
 
 .search-wrap{max-width:1200px;margin:0 auto;padding:0 24px 24px}
