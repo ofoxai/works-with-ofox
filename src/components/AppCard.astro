@@ -1,0 +1,24 @@
+---
+import type { App } from '../lib/apps';
+import { isNew } from '../lib/apps';
+import { tagLabel, detailPath } from '../lib/i18n';
+
+interface Props { app: App; locale: string; }
+const { app, locale } = Astro.props;
+const isNewApp = isNew(app.dateAdded);
+---
+<a class="card" href={detailPath(locale, app.slug)} aria-label={app.name} data-slug={app.slug} data-tags={app.tags.join(' ')} data-name={app.name.toLowerCase()} data-desc={app.description.toLowerCase()}>
+  {isNewApp && <span class="new-badge">NEW</span>}
+  <div class="card-head">
+    <img class="card-logo" src={`/awesome-ofox/logos/${app.slug}.png`} alt={`${app.name} logo`} width="44" height="44" loading="lazy" />
+    <h3 class="card-name">
+      {app.name}
+      {app.openSource && <span class="oss-badge"><span aria-hidden="true">⭐</span> OSS</span>}
+    </h3>
+  </div>
+  <div class="card-desc">{app.description}</div>
+  <div class="card-tags">
+    {app.tags.map((tg) => <span class="tag">{tagLabel(locale, tg)}</span>)}
+  </div>
+  <div class="card-date">{app.dateAdded}</div>
+</a>

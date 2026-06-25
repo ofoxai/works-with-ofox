@@ -1,0 +1,103 @@
+name: Deploy
+
+# Mirrors home-page's deploy flow: GitHub Actions + Vercel token (no Vercel
+# GitHub-app git integration). Configure these repo secrets to enable it —
+# until then the job no-ops (no red failures):
+#   VERCEL_TOKEN       — Vercel access token (scoped to the Ofox team)
+#   VERCEL_ORG_ID      — the Ofox Vercel team id
+#   VERCEL_PROJECT_ID  — the works-with-ofox project id under that team
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    env:
+      # secrets can't be used in step `if:` — map to env first
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      # Lark notify only when a deploy actually puts a NEW app on the wall
+      # (not for generic repo/CSS/doc changes). No-op without the secret.
+      LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+      SITE_URL: "https://ofox.ai/awesome-ofox"
+    steps:
+      - name: Note when Vercel secrets are absent
+        if: ${{ env.VERCEL_TOKEN == '' }}
+        run: echo "::notice::VERCEL_TOKEN not set — skipping deploy. Add VERCEL_TOKEN / VERCEL_ORG_ID / VERCEL_PROJECT_ID (Ofox team) to enable auto-deploy."
+
+      - uses: actions/checkout@v4
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Vercel CLI tags each deployment with the current git HEAD. Add a clean
+      # empty commit (with [skip ci] so it can't re-trigger this workflow) so
+      # the production deploy carries its own marker — mirrors home-page.
+      - name: Create empty commit for Vercel
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: |
+          git config --global user.email "1057589+larrykoo711@users.noreply.github.com"
+          git config --global user.name "larrykoo711"
+          git commit --allow-empty -m "chore: trigger Vercel deployment [skip ci]"
+
+      - name: Pull Vercel environment (production)
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: npx vercel@latest pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build (Vercel, production)
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: npx vercel@latest build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy prebuilt to production
+        id: deploy
+        if: ${{ env.VERCEL_TOKEN != '' }}
+        run: |
+          URL=$(npx vercel@latest deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Deployed to: $URL"
+
+      - name: Summary
+        if: ${{ env.VERCEL_TOKEN != '' && success() }}
+        run: |
+          {
+            echo "## Deployment Successful"
+            echo "- **URL**: ${{ steps.deploy.outputs.url }}"
+            echo "- **Commit**: ${{ github.sha }}"
+            echo "- **Author**: ${{ github.actor }}"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Notify Lark ONLY when this deploy newly listed an app on the wall
+      # (a new apps/<slug>/app.yaml was added in this push). Generic changes
+      # (CSS, docs, CI) deploy silently — no notification.
+      - name: Notify Lark — app listed on the wall
+        if: ${{ env.VERCEL_TOKEN != '' && env.LARK_WEBHOOK != '' && success() }}
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          ADDED=$(git diff --name-only --diff-filter=A "$BEFORE" "$SHA" 2>/dev/null | grep -E '^apps/[^/]+/app\.yaml$' | cut -d/ -f2 | paste -sd, - || true)
+          if [ -z "$ADDED" ]; then echo "No new app added in this push — no listing notification."; exit 0; fi
+          cat > payload.json <<EOF
+          {"msg_type":"interactive","card":{"header":{"template":"green","title":{"tag":"plain_text","content":"🎉 Works with Ofox 新应用已上墙"}},"elements":[
+            {"tag":"div","text":{"tag":"lark_md","content":"**已上墙**: ${ADDED}\n你批准的申请已成功展示。"}},
+            {"tag":"action","actions":[
+              {"tag":"button","text":{"tag":"plain_text","content":"🔗 查看展示墙"},"type":"primary","url":"${SITE_URL}"}
+            ]}
+          ]}}
+          EOF
+          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
