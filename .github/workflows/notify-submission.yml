@@ -1,0 +1,48 @@
+name: Notify submission
+
+# Ping Lark when a new app-submission PR opens, so a maintainer goes and
+# reviews/approves it. Approval itself is still a manual GitHub review — this
+# only notifies.
+#
+# Uses pull_request_target (not pull_request) so the LARK_WEBHOOK secret is
+# available even for fork PRs. SECURITY: this workflow must NEVER check out or
+# run the PR's code — it only reads event metadata (title/author/number/url),
+# passed via env vars (not inlined into the script) to avoid injection.
+
+on:
+  pull_request_target:
+    types: [opened, reopened, ready_for_review]
+    paths:
+      - 'apps/**'
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+    steps:
+      - name: Notify Lark of new submission
+        if: ${{ env.LARK_WEBHOOK != '' }}
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          # Sanitize untrusted PR title for JSON: escape backslashes/quotes, single line, cap length.
+          TITLE=$(printf '%s' "$PR_TITLE" | tr '\n\r' '  ' | sed 's/\\/\\\\/g; s/"/\\"/g' | cut -c1-80)
+          cat > payload.json <<EOF
+          {"msg_type":"interactive","card":{"header":{"template":"orange","title":{"tag":"plain_text","content":"📥 Works with Ofox 有新投稿待审核"}},"elements":[
+            {"tag":"div","fields":[
+              {"is_short":true,"text":{"tag":"lark_md","content":"**📝 PR**\n#${PR_NUMBER} ${TITLE}"}},
+              {"is_short":true,"text":{"tag":"lark_md","content":"**👤 提交者**\n${PR_AUTHOR}"}}
+            ]},
+            {"tag":"action","actions":[
+              {"tag":"button","text":{"tag":"plain_text","content":"🔍 去审核 / Review"},"type":"primary","url":"${PR_URL}"}
+            ]}
+          ]}}
+          EOF
+          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
