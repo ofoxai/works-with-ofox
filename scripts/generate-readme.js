@@ -16,6 +16,7 @@ function loadApps() {
 
   const dirs = fs.readdirSync(APPS_DIR, { withFileTypes: true })
     .filter(d => d.isDirectory())
+    .filter(d => !d.name.startsWith('_')) // skip templates like _TEMPLATE
     .map(d => d.name);
 
   for (const dir of dirs) {
@@ -66,6 +67,14 @@ const LANGS = {
     why: ['One interface to many AI models', 'Automatic fallback and load balancing', 'No vendor lock-in'],
     keyH: 'Get an API key',
     keySteps: ['Sign up at [ofox.ai](https://ofox.ai)', 'Add credits and generate an API key in the dashboard', 'Use it in any app below, or integrate it into your own project'],
+    quickH: '🚀 Add your app in 3 steps',
+    quickIntro: 'Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real backlinks from a high-traffic AI site, plus a **$5 dev reward** when approved.',
+    quickSteps: [
+      'Copy [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml) to `apps/your-app-name/app.yaml` and fill it in (every field is commented).',
+      'Add a square `logo.png` (≤ 1MB) in the same folder.',
+      'Open a Pull Request. **Don\'t** edit `README.md` / `apps.json` — they regenerate automatically.',
+    ],
+    quickReq: '**Bar to get listed:** your `docs` link must point to a page **on your own site** that documents how to configure Ofox. Full rules → [CONTRIBUTING_EN.md](CONTRIBUTING_EN.md).',
     noEdit: 'This file is auto-generated. See CONTRIBUTING.md for how to add your app.',
     contentsH: 'Contents',
     appsH: 'Apps',
@@ -84,6 +93,14 @@ const LANGS = {
     why: ['一个接口接入多家模型', '自动故障转移与负载均衡', '无供应商锁定'],
     keyH: '获取 API Key',
     keySteps: ['在 [ofox.ai](https://ofox.ai) 注册', '在控制台充值并生成 API Key', '在下面任意应用中使用，或集成进你自己的项目'],
+    quickH: '🚀 三步添加你的应用',
+    quickIntro: '上墙 [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) —— 获得来自高流量 AI 网站的真实反链，审核通过还有 **$5 开发激励金**。',
+    quickSteps: [
+      '把 [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml) 复制到 `apps/你的应用名/app.yaml` 并填写（每个字段都有注释）。',
+      '在同一目录放一张正方形 `logo.png`（≤ 1MB）。',
+      '提交 Pull Request。**不要**改 `README.md` / `apps.json` —— 它们会自动重新生成。',
+    ],
+    quickReq: '**上墙门槛：** 你的 `docs` 链接必须指向**你自己网站上**说明如何配置 Ofox 的页面。完整规则 → [CONTRIBUTING.md](CONTRIBUTING.md)。',
     noEdit: '本文件由脚本自动生成。如何添加你的应用请见 CONTRIBUTING.md。',
     contentsH: '目录',
     appsH: '应用',
@@ -136,6 +153,14 @@ function generateReadme(apps, s) {
 ${s.switcher}
 
 ${s.intro}
+
+## ${s.quickH}
+
+${s.quickIntro}
+
+${s.quickSteps.map((step, i) => `${i + 1}. ${step}`).join('\n')}
+
+${s.quickReq}
 
 ## ${s.whatisH}
 

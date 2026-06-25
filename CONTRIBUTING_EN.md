@@ -43,6 +43,8 @@ Folder name should use lowercase letters, numbers, and hyphens (e.g. `my-cool-ap
 
 ### 3. Create `app.yaml`
 
+> Easiest path: copy [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml) (every field is commented) into your folder and edit the values.
+
 ```yaml
 name: "Your App Name"
 description: "A one-liner about your app (max 300 characters)"

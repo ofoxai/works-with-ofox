@@ -4,6 +4,16 @@
 
 使用 [Ofox](https://ofox.ai) 构建的应用与工具精选。Ofox 是统一网关——一个 API Key 即可接入 Claude、GPT、Gemini、DeepSeek 等众多模型。
 
+## 🚀 三步添加你的应用
+
+上墙 [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) —— 获得来自高流量 AI 网站的真实反链，审核通过还有 **$5 开发激励金**。
+
+1. 把 [`apps/_TEMPLATE/app.yaml`](apps/_TEMPLATE/app.yaml) 复制到 `apps/你的应用名/app.yaml` 并填写（每个字段都有注释）。
+2. 在同一目录放一张正方形 `logo.png`（≤ 1MB）。
+3. 提交 Pull Request。**不要**改 `README.md` / `apps.json` —— 它们会自动重新生成。
+
+**上墙门槛：** 你的 `docs` 链接必须指向**你自己网站上**说明如何配置 Ofox 的页面。完整规则 → [CONTRIBUTING.md](CONTRIBUTING.md)。
+
 ## 什么是 Ofox？
 
 [Ofox](https://ofox.ai) 提供统一的 AI 模型接口，一个 API 即可访问多家供应商的模型。

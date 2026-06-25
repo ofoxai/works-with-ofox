@@ -136,6 +136,7 @@ function main() {
     ? appDirs
     : fs.readdirSync(APPS_DIR, { withFileTypes: true })
         .filter(d => d.isDirectory())
+        .filter(d => !d.name.startsWith('_')) // skip templates like _TEMPLATE
         .map(d => d.name);
 
   let hasErrors = false;
