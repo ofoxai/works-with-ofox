@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+*.log
+.DS_Store
+# generated at build by scripts/prepare-assets.js
+public/awesome-ofox/logos/
+public/awesome-ofox/sitemap.xml
+public/awesome-ofox/robots.txt
+.vercel

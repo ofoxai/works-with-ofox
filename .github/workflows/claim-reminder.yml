@@ -1,0 +1,50 @@
+name: Claim reminder
+
+# When an app-submission PR is MERGED, comment the $10 + Partner claim steps,
+# pre-filled with the app name(s) — so the contributor knows exactly how to
+# claim at the right moment (email hi@ofox.ai). No payout info is collected in
+# the public PR; it's confirmed privately by email.
+#
+# pull_request_target so it can comment; gated on merged == true. Reads only
+# event metadata + the changed file paths — never runs PR code.
+
+on:
+  pull_request_target:
+    types: [closed]
+    paths:
+      - 'apps/**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  remind:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment claim instructions
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          # Only when the PR ADDED a new apps/<slug>/app.yaml (a real new listing),
+          # not a maintainer edit to an existing app / template / config.
+          SLUGS=$(gh api "repos/$REPO/pulls/$PR/files" --paginate -q '.[] | select(.status=="added") | .filename' \
+            | grep -E '^apps/[a-z0-9-]+/app\.yaml$' | cut -d/ -f2 | sort -u | paste -sd', ' -)
+          if [ -z "$SLUGS" ]; then echo "No newly-added app — maintainer edit, skip claim reminder."; exit 0; fi
+          cat > claim.md <<EOF
+          🎉 已合并,应用即将上墙!/ Merged — your app will appear on the wall shortly.
+
+          **领取 \$10 + Partner / Claim your \$10 + Partner:** 发邮件到 / email **hi@ofox.ai**,注明 / with:
+          1. 你的 Ofox 注册邮箱 / your Ofox account email
+          2. 团队 ID(有多个 Ofox 团队时) / team ID (if you have multiple teams)
+          3. 通过审核的应用名称 / the approved app(s): \`$SLUGS\`
+
+          我们核实后将 \$10 打入你的 Ofox 账户,并为你绑定 Partner 资格。
+          We'll verify, credit the \$10 to your Ofox account, and bind you as a Partner.
+          返利详情 / Partner details: https://ofox.ai/partner
+          EOF
+          gh pr comment "$PR" --body-file claim.md

@@ -1,0 +1,27 @@
+# Copy this whole folder to apps/your-app-name/ and edit the values below.
+# Folder name: lowercase letters, numbers and hyphens only (e.g. my-cool-app).
+# This _TEMPLATE folder is ignored — it is never validated or listed on the wall.
+
+name: "Your App Name"                 # required · 1–100 chars
+
+# required — which kind of app are you? pick one:
+#   integration  = users enter their OWN Ofox API key in your app  → docs below is REQUIRED
+#   powered-by   = your product itself is built on Ofox            → docs is optional; we verify
+#                  your Ofox account & usage by email at review
+category: "integration"
+
+description: "One sentence about what your app does."  # required · max 300 chars
+
+url: "https://your-app.com"           # required · your app's homepage (http/https)
+
+# Ofox setup doc. REQUIRED for category: integration (a page ON YOUR OWN SITE
+# showing how to configure Ofox in your app). For category: powered-by, delete
+# this line.
+docs: "https://your-app.com/docs/ofox"
+
+tags:                                 # required · 1–3 of the 6 values below
+  - chat                              # chat / coding / productivity / creative / research / other
+
+open_source: "https://github.com/you/your-app"  # optional · delete this line if not open source
+
+date_added: "2026-06-25"              # required · today's date, format YYYY-MM-DD

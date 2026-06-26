@@ -1,0 +1,48 @@
+name: Validate App Submission
+
+on:
+  pull_request:
+    paths:
+      - 'apps/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Find changed app directories
+        id: changed
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          # --diff-filter=ACMR excludes Deleted dirs (removing an app must not fail validation)
+          CHANGED_DIRS=$(git diff --name-only --diff-filter=ACMR "origin/${BASE_REF}...HEAD" | grep '^apps/' | cut -d'/' -f2 | sort -u | tr '\n' ' ')
+          echo "dirs=${CHANGED_DIRS}" >> "$GITHUB_OUTPUT"
+
+      - name: Validate app submissions
+        env:
+          CHANGED_DIRS: ${{ steps.changed.outputs.dirs }}
+        run: |
+          if [ -n "$CHANGED_DIRS" ]; then
+            # Pass each dir as a separate quoted argument
+            echo "$CHANGED_DIRS" | tr ' ' '\n' | grep -E '^[a-z0-9-]+$' | xargs -I{} node scripts/validate.js "{}"
+          else
+            echo "No app changes detected"
+          fi
+
+      # NOTE: no apps.json/README drift check here on purpose. Contributors only
+      # add apps/<slug>/{app.yaml,logo.png} — they must NOT have to regenerate or
+      # commit apps.json/README. Those are regenerated automatically: at deploy
+      # build time (always correct on the live wall) and post-merge by
+      # generate.yml (BOT_TOKEN) which commits the refreshed files to main.

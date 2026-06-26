@@ -1,0 +1,106 @@
+---
+import AppCard from './AppCard.astro';
+import { apps, categoryCounts, CATEGORIES } from '../lib/apps';
+import { t, tagLabel, r, submitUrl } from '../lib/i18n';
+
+interface Props { locale: string; }
+const { locale } = Astro.props;
+
+const counts = categoryCounts();
+const catsPresent = Object.keys(counts).length;
+const ossCount = apps.filter((a) => a.openSource).length;
+const statIcons = ['▶', '✦', '⭐'];
+const stats = [
+  [apps.length, t(locale, 'stat_apps')],
+  [catsPresent, t(locale, 'stat_cats')],
+  [ossCount, t(locale, 'stat_oss')],
+] as const;
+
+const submit = submitUrl(locale);
+---
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-spacer" aria-hidden="true"></div>
+    <div class="hero-text">
+      <h1>
+        {t(locale, 'hero_before')}<span class="accent">Ofox</span>{t(locale, 'hero_after')}
+        <span class="verified" style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--copper);border-radius:50%;color:#fff;font-size:14px;margin-left:6px">✓</span>
+      </h1>
+      <div class="sub">{t(locale, 'sub')}</div>
+      <div class="stats">
+        {stats.map(([n, label], i) => (
+          <div class="stat-item">
+            <div class="stat-num"><span class="stat-icon">{statIcons[i]}</span>{n}</div>
+            <div class="stat-label">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <aside class="hero-promo" aria-label={r(locale, 'promo_badge')}>
+      <div class="hp-badge">{r(locale, 'promo_badge')}</div>
+      <div class="hp-amount">$10<span class="hp-plus">+</span></div>
+      <div class="hp-hook">{r(locale, 'hook')}</div>
+      <a class="hp-cta recruit-band" href={submit} target="_blank" rel="noopener">{r(locale, 'cta')} →</a>
+      <a class="hp-more" href={submit} target="_blank" rel="noopener">{r(locale, 'learn')} →</a>
+    </aside>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <input type="search" id="searchInput" placeholder={t(locale, 'search')} aria-label={t(locale, 'search')} />
+</div>
+
+<div class="cat-filter" id="catFilter">
+  <button type="button" class="cat-chip active" data-cat="all" aria-pressed="true">{t(locale, 'all')}<span class="cat-count">{apps.length}</span></button>
+  {CATEGORIES.map((cat) => {
+    const n = counts[cat] || 0;
+    return (
+      <button type="button" class={`cat-chip${n === 0 ? ' disabled' : ''}`} data-cat={cat} aria-pressed="false" disabled={n === 0}>
+        {tagLabel(locale, cat)}<span class="cat-count">{n}</span>
+      </button>
+    );
+  })}
+</div>
+
+<div class="grid" id="appGrid">
+  {apps.map((app) => <AppCard app={app} locale={locale} />)}
+  <div class="empty" id="emptyMsg" role="status" aria-live="polite" style="display:none">{t(locale, 'empty')}</div>
+</div>
+
+<script>
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('#appGrid .card'));
+  const empty = document.getElementById('emptyMsg');
+  const search = document.getElementById('searchInput') as HTMLInputElement;
+  const chips = Array.from(document.querySelectorAll<HTMLElement>('.cat-chip'));
+  let activeCat = 'all';
+
+  function apply() {
+    const q = (search.value || '').toLowerCase().trim();
+    let shown = 0;
+    cards.forEach((card) => {
+      const tags = (card.dataset.tags || '').split(' ');
+      const hay = (card.dataset.name || '') + ' ' + (card.dataset.desc || '') + ' ' + tags.join(' ');
+      const okCat = activeCat === 'all' || tags.includes(activeCat);
+      const okQ = !q || hay.indexOf(q) !== -1;
+      const show = okCat && okQ;
+      card.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    if (empty) empty.style.display = shown === 0 ? '' : 'none';
+  }
+
+  chips.forEach((chip) => {
+    if ((chip as HTMLButtonElement).disabled) return;
+    chip.addEventListener('click', () => {
+      activeCat = chip.dataset.cat || 'all';
+      chips.forEach((c) => {
+        const on = c === chip;
+        c.classList.toggle('active', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      apply();
+    });
+  });
+  search?.addEventListener('input', apply);
+</script>
