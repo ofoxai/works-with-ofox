@@ -101,12 +101,18 @@ const ogImage = abs('/awesome-ofox/og.png');
     document.addEventListener('click', (e) => {
       const el = (e.target as HTMLElement)?.closest('a, .cat-chip') as HTMLElement | null;
       if (!el) return;
-      if (el.classList.contains('card')) {
+      const link = el.tagName === 'A' ? (el as HTMLAnchorElement) : null;
+      if (link && /(^|\.)app\.ofox\.ai$/i.test(link.hostname)) {
+        // highest-value conversion: account signup / API-key creation on the
+        // Ofox console (the integration guide's step links). Catch it wherever
+        // it appears, regardless of how the link is styled.
+        trk('wall_console_click', { href: link.href });
+      } else if (el.classList.contains('card')) {
         trk('wall_app_click', { slug: el.getAttribute('data-slug') });
       } else if (el.classList.contains('btn-submit')) {
         trk('wall_submit_pr_click', { from: el.closest('.recruit-panel') ? 'recruit_panel' : 'header' });
-      } else if (el.classList.contains('recruit-band')) {
-        trk('wall_submit_pr_click', { from: 'recruit_band' });
+      } else if (el.classList.contains('recruit-band') || el.classList.contains('hp-more')) {
+        trk('wall_submit_pr_click', { from: el.classList.contains('hp-more') ? 'recruit_more' : 'recruit_band' });
       } else if (el.classList.contains('cat-chip') && !el.classList.contains('disabled')) {
         trk('wall_category_filter', { category: el.getAttribute('data-cat') });
       } else if (el.classList.contains('d-btn')) {
