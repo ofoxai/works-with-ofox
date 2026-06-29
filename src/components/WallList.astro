@@ -102,5 +102,21 @@ const submit = submitUrl(locale);
       apply();
     });
   });
-  search?.addEventListener('input', apply);
+  // Track search intent once typing settles (debounced) — not per keystroke —
+  // and skip repeats of the same query. Records the result count so we can see
+  // which searches come up empty.
+  let searchTimer: ReturnType<typeof setTimeout>;
+  let lastTracked = '';
+  search?.addEventListener('input', () => {
+    apply();
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => {
+      const q = (search.value || '').trim();
+      if (!q || q === lastTracked) return;
+      lastTracked = q;
+      const shown = cards.filter((c) => c.style.display !== 'none').length;
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({ event: 'wall_search', query: q, results: shown });
+    }, 800);
+  });
 </script>
