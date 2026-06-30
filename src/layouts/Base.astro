@@ -29,6 +29,10 @@ const ogImage = abs(isZh ? '/awesome-ofox/og.zh.png' : '/awesome-ofox/og.png');
   </script>
   <!-- End Google Tag Manager -->
   <title>{title}</title>
+  {/* Explicit favicon: link unfurlers (chat apps) read the declared icon and do
+      NOT fall back to /favicon.ico. Point at the main-site favicon (absolute URL —
+      this sub-site is proxied, so a relative path can resolve against the wrong base). */}
+  <link rel="icon" href={abs('/favicon.ico')} sizes="any" />
   {description && <meta name="description" content={description} />}
   <link rel="canonical" href={canonical} />
   {LOCALES.map((l) => (
