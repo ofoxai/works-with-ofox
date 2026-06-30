@@ -12,7 +12,11 @@ interface Props {
 const { locale, title, description = '', localeUrls } = Astro.props;
 const abs = (p: string) => new URL(p, Astro.site).href;
 const canonical = abs(localeUrls[locale]);
-const ogImage = abs('/awesome-ofox/og.png');
+// Chinese locales get the Chinese share card; every other locale shares the
+// English one (og.png is also the x-default). Crawlers don't run JS, so the
+// per-locale image must be baked into each statically-rendered route here.
+const isZh = locale === 'zh' || locale === 'zh-TW';
+const ogImage = abs(isZh ? '/awesome-ofox/og.zh.png' : '/awesome-ofox/og.png');
 ---
 <!doctype html>
 <html lang={htmlLang(locale)}>
