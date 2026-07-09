@@ -92,22 +92,38 @@ jobs:
           import sys, os, glob
           repo, headsha = sys.argv[1], sys.argv[2]
           def unq(s): return s.strip().strip('"').strip("'")
-          def esc(v): return str(v).replace("\n", " ").replace("\r", " ").replace("|", "\\|").strip()[:200]
+          def esc(v):
+              if isinstance(v, dict):
+                  v = "; ".join(f"{k}: {val}" for k, val in v.items())
+              elif isinstance(v, list):
+                  v = ", ".join(v)
+              return str(v).replace("\n", " ").replace("\r", " ").replace("|", "\\|").strip()[:200]
           def parse(path):
+              # Nested block (e.g. description: {en, zh}) uses "  key: value" lines;
+              # list items (e.g. tags: [...]) use "  - value" lines. Both hang off
+              # the last bare "key:" line, so cur tracks which container to fill.
               d, cur = {}, None
               for line in open(path, encoding="utf-8"):
                   s = line.rstrip("\n")
                   if not s.strip() or s.lstrip().startswith("#"):
                       continue
                   ls = s.lstrip()
-                  if ls.startswith("- ") and cur:
-                      d.setdefault(cur, []).append(unq(ls[2:]))
+                  if s[:1].isspace() and cur:
+                      if ls.startswith("- "):
+                          if not isinstance(d.get(cur), list):
+                              d[cur] = []
+                          d[cur].append(unq(ls[2:]))
+                      elif ":" in ls:
+                          k, _, v = ls.partition(":")
+                          if not isinstance(d.get(cur), dict):
+                              d[cur] = {}
+                          d[cur][k.strip()] = unq(v.strip())
                       continue
                   if (not s[:1].isspace()) and ":" in s:
                       k, _, v = s.partition(":")
                       k, v = k.strip(), v.strip()
                       if v == "":
-                          cur = k; d.setdefault(k, [])
+                          cur = k; d.setdefault(k, None)
                       else:
                           cur = None; d[k] = unq(v)
               return d
@@ -140,4 +156,4 @@ jobs:
           out.append("**需人工确认**:① `integration` → 点开 Docs 确认是真实 Ofox 接入文档;② `powered-by` → 邮件核实 Ofox 账户及用量;③ Files changed 里只新增了 apps/<slug>/(app.yaml + logo.png),没动其他文件\n")
           print("".join(out))
           PY
-          gh pr comment "$PR" --body-file comment.md
+          gh pr comment "$PR" --repo "$REPO" --body-file comment.md
