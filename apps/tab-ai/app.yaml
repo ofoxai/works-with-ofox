@@ -1,0 +1,12 @@
+name: "Tab AI"
+category: "integration"
+description:
+  en: "AI-powered Chrome new tab page. Automatically organizes your browsing history with AI classification, supports one-click cleanup of duplicate and idle tabs."
+  zh: "AI 驱动的 Chrome 新标签页管理器。自动整理浏览历史并按 AI 分类展示，支持一键清理重复和闲置标签页。"
+url: "https://github.com/liuxingqitd/tab-ai"
+docs: "https://github.com/liuxingqitd/tab-ai/blob/main/docs/ofox-integration.md"
+tags:
+  - productivity
+  - other
+open_source: "https://github.com/liuxingqitd/tab-ai"
+date_added: "2026-07-09"
