@@ -35,6 +35,7 @@
 ## 目录
 
 - [Ofox Chat](#ofox-chat)
+- [Skills Hub](#skills-hub)
 
 ## 应用
 
@@ -45,6 +46,16 @@
 Ofox 官方 AI 对话产品。在一处即可使用众多主流模型,对话中随时自由切换,无需在多个账户和密钥间周旋。基于 Ofox 统一网关构建,模型路由、负载均衡与自动故障转移皆已内置:一个账户,畅享所有模型。
 
 `chat` `productivity`
+
+---
+
+### [Skills Hub](https://skills-hub.dev)
+
+<img src="./apps/skills-hub/logo.png" alt="Skills Hub logo" width="64" height="64">
+
+跨 AI 编程助手统一技能管理桌面端。自动扫描、一键同步、可视化仪表盘——让你的 AI 工具箱始终处于最佳状态。支持 Claude Code、Cursor、Cline、Codex、Windsurf 等主流 AI 编程代理。
+
+`coding` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/liuxingqitd/skills-hub)
 
 ---
 

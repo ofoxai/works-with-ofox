@@ -35,6 +35,7 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 ## Contents
 
 - [Ofox Chat](#ofox-chat)
+- [Skills Hub](#skills-hub)
 
 ## Apps
 
@@ -45,6 +46,16 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 Ofox&#39;s official AI chat. Use a wide range of leading models from one place and switch between them freely as you chat — no juggling separate accounts or keys. Built on Ofox&#39;s unified gateway, so model routing, load balancing and automatic failover are handled for you: one account, every model.
 
 `chat` `productivity`
+
+---
+
+### [Skills Hub](https://skills-hub.dev)
+
+<img src="./apps/skills-hub/logo.png" alt="Skills Hub logo" width="64" height="64">
+
+A local dashboard to manage AI coding agent skills across multiple agents. Auto-scan, one-click sync, visual dashboard — keep your AI toolbox in perfect shape. Supports Claude Code, Cursor, Cline, Codex, Windsurf, and more.
+
+`coding` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/liuxingqitd/skills-hub)
 
 ---
 
