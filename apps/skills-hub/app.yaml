@@ -1,0 +1,11 @@
+name: "Skills Hub"
+category: "powered-by"
+description:
+  en: "A local dashboard to manage AI coding agent skills across multiple agents. Auto-scan, one-click sync, visual dashboard — keep your AI toolbox in perfect shape. Supports Claude Code, Cursor, Cline, Codex, Windsurf, and more."
+  zh: "跨 AI 编程助手统一技能管理桌面端。自动扫描、一键同步、可视化仪表盘——让你的 AI 工具箱始终处于最佳状态。支持 Claude Code、Cursor、Cline、Codex、Windsurf 等主流 AI 编程代理。"
+url: "https://skills-hub.dev"
+tags:
+  - coding
+  - productivity
+open_source: "https://github.com/liuxingqitd/skills-hub"
+date_added: "2026-07-09"
