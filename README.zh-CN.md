@@ -36,6 +36,7 @@
 
 - [Ofox Chat](#ofox-chat)
 - [Skills Hub](#skills-hub)
+- [Tab AI](#tab-ai)
 
 ## 应用
 
@@ -56,6 +57,18 @@ Ofox 官方 AI 对话产品。在一处即可使用众多主流模型,对话中�
 跨 AI 编程助手统一技能管理桌面端。自动扫描、一键同步、可视化仪表盘——让你的 AI 工具箱始终处于最佳状态。支持 Claude Code、Cursor、Cline、Codex、Windsurf 等主流 AI 编程代理。
 
 `coding` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/liuxingqitd/skills-hub)
+
+---
+
+### [Tab AI](https://github.com/liuxingqitd/tab-ai)
+
+<img src="./apps/tab-ai/logo.png" alt="Tab AI logo" width="64" height="64">
+
+AI 驱动的 Chrome 新标签页管理器。自动整理浏览历史并按 AI 分类展示，支持一键清理重复和闲置标签页。
+
+`productivity` `other` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/liuxingqitd/tab-ai)
+
+[文档](https://github.com/liuxingqitd/tab-ai/blob/main/docs/ofox-integration.md)
 
 ---
 

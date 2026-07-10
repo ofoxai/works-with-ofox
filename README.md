@@ -36,6 +36,7 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 
 - [Ofox Chat](#ofox-chat)
 - [Skills Hub](#skills-hub)
+- [Tab AI](#tab-ai)
 
 ## Apps
 
@@ -56,6 +57,18 @@ Ofox&#39;s official AI chat. Use a wide range of leading models from one place a
 A local dashboard to manage AI coding agent skills across multiple agents. Auto-scan, one-click sync, visual dashboard — keep your AI toolbox in perfect shape. Supports Claude Code, Cursor, Cline, Codex, Windsurf, and more.
 
 `coding` `productivity` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/liuxingqitd/skills-hub)
+
+---
+
+### [Tab AI](https://github.com/liuxingqitd/tab-ai)
+
+<img src="./apps/tab-ai/logo.png" alt="Tab AI logo" width="64" height="64">
+
+AI-powered Chrome new tab page. Automatically organizes your browsing history with AI classification, supports one-click cleanup of duplicate and idle tabs.
+
+`productivity` `other` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/liuxingqitd/tab-ai)
+
+[Documentation](https://github.com/liuxingqitd/tab-ai/blob/main/docs/ofox-integration.md)
 
 ---
 
