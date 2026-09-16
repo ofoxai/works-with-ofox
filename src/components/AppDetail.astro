@@ -69,7 +69,7 @@ const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
     </div>
   )}
 
-  <div class="d-card">
+  {!guide && <div class="d-card">
     <h2>{fill('use_title')}</h2>
     <p>{fill('use_body')}</p>
     {app.docs && (
@@ -77,12 +77,14 @@ const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
         {t(locale, 'use_docs_pre')} <a href={app.docs} target="_blank" rel="noopener">{fill('use_docs_link')}</a>{dot}
       </p>
     )}
-  </div>
-  {guide && <section class="d-card">
-    <h2>{guide.title}</h2><p>{guide.body}</p>
-    <ol>{guide.steps.map(step => <li>{step}</li>)}</ol>
-    <h3>{guide.exampleTitle}</h3><blockquote>{guide.example}</blockquote><p>{guide.exampleNote}</p>
-    <h3>{guide.limitsTitle}</h3><p>{guide.limits}</p>
-    <nav aria-label={guide.next} class="d-buttons"><a class="d-btn d-btn-secondary" href={`${prefix}/model-finder/best-llm-for-writing`}>{guide.writing}</a><a class="d-btn d-btn-secondary" href={`${prefix}/model-finder/best-llm-for-translation`}>{guide.translation}</a><a class="d-btn d-btn-secondary" href={`${prefix}/model-finder`}>{guide.finder}</a></nav>
+  </div>}
+  {guide && <section class="chat-guide" aria-labelledby="chat-guide-title">
+    <header><h2 id="chat-guide-title">{guide.title}</h2><p>{guide.body}</p></header>
+    <div class="chat-guide-grid">
+      <ol class="chat-steps">{guide.steps.map((step, i) => <li><span aria-hidden="true">0{i+1}</span><p>{step}</p></li>)}</ol>
+      <aside class="chat-example" aria-labelledby="chat-example-title"><h3 id="chat-example-title">{guide.exampleTitle}</h3><blockquote>{guide.example}</blockquote><p class="chat-caption">{guide.exampleNote}</p></aside>
+    </div>
+    <details class="chat-limits"><summary>{guide.limitsTitle}<span aria-hidden="true">+</span></summary><p>{guide.limits}</p></details>
+    <nav aria-label={guide.next} class="chat-next"><h3>{guide.next}</h3><div><a href={`${prefix}/model-finder/best-llm-for-writing`}>{guide.writing} ↗</a><a href={`${prefix}/model-finder/best-llm-for-translation`}>{guide.translation} ↗</a><a href={`${prefix}/model-finder`}>{guide.finder} ↗</a></div></nav>
   </section>}
 </main>
