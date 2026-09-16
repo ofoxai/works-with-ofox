@@ -1,4 +1,5 @@
 ---
+import { chatGuides } from '../lib/chat-guide';
 import type { App } from '../lib/apps';
 import { describe } from '../lib/apps';
 import { t, tagLabel, wallPath, period } from '../lib/i18n';
@@ -6,6 +7,9 @@ import { t, tagLabel, wallPath, period } from '../lib/i18n';
 interface Props { app: App; locale: string; }
 const { app, locale } = Astro.props;
 const name = app.name;
+const guide = app.slug === 'ofox-chat' && (locale === 'en' || locale === 'zh') ? chatGuides[locale] : null;
+const prefix = locale === 'en' ? '' : `/${locale}`;
+const structured = {'@context':'https://schema.org', '@type':'SoftwareApplication', name, description: describe(app, locale), url:app.url, applicationCategory: app.tags.includes('coding') ? 'DeveloperApplication' : 'ProductivityApplication', ...(app.slug === 'ofox-chat' ? {operatingSystem:'Web'} : {})};
 const fill = (k: string) => t(locale, k).replace(/\{app\}/g, name);
 const dot = period(locale);
 // CJK scripts don't use inter-word spaces — drop the template-injected space there.
@@ -20,7 +24,8 @@ const suf = (k: string) => { const v = t(locale, k); return v ? sp + v : ''; };
 const isGitHub = !!app.openSource && /:\/\/(www\.)?github\.com\//i.test(app.openSource);
 const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
 ---
-<div class="detail">
+<script type="application/ld+json" set:html={JSON.stringify(structured).replace(/</g, "\\u003c")} />
+<main class="detail">
   <a class="back" href={wallPath(locale)}>{t(locale, 'back')}</a>
 
   <div class="d-banner">
@@ -73,4 +78,11 @@ const sourceLabel = isGitHub ? 'GitHub' : t(locale, 'source');
       </p>
     )}
   </div>
-</div>
+  {guide && <section class="d-card">
+    <h2>{guide.title}</h2><p>{guide.body}</p>
+    <ol>{guide.steps.map(step => <li>{step}</li>)}</ol>
+    <h3>{guide.exampleTitle}</h3><blockquote>{guide.example}</blockquote><p>{guide.exampleNote}</p>
+    <h3>{guide.limitsTitle}</h3><p>{guide.limits}</p>
+    <nav aria-label={guide.next} class="d-buttons"><a class="d-btn d-btn-secondary" href={`${prefix}/model-finder/best-llm-for-writing`}>{guide.writing}</a><a class="d-btn d-btn-secondary" href={`${prefix}/model-finder/best-llm-for-translation`}>{guide.translation}</a><a class="d-btn d-btn-secondary" href={`${prefix}/model-finder`}>{guide.finder}</a></nav>
+  </section>}
+</main>
