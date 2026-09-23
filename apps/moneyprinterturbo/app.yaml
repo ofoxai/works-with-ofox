@@ -4,7 +4,7 @@ description:
   en: "All-in-one AI short video generator: give it a topic and it writes the script, sources footage, adds voiceover, subtitles and music, then renders an HD video. Built-in Ofox video source generates fresh clips with Seedance, Wan and more — one API key."
   zh: "一站式 AI 短视频生成工具：只需提供主题，即可自动生成脚本、匹配素材、配音、字幕与背景音乐并合成高清短视频。内置 Ofox 素材源，一个 API Key 即可调用 Seedance、Wan 等模型文生视频。"
 url: "https://github.com/harry0703/MoneyPrinterTurbo"
-docs: "https://github.com/harry0703/MoneyPrinterTurbo/blob/main/config.example.toml"
+docs: "https://ofox.ai/zh/docs/integrations/moneyprinterturbo"
 tags:
   - creative
 open_source: "https://github.com/harry0703/MoneyPrinterTurbo"
