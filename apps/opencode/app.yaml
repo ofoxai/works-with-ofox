@@ -1,0 +1,11 @@
+name: "opencode"
+category: "integration"
+description:
+  en: "The open-source AI coding agent for the terminal, IDE and desktop. Ofox is built into its models.dev provider catalog — run /connect, pick Ofox and paste your API key to code with GPT, Claude, Gemini, DeepSeek and more."
+  zh: "开源 AI 编程智能体，支持终端、IDE 与桌面端。Ofox 已内置于其 models.dev 模型供应商目录——执行 /connect 选择 Ofox 并填入 API Key，即可用 GPT、Claude、Gemini、DeepSeek 等模型写代码。"
+url: "https://opencode.ai"
+docs: "https://models.dev/providers/ofox/"
+tags:
+  - coding
+open_source: "https://github.com/anomalyco/opencode"
+date_added: "2026-09-23"
