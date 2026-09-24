@@ -2,7 +2,7 @@
 
 **English** · [中文](README.zh-CN.md)
 
-A curated list of apps and tools built with [Ofox](https://ofox.ai). Ofox is a unified gateway — one API key to reach Claude, GPT, Gemini, DeepSeek and more.
+Tools and apps that officially support [Ofox](https://ofox.ai) — integrated with Ofox or built on it. Ofox is a unified gateway — one API key to reach Claude, GPT, Gemini, DeepSeek and more.
 
 ## 🚀 Add your app in 3 steps
 
@@ -34,11 +34,25 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 
 ## Contents
 
+- [MoneyPrinterTurbo](#moneyprinterturbo)
 - [Ofox Chat](#ofox-chat)
+- [opencode](#opencode)
 - [Skills Hub](#skills-hub)
 - [Tab AI](#tab-ai)
 
 ## Apps
+
+### [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo)
+
+<img src="./apps/moneyprinterturbo/logo.png" alt="MoneyPrinterTurbo logo" width="64" height="64">
+
+All-in-one AI short video generator: give it a topic and it writes the script, sources footage, adds voiceover, subtitles and music, then renders an HD video. Built-in Ofox video source generates fresh clips with Seedance, Wan and more — one API key.
+
+`creative` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/harry0703/MoneyPrinterTurbo)
+
+[Documentation](https://ofox.ai/zh/docs/integrations/moneyprinterturbo)
+
+---
 
 ### [Ofox Chat](https://chat.ofox.ai)
 
@@ -47,6 +61,18 @@ Get listed on [ofox.ai/awesome-ofox](https://ofox.ai/awesome-ofox) — real back
 Ofox&#39;s official AI chat. Use a wide range of leading models from one place and switch between them freely as you chat — no juggling separate accounts or keys. Built on Ofox&#39;s unified gateway, so model routing, load balancing and automatic failover are handled for you: one account, every model.
 
 `chat` `productivity`
+
+---
+
+### [opencode](https://opencode.ai)
+
+<img src="./apps/opencode/logo.png" alt="opencode logo" width="64" height="64">
+
+The open-source AI coding agent for the terminal, IDE and desktop. Ofox is built into its models.dev provider catalog — run /connect, pick Ofox and paste your API key to code with GPT, Claude, Gemini, DeepSeek and more.
+
+`coding` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/anomalyco/opencode)
+
+[Documentation](https://ofox.ai/zh/docs/integrations/opencode)
 
 ---
 
