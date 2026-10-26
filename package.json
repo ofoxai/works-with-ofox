@@ -16,7 +16,7 @@
     "generate": "node scripts/generate-readme.js"
   },
   "dependencies": {
-    "astro": "^7.0.2"
+    "astro": "^7.4.2"
   },
   "devDependencies": {
     "ajv": "^8.17.1",
