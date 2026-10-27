@@ -25,9 +25,9 @@ jobs:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-      # Lark notify only when a deploy actually puts a NEW app on the wall
+      # Slack notify only when a deploy actually puts a NEW app on the wall
       # (not for generic repo/CSS/doc changes). No-op without the secret.
-      LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       SITE_URL: "https://ofox.ai/awesome-ofox"
     steps:
       - name: Note when Vercel secrets are absent
@@ -81,23 +81,31 @@ jobs:
             echo "- **Author**: ${{ github.actor }}"
           } >> "$GITHUB_STEP_SUMMARY"
 
-      # Notify Lark ONLY when this deploy newly listed an app on the wall
+      # Notify Slack ONLY when this deploy newly listed an app on the wall
       # (a new apps/<slug>/app.yaml was added in this push). Generic changes
       # (CSS, docs, CI) deploy silently — no notification.
-      - name: Notify Lark — app listed on the wall
-        if: ${{ env.VERCEL_TOKEN != '' && env.LARK_WEBHOOK != '' && success() }}
+      - name: Notify Slack — app listed on the wall
+        if: ${{ env.VERCEL_TOKEN != '' && env.SLACK_WEBHOOK != '' && success() }}
         env:
           BEFORE: ${{ github.event.before }}
           SHA: ${{ github.sha }}
         run: |
           ADDED=$(git diff --name-only --diff-filter=A "$BEFORE" "$SHA" 2>/dev/null | grep -E '^apps/[^/]+/app\.yaml$' | cut -d/ -f2 | paste -sd, - || true)
           if [ -z "$ADDED" ]; then echo "No new app added in this push — no listing notification."; exit 0; fi
-          cat > payload.json <<EOF
-          {"msg_type":"interactive","card":{"header":{"template":"green","title":{"tag":"plain_text","content":"🎉 Works with Ofox 新应用已上墙"}},"elements":[
-            {"tag":"div","text":{"tag":"lark_md","content":"**已上墙**: ${ADDED}\n你批准的申请已成功展示。"}},
-            {"tag":"action","actions":[
-              {"tag":"button","text":{"tag":"plain_text","content":"🔗 查看展示墙"},"type":"primary","url":"${SITE_URL}"}
-            ]}
-          ]}}
-          EOF
-          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
+          jq -n --arg added "$ADDED" --arg site "$SITE_URL" '
+            "🎉 Works with Ofox 新应用已上墙" as $head
+            | {text: $head, blocks: [
+                {type: "header", text: {type: "plain_text", text: $head}},
+                {type: "section", text: {type: "mrkdwn", text: "*已上墙*: \($added)\n你批准的申请已成功展示。"}},
+                {type: "actions", elements: [
+                  {type: "button", style: "primary", text: {type: "plain_text", text: "🔗 查看展示墙"}, url: $site}]}
+              ]}' > payload.json
+          # Slack incoming webhook answers a bare `ok` on success. Check it — a bare
+          # `curl -s` is how the old Lark hook got silently rejected for days. Warn,
+          # don't fail: a notification hiccup must not turn the run red.
+          RESP=$(curl -sS -w '\n%{http_code}' -X POST "$SLACK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true)
+          HTTP=$(printf '%s' "$RESP" | tail -n1); BODY=$(printf '%s' "$RESP" | sed '$d')
+          echo "Slack HTTP $HTTP: $BODY"
+          if [ "$HTTP" != "200" ] || [ "$BODY" != "ok" ]; then
+            echo "::warning::Slack rejected the notification (HTTP $HTTP: $BODY)"
+          fi
