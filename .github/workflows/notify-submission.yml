@@ -1,6 +1,6 @@
 name: Notify submission
 
-# On a new app-submission PR: (1) ping Lark so a maintainer goes and reviews it,
+# On a new app-submission PR: (1) ping Slack #marketing so a maintainer goes and reviews it,
 # and (2) post a "review summary" comment that surfaces the submitted fields and
 # a jump-link to the app.yaml — so the reviewer sees the real submitted content
 # (name/description/url/docs/tags) at a glance and knows the one thing to verify
@@ -25,7 +25,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     env:
-      LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     steps:
       - name: Detect newly added app
         id: detect
@@ -47,28 +47,36 @@ jobs:
             echo "New submission detected:"; echo "$ADDED"
           fi
 
-      - name: Notify Lark of new submission
-        if: ${{ steps.detect.outputs.is_submission == 'true' && env.LARK_WEBHOOK != '' }}
+      - name: Notify Slack of new submission
+        if: ${{ steps.detect.outputs.is_submission == 'true' && env.SLACK_WEBHOOK != '' }}
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_AUTHOR: ${{ github.event.pull_request.user.login }}
           PR_URL: ${{ github.event.pull_request.html_url }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
-          # Sanitize untrusted PR title for JSON: escape backslashes/quotes, single line, cap length.
-          TITLE=$(printf '%s' "$PR_TITLE" | tr '\n\r' '  ' | sed 's/\\/\\\\/g; s/"/\\"/g' | cut -c1-80)
-          cat > payload.json <<EOF
-          {"msg_type":"interactive","card":{"header":{"template":"orange","title":{"tag":"plain_text","content":"📥 Works with Ofox 有新投稿待审核"}},"elements":[
-            {"tag":"div","fields":[
-              {"is_short":true,"text":{"tag":"lark_md","content":"**📝 PR**\n#${PR_NUMBER} ${TITLE}"}},
-              {"is_short":true,"text":{"tag":"lark_md","content":"**👤 提交者**\n${PR_AUTHOR}"}}
-            ]},
-            {"tag":"action","actions":[
-              {"tag":"button","text":{"tag":"plain_text","content":"🔍 去审核 / Review"},"type":"primary","url":"${PR_URL}"}
-            ]}
-          ]}}
-          EOF
-          curl -s -X POST "$LARK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true
+          # Untrusted PR title: jq builds the JSON (no quote/backslash injection),
+          # single line, capped at 80 chars, and & < > escaped for Slack mrkdwn.
+          jq -n --arg n "$PR_NUMBER" --arg t "$PR_TITLE" --arg a "$PR_AUTHOR" --arg u "$PR_URL" '
+            def esc: gsub("[\r\n]"; " ") | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;");
+            "📥 Works with Ofox 有新投稿待审核" as $head
+            | {text: $head, blocks: [
+                {type: "header", text: {type: "plain_text", text: $head}},
+                {type: "section", fields: [
+                  {type: "mrkdwn", text: "*📝 PR*\n#\($n) \($t[0:80] | esc)"},
+                  {type: "mrkdwn", text: "*👤 提交者*\n\($a | esc)"}]},
+                {type: "actions", elements: [
+                  {type: "button", style: "primary", text: {type: "plain_text", text: "🔍 去审核 / Review"}, url: $u}]}
+              ]}' > payload.json
+          # Slack incoming webhook answers a bare `ok` on success. Check it — a bare
+          # `curl -s` is how the old Lark hook got silently rejected for days. Warn,
+          # don't fail: a notification hiccup must not turn the run red.
+          RESP=$(curl -sS -w '\n%{http_code}' -X POST "$SLACK_WEBHOOK" -H "Content-Type: application/json" -d @payload.json || true)
+          HTTP=$(printf '%s' "$RESP" | tail -n1); BODY=$(printf '%s' "$RESP" | sed '$d')
+          echo "Slack HTTP $HTTP: $BODY"
+          if [ "$HTTP" != "200" ] || [ "$BODY" != "ok" ]; then
+            echo "::warning::Slack rejected the notification (HTTP $HTTP: $BODY)"
+          fi
 
       # Review-aid comment. continue-on-error so a hiccup here never blocks the PR.
       - name: Post submission review summary
