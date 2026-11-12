@@ -11,7 +11,7 @@ description:
   fr: "Le chat IA officiel d'Ofox. Utilisez un large éventail de modèles de premier plan depuis un seul endroit et passez de l'un à l'autre librement, sans jongler avec des comptes ou des clés. Bâti sur la passerelle unifiée d'Ofox : routage, répartition de charge et bascule automatique intégrés."
   de: "Der offizielle KI-Chat von Ofox. Nutze zahlreiche führende Modelle an einem Ort und wechsle jederzeit frei zwischen ihnen — ohne separate Konten oder Schlüssel. Auf dem einheitlichen Gateway von Ofox aufgebaut: Routing, Lastausgleich und automatisches Failover sind bereits integriert."
   pt: "O chat de IA oficial da Ofox. Use uma ampla variedade de modelos líderes em um só lugar e alterne livremente entre eles enquanto conversa, sem gerenciar contas ou chaves separadas. Construído sobre o gateway unificado da Ofox: roteamento, balanceamento de carga e failover automático integrados."
-url: "https://chat.ofox.ai"
+url: "https://ofox.ai"
 tags:
   - chat
   - productivity
