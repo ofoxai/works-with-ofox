@@ -1,5 +1,21 @@
 [
   {
+    "slug": "moneyprinterturbo",
+    "name": "MoneyPrinterTurbo",
+    "category": "integration",
+    "description": {
+      "en": "All-in-one AI short video generator: give it a topic and it writes the script, sources footage, adds voiceover, subtitles and music, then renders an HD video. Built-in Ofox video source generates fresh clips with Seedance, Wan and more — one API key.",
+      "zh": "一站式 AI 短视频生成工具：只需提供主题，即可自动生成脚本、匹配素材、配音、字幕与背景音乐并合成高清短视频。内置 Ofox 素材源，一个 API Key 即可调用 Seedance、Wan 等模型文生视频。"
+    },
+    "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "docs": "https://ofox.ai/zh/docs/integrations/moneyprinterturbo",
+    "tags": [
+      "creative"
+    ],
+    "openSource": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "dateAdded": "2026-09-23"
+  },
+  {
     "slug": "ofox-chat",
     "name": "Ofox Chat",
     "category": "powered-by",
@@ -23,6 +39,22 @@
     ],
     "openSource": null,
     "dateAdded": "2026-06-25"
+  },
+  {
+    "slug": "opencode",
+    "name": "opencode",
+    "category": "integration",
+    "description": {
+      "en": "The open-source AI coding agent for the terminal, IDE and desktop. Ofox is built into its models.dev provider catalog — run /connect, pick Ofox and paste your API key to code with GPT, Claude, Gemini, DeepSeek and more.",
+      "zh": "开源 AI 编程智能体，支持终端、IDE 与桌面端。Ofox 已内置于其 models.dev 模型供应商目录——执行 /connect 选择 Ofox 并填入 API Key，即可用 GPT、Claude、Gemini、DeepSeek 等模型写代码。"
+    },
+    "url": "https://opencode.ai",
+    "docs": "https://ofox.ai/zh/docs/integrations/opencode",
+    "tags": [
+      "coding"
+    ],
+    "openSource": "https://github.com/anomalyco/opencode",
+    "dateAdded": "2026-09-23"
   },
   {
     "slug": "skills-hub",

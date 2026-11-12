@@ -2,7 +2,7 @@
   "name": "works-with-ofox",
   "type": "module",
   "version": "1.0.0",
-  "description": "Ofox 应用展示墙 — 基于 Ofox 构建的应用精选列表",
+  "description": "Works with Ofox — 正式支持 Ofox 的工具与应用展示墙",
   "private": true,
   "engines": {
     "node": ">=22.12.0"

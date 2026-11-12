@@ -2,7 +2,7 @@
 
 [English](README.md) · **中文**
 
-使用 [Ofox](https://ofox.ai) 构建的应用与工具精选。Ofox 是统一网关——一个 API Key 即可接入 Claude、GPT、Gemini、DeepSeek 等众多模型。
+正式支持 [Ofox](https://ofox.ai) 的工具与应用——已集成 Ofox 或基于 Ofox 构建。Ofox 是统一网关——一个 API Key 即可接入 Claude、GPT、Gemini、DeepSeek 等众多模型。
 
 ## 🚀 三步添加你的应用
 
@@ -34,11 +34,25 @@
 
 ## 目录
 
+- [MoneyPrinterTurbo](#moneyprinterturbo)
 - [Ofox Chat](#ofox-chat)
+- [opencode](#opencode)
 - [Skills Hub](#skills-hub)
 - [Tab AI](#tab-ai)
 
 ## 应用
+
+### [MoneyPrinterTurbo](https://github.com/harry0703/MoneyPrinterTurbo)
+
+<img src="./apps/moneyprinterturbo/logo.png" alt="MoneyPrinterTurbo logo" width="64" height="64">
+
+一站式 AI 短视频生成工具：只需提供主题，即可自动生成脚本、匹配素材、配音、字幕与背景音乐并合成高清短视频。内置 Ofox 素材源，一个 API Key 即可调用 Seedance、Wan 等模型文生视频。
+
+`creative` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/harry0703/MoneyPrinterTurbo)
+
+[文档](https://ofox.ai/zh/docs/integrations/moneyprinterturbo)
+
+---
 
 ### [Ofox Chat](https://chat.ofox.ai)
 
@@ -47,6 +61,18 @@
 Ofox 官方 AI 对话产品。在一处即可使用众多主流模型,对话中随时自由切换,无需在多个账户和密钥间周旋。基于 Ofox 统一网关构建,模型路由、负载均衡与自动故障转移皆已内置:一个账户,畅享所有模型。
 
 `chat` `productivity`
+
+---
+
+### [opencode](https://opencode.ai)
+
+<img src="./apps/opencode/logo.png" alt="opencode logo" width="64" height="64">
+
+开源 AI 编程智能体，支持终端、IDE 与桌面端。Ofox 已内置于其 models.dev 模型供应商目录——执行 /connect 选择 Ofox 并填入 API Key，即可用 GPT、Claude、Gemini、DeepSeek 等模型写代码。
+
+`coding` [![Open Source](https://img.shields.io/badge/Open%20Source-green)](https://github.com/anomalyco/opencode)
+
+[文档](https://ofox.ai/zh/docs/integrations/opencode)
 
 ---
 
